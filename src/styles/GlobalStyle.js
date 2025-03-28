@@ -192,18 +192,26 @@ const GlobalStyle = createGlobalStyle`
   /* Стили для полноэкранного режима */
   :fullscreen {
     background: ${props => props.theme.colors.primary};
+    width: 100vw !important;
+    height: 100vh !important;
   }
 
   :-webkit-full-screen {
     background: ${props => props.theme.colors.primary};
+    width: 100vw !important;
+    height: 100vh !important;
   }
 
   :-moz-full-screen {
     background: ${props => props.theme.colors.primary};
+    width: 100vw !important;
+    height: 100vh !important;
   }
 
   :-ms-fullscreen {
     background: ${props => props.theme.colors.primary};
+    width: 100vw !important;
+    height: 100vh !important;
   }
 
   /* Стили для контейнера приложения */
@@ -268,6 +276,7 @@ const GlobalStyle = createGlobalStyle`
     .app-container {
       max-width: 100%;
       height: 100vh;
+      width: 100vw;
     }
 
     .main-content {
@@ -275,6 +284,7 @@ const GlobalStyle = createGlobalStyle`
       display: flex;
       justify-content: center;
       align-items: center;
+      height: calc(100vh - 150px); // Учитываем высоту баланса и навигации
     }
 
     .balance-container {
@@ -289,6 +299,16 @@ const GlobalStyle = createGlobalStyle`
 
     .balance-amount {
       font-size: 1.5rem;
+    }
+
+    .game-container {
+      max-width: 1200px;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
   }
 

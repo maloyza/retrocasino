@@ -47,8 +47,8 @@ const AppContainer = styled.div`
 
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     max-width: 100%;
-    left: 0;
-    transform: none;
+    width: 100vw;
+    height: 100vh;
   }
 `;
 
@@ -71,6 +71,7 @@ const MainContent = styled.main`
     padding: ${({ theme }) => theme.spacing.xl};
     padding-top: 70px;
     padding-bottom: 80px;
+    height: calc(100vh - 150px);
   }
 
   & > * {
@@ -119,7 +120,7 @@ const App = () => {
     if (!isMobile()) {
       // Пробуем открыть полноэкранный режим при загрузке
       const handleLoad = () => {
-        openFullscreen();
+        setTimeout(openFullscreen, 100); // Небольшая задержка для гарантированного открытия
         window.removeEventListener('load', handleLoad);
       };
 
@@ -143,10 +144,20 @@ const App = () => {
 
       document.addEventListener('keydown', handleKeyPress);
 
+      // Добавляем обработчик изменения размера окна
+      const handleResize = () => {
+        if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+          openFullscreen();
+        }
+      };
+
+      window.addEventListener('resize', handleResize);
+
       return () => {
         window.removeEventListener('load', handleLoad);
         document.removeEventListener('click', handleClick);
         document.removeEventListener('keydown', handleKeyPress);
+        window.removeEventListener('resize', handleResize);
       };
     }
 
