@@ -19,7 +19,7 @@ const OrientationWarning = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: ${({ theme }) => theme.colors.primary};
+  background: ${({ theme }) => theme.gradients.dark};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -28,6 +28,37 @@ const OrientationWarning = styled.div`
   color: ${({ theme }) => theme.colors.accent};
   text-align: center;
   padding: 2rem;
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: ${({ theme }) => theme.colors.accent};
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  p {
+    font-size: 1rem;
+    color: ${({ theme }) => theme.colors.text};
+    max-width: 280px;
+    line-height: 1.4;
+  }
+
+  &::before {
+    content: '↺';
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: rotate 2s infinite linear;
+  }
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 `;
 
 const AppContainer = styled.div`
@@ -93,7 +124,7 @@ const App = () => {
     const checkOrientation = () => {
       const isPortraitMode = window.innerHeight > window.innerWidth;
       setIsPortrait(isPortraitMode);
-      setShowOrientationWarning(isMobile() && !isPortraitMode);
+      setShowOrientationWarning(isMobile() && isPortraitMode);
     };
 
     const initTelegramWebApp = () => {
@@ -145,7 +176,7 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <OrientationWarning>
           <h2>Пожалуйста, переверните устройство</h2>
-          <p>Для лучшего игрового опыта рекомендуется использовать портретную ориентацию</p>
+          <p>Для лучшего игрового опыта используйте горизонтальную ориентацию экрана</p>
         </OrientationWarning>
       </ThemeProvider>
     );
