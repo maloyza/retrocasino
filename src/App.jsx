@@ -96,31 +96,22 @@ const App = () => {
       setShowOrientationWarning(isMobile() && !isPortraitMode);
     };
 
-    const requestFullscreen = async () => {
-      try {
-        // Проверяем, запущено ли приложение в Telegram Web App
-        if (window.Telegram?.WebApp) {
-          console.log('Telegram Web App detected, trying to expand...');
-          // Используем метод expand() для TWA
-          window.Telegram.WebApp.expand();
-          return;
-        }
+    const initTelegramWebApp = () => {
+      if (window.Telegram?.WebApp) {
+        // Инициализируем Telegram Web App
+        window.Telegram.WebApp.ready();
+        
+        // Устанавливаем цвет фона
+        window.Telegram.WebApp.setBackgroundColor('#000000');
+        
+        // Расширяем на весь экран
+        window.Telegram.WebApp.expand();
 
-        // Для обычного браузера используем стандартный API
-        const element = document.documentElement;
-        console.log('Requesting fullscreen mode for browser...');
+        // Отключаем свайп для закрытия
+        window.Telegram.WebApp.disableClosingConfirmation();
 
-        if (element.requestFullscreen) {
-          await element.requestFullscreen();
-        } else if (element.webkitRequestFullscreen) {
-          await element.webkitRequestFullscreen();
-        } else if (element.msRequestFullscreen) {
-          await element.msRequestFullscreen();
-        }
-
-        console.log('Fullscreen mode activated successfully');
-      } catch (error) {
-        console.error('Failed to open fullscreen:', error);
+        // Устанавливаем основной цвет приложения
+        window.Telegram.WebApp.setHeaderColor('#000000');
       }
     };
 
@@ -129,60 +120,22 @@ const App = () => {
     window.addEventListener('resize', checkOrientation);
     window.addEventListener('orientationchange', checkOrientation);
 
-    // Пробуем открыть полноэкранный режим при загрузке
-    const handleLoad = () => {
-      console.log('Page loaded, attempting to enter fullscreen mode...');
-      // Уменьшаем задержку для TWA
-      setTimeout(requestFullscreen, 100);
-      window.removeEventListener('load', handleLoad);
+    // Инициализируем TWA при загрузке
+    initTelegramWebApp();
+
+    // Добавляем обработчик для повторной инициализации при необходимости
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        initTelegramWebApp();
+      }
     };
 
-    window.addEventListener('load', handleLoad);
-
-    // Добавляем обработчик клика как запасной вариант
-    const handleClick = () => {
-      console.log('Click detected, attempting to enter fullscreen mode...');
-      requestFullscreen();
-      document.removeEventListener('click', handleClick);
-    };
-
-    document.addEventListener('click', handleClick);
-
-    // Добавляем обработчик клавиши F11 (только для ПК)
-    if (!isMobile()) {
-      const handleKeyPress = (e) => {
-        if (e.key === 'F11') {
-          e.preventDefault();
-          console.log('F11 pressed, attempting to enter fullscreen mode...');
-          requestFullscreen();
-        }
-      };
-
-      document.addEventListener('keydown', handleKeyPress);
-
-      // Добавляем обработчик изменения размера окна (только для ПК)
-      const handleResize = () => {
-        if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
-          console.log('Window resized, attempting to enter fullscreen mode...');
-          requestFullscreen();
-        }
-      };
-
-      window.addEventListener('resize', handleResize);
-
-      return () => {
-        window.removeEventListener('load', handleLoad);
-        document.removeEventListener('click', handleClick);
-        document.removeEventListener('keydown', handleKeyPress);
-        window.removeEventListener('resize', handleResize);
-      };
-    }
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     return () => {
-      window.removeEventListener('load', handleLoad);
-      document.removeEventListener('click', handleClick);
       window.removeEventListener('resize', checkOrientation);
       window.removeEventListener('orientationchange', checkOrientation);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, []);
 
