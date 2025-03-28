@@ -96,18 +96,24 @@ const App = () => {
       setShowOrientationWarning(isMobile() && !isPortraitMode);
     };
 
-    const openFullscreen = () => {
-      const element = document.documentElement;
-      try {
-        if (element.requestFullscreen) {
-          element.requestFullscreen();
-        } else if (element.webkitRequestFullscreen) {
-          element.webkitRequestFullscreen();
-        } else if (element.msRequestFullscreen) {
-          element.msRequestFullscreen();
+    const requestFullscreen = () => {
+      // Проверяем, запущено ли приложение в Telegram Web App
+      if (window.Telegram?.WebApp) {
+        window.Telegram.WebApp.expand();
+      } else {
+        // Для обычного браузера используем стандартный API
+        const element = document.documentElement;
+        try {
+          if (element.requestFullscreen) {
+            element.requestFullscreen();
+          } else if (element.webkitRequestFullscreen) {
+            element.webkitRequestFullscreen();
+          } else if (element.msRequestFullscreen) {
+            element.msRequestFullscreen();
+          }
+        } catch (error) {
+          console.error('Failed to open fullscreen:', error);
         }
-      } catch (error) {
-        console.error('Failed to open fullscreen:', error);
       }
     };
 
@@ -120,7 +126,7 @@ const App = () => {
     if (!isMobile()) {
       // Пробуем открыть полноэкранный режим при загрузке
       const handleLoad = () => {
-        setTimeout(openFullscreen, 100); // Небольшая задержка для гарантированного открытия
+        setTimeout(requestFullscreen, 100);
         window.removeEventListener('load', handleLoad);
       };
 
@@ -128,7 +134,7 @@ const App = () => {
 
       // Добавляем обработчик клика как запасной вариант
       const handleClick = () => {
-        openFullscreen();
+        requestFullscreen();
         document.removeEventListener('click', handleClick);
       };
 
@@ -138,7 +144,7 @@ const App = () => {
       const handleKeyPress = (e) => {
         if (e.key === 'F11') {
           e.preventDefault();
-          openFullscreen();
+          requestFullscreen();
         }
       };
 
@@ -147,7 +153,7 @@ const App = () => {
       // Добавляем обработчик изменения размера окна
       const handleResize = () => {
         if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
-          openFullscreen();
+          requestFullscreen();
         }
       };
 
