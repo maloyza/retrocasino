@@ -20,7 +20,7 @@ export default defineConfig({
       }
     }
   },
-  base: './',
+  base: '/retrocasino/',
   publicDir: 'public',
   resolve: {
     alias: {
