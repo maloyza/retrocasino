@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { AnimatePresence } from 'framer-motion';
 import GlobalStyle from './styles/GlobalStyle';
+import theme from './styles/theme';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
@@ -64,25 +65,27 @@ const App = () => {
   }, []);
 
   return (
-    <Router basename="/retrocasino">
-      <GlobalStyle />
-      <AppContainer className="app-container">
-        <Balance />
-        <MainContent className="main-content">
-          <AnimatePresence mode="wait">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/leaderboard" element={<Leaderboard />} />
-              <Route path="/blackjack" element={<Blackjack />} />
-              <Route path="/video-poker" element={<VideoPoker />} />
-              <Route path="/roulette" element={<Roulette />} />
-            </Routes>
-          </AnimatePresence>
-        </MainContent>
-        <Navbar />
-      </AppContainer>
-    </Router>
+    <ThemeProvider theme={theme}>
+      <Router basename="/retrocasino">
+        <GlobalStyle />
+        <AppContainer className="app-container">
+          <Balance />
+          <MainContent className="main-content">
+            <AnimatePresence mode="wait">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/leaderboard" element={<Leaderboard />} />
+                <Route path="/blackjack" element={<Blackjack />} />
+                <Route path="/video-poker" element={<VideoPoker />} />
+                <Route path="/roulette" element={<Roulette />} />
+              </Routes>
+            </AnimatePresence>
+          </MainContent>
+          <Navbar />
+        </AppContainer>
+      </Router>
+    </ThemeProvider>
   );
 };
 

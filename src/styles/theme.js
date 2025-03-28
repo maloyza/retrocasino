@@ -1,21 +1,18 @@
 const theme = {
   colors: {
-    primary: '#1a472a',
-    secondary: '#8b4513',
+    primary: '#1a1a1a',
+    secondary: '#2a2a2a',
     accent: '#ffd700',
     text: '#ffffff',
-    background: '#000000',
-    red: '#ff0000',
-    black: '#000000',
-    green: '#00ff00',
-    blue: '#0000ff'
+    error: '#ff0000',
+    success: '#00ff00'
   },
   fonts: {
     primary: "'Press Start 2P', cursive",
     secondary: "'VT323', monospace"
   },
   breakpoints: {
-    mobile: '320px',
+    mobile: '480px',
     tablet: '768px',
     desktop: '1024px'
   },
