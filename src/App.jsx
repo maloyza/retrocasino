@@ -64,7 +64,7 @@ const App = () => {
   }, []);
 
   return (
-    <Router>
+    <Router basename="/retrocasino">
       <GlobalStyle />
       <AppContainer className="app-container">
         <Balance />
