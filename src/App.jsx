@@ -96,29 +96,19 @@ const App = () => {
       setShowOrientationWarning(isMobile() && !isPortraitMode);
     };
 
-    const isFullscreenSupported = () => {
-      return document.fullscreenEnabled || 
-             document.webkitFullscreenEnabled || 
-             document.msFullscreenEnabled;
-    };
-
     const requestFullscreen = async () => {
       try {
         // Проверяем, запущено ли приложение в Telegram Web App
         if (window.Telegram?.WebApp) {
           console.log('Telegram Web App detected, trying to expand...');
+          // Используем метод expand() для TWA
           window.Telegram.WebApp.expand();
           return;
         }
 
-        // Проверяем поддержку полноэкранного режима
-        if (!isFullscreenSupported()) {
-          console.log('Fullscreen mode is not supported');
-          return;
-        }
-
+        // Для обычного браузера используем стандартный API
         const element = document.documentElement;
-        console.log('Requesting fullscreen mode...');
+        console.log('Requesting fullscreen mode for browser...');
 
         if (element.requestFullscreen) {
           await element.requestFullscreen();
@@ -142,8 +132,8 @@ const App = () => {
     // Пробуем открыть полноэкранный режим при загрузке
     const handleLoad = () => {
       console.log('Page loaded, attempting to enter fullscreen mode...');
-      // Увеличиваем задержку для гарантии загрузки всех ресурсов
-      setTimeout(requestFullscreen, 500);
+      // Уменьшаем задержку для TWA
+      setTimeout(requestFullscreen, 100);
       window.removeEventListener('load', handleLoad);
     };
 
