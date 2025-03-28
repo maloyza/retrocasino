@@ -13,14 +13,13 @@ const GlobalStyle = createGlobalStyle`
   html, body {
     height: 100%;
     width: 100%;
-    overflow: hidden;
     position: fixed;
-    touch-action: none;
     background: ${props => props.theme.colors.primary};
+    overflow: hidden;
+    font-family: ${props => props.theme.fonts.primary};
   }
 
   body {
-    font-family: ${props => props.theme.fonts.primary};
     color: ${props => props.theme.colors.text};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -55,6 +54,7 @@ const GlobalStyle = createGlobalStyle`
     @media (min-width: ${props => props.theme.breakpoints.desktop}) {
       padding: ${props => props.theme.spacing.lg};
       gap: 1.5rem;
+      max-width: 1200px;
     }
   }
 

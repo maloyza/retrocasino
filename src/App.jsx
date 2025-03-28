@@ -46,9 +46,9 @@ const AppContainer = styled.div`
   margin: 0 auto;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    max-width: 1200px;
-    left: 50%;
-    transform: translateX(-50%);
+    max-width: 100%;
+    left: 0;
+    transform: none;
   }
 `;
 
@@ -85,19 +85,16 @@ const App = () => {
   const [showOrientationWarning, setShowOrientationWarning] = useState(false);
 
   useEffect(() => {
-    // Функция для определения мобильного устройства
     const isMobile = () => {
       return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     };
 
-    // Функция для определения ориентации
     const checkOrientation = () => {
       const isPortraitMode = window.innerHeight > window.innerWidth;
       setIsPortrait(isPortraitMode);
       setShowOrientationWarning(isMobile() && !isPortraitMode);
     };
 
-    // Функция для открытия в полноэкранном режиме
     const openFullscreen = () => {
       const element = document.documentElement;
       try {
@@ -120,6 +117,7 @@ const App = () => {
 
     // Если это не мобильное устройство, пытаемся открыть в полноэкранном режиме
     if (!isMobile()) {
+      // Пробуем открыть полноэкранный режим при загрузке
       const handleLoad = () => {
         openFullscreen();
         window.removeEventListener('load', handleLoad);
@@ -127,6 +125,7 @@ const App = () => {
 
       window.addEventListener('load', handleLoad);
 
+      // Добавляем обработчик клика как запасной вариант
       const handleClick = () => {
         openFullscreen();
         document.removeEventListener('click', handleClick);
@@ -134,9 +133,20 @@ const App = () => {
 
       document.addEventListener('click', handleClick);
 
+      // Добавляем обработчик клавиши F11
+      const handleKeyPress = (e) => {
+        if (e.key === 'F11') {
+          e.preventDefault();
+          openFullscreen();
+        }
+      };
+
+      document.addEventListener('keydown', handleKeyPress);
+
       return () => {
         window.removeEventListener('load', handleLoad);
         document.removeEventListener('click', handleClick);
+        document.removeEventListener('keydown', handleKeyPress);
       };
     }
 
