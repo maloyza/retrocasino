@@ -96,42 +96,19 @@ const App = () => {
       setShowOrientationWarning(isMobile() && !isPortraitMode);
     };
 
-    const initTelegramWebApp = () => {
+    const expandApp = () => {
       try {
         if (window.Telegram?.WebApp) {
-          // Получаем объект WebApp
-          const WebApp = window.Telegram.WebApp;
-
-          // Сообщаем что приложение готово
-          WebApp.ready();
-
-          // Устанавливаем параметры отображения
-          WebApp.expand();
-          WebApp.enableClosingConfirmation();
+          // Сначала сообщаем что приложение готово
+          window.Telegram.WebApp.ready();
           
-          // Устанавливаем тему
-          WebApp.setHeaderColor('#000000');
-          WebApp.setBackgroundColor('#000000');
-
-          // Проверяем, что приложение действительно развернулось
-          const viewportHeight = WebApp.viewportHeight;
-          const viewportWidth = WebApp.viewportWidth;
+          // Затем пытаемся развернуть
+          window.Telegram.WebApp.expand();
           
-          console.log('TWA viewport size:', { width: viewportWidth, height: viewportHeight });
-          console.log('TWA isExpanded:', WebApp.isExpanded);
-
-          // Если не развернулось, пробуем еще раз
-          if (!WebApp.isExpanded) {
-            setTimeout(() => {
-              WebApp.expand();
-              console.log('TWA second expand attempt');
-            }, 100);
-          }
-        } else {
-          console.log('TWA not available');
+          console.log('TWA initialized and expanded');
         }
       } catch (error) {
-        console.error('TWA initialization error:', error);
+        console.error('TWA error:', error);
       }
     };
 
@@ -140,25 +117,15 @@ const App = () => {
     window.addEventListener('resize', checkOrientation);
     window.addEventListener('orientationchange', checkOrientation);
 
-    // Инициализируем TWA
-    initTelegramWebApp();
-
-    // Добавляем обработчик для повторной инициализации
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === 'visible') {
-        setTimeout(initTelegramWebApp, 100);
-      }
-    };
-
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-
-    // Пробуем повторно развернуть через небольшую задержку
-    setTimeout(initTelegramWebApp, 500);
+    // Пытаемся развернуть приложение несколько раз с разными задержками
+    expandApp(); // Сразу
+    setTimeout(expandApp, 100); // Через 100мс
+    setTimeout(expandApp, 500); // Через 500мс
+    setTimeout(expandApp, 1000); // Через 1с
 
     return () => {
       window.removeEventListener('resize', checkOrientation);
       window.removeEventListener('orientationchange', checkOrientation);
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, []);
 
