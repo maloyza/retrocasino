@@ -4,146 +4,122 @@ import { motion } from 'framer-motion';
 import Balance from '../components/Balance';
 
 const LeaderboardContainer = styled.div`
+  height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  padding: 20px;
-  min-height: 100vh;
-  background: url('/assets/leaderboard-bg.jpg') center/cover;
+  overflow: hidden;
+  background: url('/assets/backgrounds/leaderboard-bg.png') center/cover no-repeat;
+  padding: 1rem;
+  padding-top: calc(1rem + 60px); // Учитываем высоту баланса
 `;
 
-const LeaderboardCard = styled.div`
-  background: ${props => props.theme.colors.secondary};
-  border-radius: 20px;
-  padding: 30px;
-  width: 100%;
-  max-width: 800px;
-  margin-top: 20px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+const LeaderboardCard = styled(motion.div)`
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 16px;
+  padding: 1rem;
+  border: 2px solid ${props => props.theme.colors.accent};
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 `;
 
 const TabsContainer = styled.div`
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 `;
 
-const Tab = styled(motion.button)`
-  background: ${props => props.active ? props.theme.colors.accent : props.theme.colors.primary};
-  color: ${props => props.active ? props.theme.colors.black : props.theme.colors.text};
-  padding: 10px 20px;
-  border-radius: 5px;
+const Tab = styled.button`
+  flex: 1;
+  padding: 0.5rem;
+  background: ${props => props.active ? props.theme.colors.accent : 'rgba(139, 69, 19, 0.8)'};
   border: none;
-  cursor: pointer;
+  border-radius: 8px;
+  color: ${props => props.theme.colors.text};
   font-family: ${props => props.theme.fonts.primary};
-  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: ${props => props.theme.colors.accent};
+  }
+`;
+
+const TableContainer = styled.div`
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 `;
 
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  color: ${props => props.theme.colors.text};
 `;
 
 const TableHeader = styled.th`
-  color: ${props => props.theme.colors.accent};
-  padding: 10px;
+  padding: 0.5rem;
   text-align: left;
-  font-size: 14px;
   border-bottom: 2px solid ${props => props.theme.colors.accent};
+  font-family: ${props => props.theme.fonts.primary};
 `;
 
 const TableCell = styled.td`
-  color: ${props => props.theme.colors.text};
-  padding: 10px;
-  border-bottom: 1px solid ${props => props.theme.colors.primary};
-  font-size: 14px;
+  padding: 0.5rem;
+  border-bottom: 1px solid rgba(139, 69, 19, 0.5);
 `;
 
-const PlayerRow = styled(motion.tr)`
-  cursor: pointer;
-  
+const PlayerRow = styled.tr`
   &:hover {
-    background: ${props => props.theme.colors.primary};
+    background: rgba(139, 69, 19, 0.2);
   }
 `;
 
-const RankCell = styled(TableCell)`
-  width: 50px;
-  text-align: center;
-  font-weight: bold;
-  color: ${props => {
-    switch (props.rank) {
-      case 1: return '#FFD700'; // золотой
-      case 2: return '#C0C0C0'; // серебряный
-      case 3: return '#CD7F32'; // бронзовый
-      default: return props.theme.colors.text;
-    }
-  }};
-`;
-
-const AvatarCell = styled(TableCell)`
-  width: 40px;
-  padding: 5px;
-`;
-
-const Avatar = styled.div`
-  width: 30px;
-  height: 30px;
+const PlayerAvatar = styled.img`
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background: url('/assets/default-avatar.jpg') center/cover;
-  border: 2px solid ${props => props.theme.colors.accent};
+  margin-right: 0.5rem;
+`;
+
+const PlayerName = styled.span`
+  display: flex;
+  align-items: center;
 `;
 
 const Leaderboard = () => {
   const [activeTab, setActiveTab] = useState('gold');
-  const [balance, setBalance] = useState({
-    blueCoins: 1000,
-    greenCoins: 1000,
-    redCoins: 1000,
-    goldCoins: 100
-  });
 
-  const tabs = [
-    { id: 'gold', name: 'Золотые монеты' },
-    { id: 'wins', name: 'Победы' },
-    { id: 'level', name: 'Уровень' }
+  // Демо-данные
+  const players = [
+    { id: 1, name: 'Player1', avatar: '/assets/avatars/avatar1.png', gold: 1000, wins: 50, level: 10 },
+    { id: 2, name: 'Player2', avatar: '/assets/avatars/avatar2.png', gold: 800, wins: 45, level: 9 },
+    { id: 3, name: 'Player3', avatar: '/assets/avatars/avatar3.png', gold: 600, wins: 40, level: 8 },
+    // Добавьте больше игроков по необходимости
   ];
 
-  const leaderboardData = {
-    gold: [
-      { rank: 1, avatar: '/assets/avatar1.jpg', name: 'Player1', value: 1000000 },
-      { rank: 2, avatar: '/assets/avatar2.jpg', name: 'Player2', value: 900000 },
-      { rank: 3, avatar: '/assets/avatar3.jpg', name: 'Player3', value: 800000 },
-      { rank: 4, avatar: '/assets/avatar4.jpg', name: 'Player4', value: 700000 },
-      { rank: 5, avatar: '/assets/avatar5.jpg', name: 'Player5', value: 600000 }
-    ],
-    wins: [
-      { rank: 1, avatar: '/assets/avatar1.jpg', name: 'Player1', value: 1000 },
-      { rank: 2, avatar: '/assets/avatar2.jpg', name: 'Player2', value: 900 },
-      { rank: 3, avatar: '/assets/avatar3.jpg', name: 'Player3', value: 800 },
-      { rank: 4, avatar: '/assets/avatar4.jpg', name: 'Player4', value: 700 },
-      { rank: 5, avatar: '/assets/avatar5.jpg', name: 'Player5', value: 600 }
-    ],
-    level: [
-      { rank: 1, avatar: '/assets/avatar1.jpg', name: 'Player1', value: 50 },
-      { rank: 2, avatar: '/assets/avatar2.jpg', name: 'Player2', value: 45 },
-      { rank: 3, avatar: '/assets/avatar3.jpg', name: 'Player3', value: 40 },
-      { rank: 4, avatar: '/assets/avatar4.jpg', name: 'Player4', value: 35 },
-      { rank: 5, avatar: '/assets/avatar5.jpg', name: 'Player5', value: 30 }
-    ]
+  const getValue = (player) => {
+    switch (activeTab) {
+      case 'gold':
+        return player.gold;
+      case 'wins':
+        return player.wins;
+      case 'level':
+        return player.level;
+      default:
+        return 0;
+    }
   };
 
-  const formatValue = (value, type) => {
-    switch (type) {
+  const formatValue = (value) => {
+    switch (activeTab) {
       case 'gold':
-        return value.toLocaleString() + ' 🪙';
+        return `${value} 🪙`;
       case 'wins':
-        return value.toLocaleString() + ' побед';
+        return `${value} 🏆`;
       case 'level':
-        return 'Уровень ' + value;
+        return `Уровень ${value}`;
       default:
         return value;
     }
@@ -151,47 +127,48 @@ const Leaderboard = () => {
 
   return (
     <LeaderboardContainer>
-      <Balance {...balance} />
-      <LeaderboardCard>
+      <LeaderboardCard
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+      >
         <TabsContainer>
-          {tabs.map(tab => (
-            <Tab
-              key={tab.id}
-              active={activeTab === tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {tab.name}
-            </Tab>
-          ))}
+          <Tab active={activeTab === 'gold'} onClick={() => setActiveTab('gold')}>
+            Золото
+          </Tab>
+          <Tab active={activeTab === 'wins'} onClick={() => setActiveTab('wins')}>
+            Победы
+          </Tab>
+          <Tab active={activeTab === 'level'} onClick={() => setActiveTab('level')}>
+            Уровень
+          </Tab>
         </TabsContainer>
 
-        <Table>
-          <thead>
-            <tr>
-              <TableHeader>#</TableHeader>
-              <TableHeader>Игрок</TableHeader>
-              <TableHeader>{tabs.find(tab => tab.id === activeTab)?.name}</TableHeader>
-            </tr>
-          </thead>
-          <tbody>
-            {leaderboardData[activeTab].map(player => (
-              <PlayerRow
-                key={player.rank}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <RankCell rank={player.rank}>{player.rank}</RankCell>
-                <AvatarCell>
-                  <Avatar />
-                </AvatarCell>
-                <TableCell>{player.name}</TableCell>
-                <TableCell>{formatValue(player.value, activeTab)}</TableCell>
-              </PlayerRow>
-            ))}
-          </tbody>
-        </Table>
+        <TableContainer>
+          <Table>
+            <thead>
+              <tr>
+                <TableHeader>#</TableHeader>
+                <TableHeader>Игрок</TableHeader>
+                <TableHeader>Значение</TableHeader>
+              </tr>
+            </thead>
+            <tbody>
+              {players.map((player, index) => (
+                <PlayerRow key={player.id}>
+                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>
+                    <PlayerName>
+                      <PlayerAvatar src={player.avatar} alt={player.name} />
+                      {player.name}
+                    </PlayerName>
+                  </TableCell>
+                  <TableCell>{formatValue(getValue(player))}</TableCell>
+                </PlayerRow>
+              ))}
+            </tbody>
+          </Table>
+        </TableContainer>
       </LeaderboardCard>
     </LeaderboardContainer>
   );

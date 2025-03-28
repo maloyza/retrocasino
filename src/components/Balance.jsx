@@ -1,82 +1,69 @@
 import React from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
 
 const BalanceContainer = styled.div`
   position: fixed;
-  top: 20px;
-  right: 20px;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 0.5rem;
   display: flex;
-  gap: 10px;
-  z-index: 100;
+  justify-content: space-around;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 `;
 
-const CoinContainer = styled(motion.div)`
+const BalanceItem = styled.div`
   display: flex;
   align-items: center;
-  gap: 5px;
-  background: ${props => props.theme.colors.secondary};
-  padding: 8px 15px;
-  border-radius: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: rgba(139, 69, 19, 0.8);
+  border-radius: 8px;
+  border: 2px solid ${props => props.theme.colors.accent};
 `;
 
-const CoinIcon = styled.div`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: ${props => props.color};
-  position: relative;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 8px;
-    height: 8px;
-    background: ${props => props.theme.colors.accent};
-    border-radius: 50%;
-  }
+const BalanceIcon = styled.img`
+  width: 24px;
+  height: 24px;
 `;
 
-const Amount = styled.span`
-  color: ${props => props.theme.colors.text};
-  font-size: 14px;
+const BalanceAmount = styled.span`
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: ${props => props.theme.colors.accent};
 `;
 
-const Balance = ({ blueCoins, greenCoins, redCoins, goldCoins }) => {
+const Balance = () => {
+  // Демо-данные
+  const balance = {
+    gold: 1000,
+    blue: 500,
+    green: 300,
+    red: 200
+  };
+
   return (
     <BalanceContainer>
-      <CoinContainer
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        <CoinIcon color="#0000FF" />
-        <Amount>{blueCoins}</Amount>
-      </CoinContainer>
-      <CoinContainer
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        <CoinIcon color="#00FF00" />
-        <Amount>{greenCoins}</Amount>
-      </CoinContainer>
-      <CoinContainer
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        <CoinIcon color="#FF0000" />
-        <Amount>{redCoins}</Amount>
-      </CoinContainer>
-      <CoinContainer
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        <CoinIcon color="#FFD700" />
-        <Amount>{goldCoins}</Amount>
-      </CoinContainer>
+      <BalanceItem>
+        <BalanceIcon src="/assets/icons/gold-coin.png" alt="Gold" />
+        <BalanceAmount>{balance.gold}</BalanceAmount>
+      </BalanceItem>
+      <BalanceItem>
+        <BalanceIcon src="/assets/icons/blue-coin.png" alt="Blue" />
+        <BalanceAmount>{balance.blue}</BalanceAmount>
+      </BalanceItem>
+      <BalanceItem>
+        <BalanceIcon src="/assets/icons/green-coin.png" alt="Green" />
+        <BalanceAmount>{balance.green}</BalanceAmount>
+      </BalanceItem>
+      <BalanceItem>
+        <BalanceIcon src="/assets/icons/red-coin.png" alt="Red" />
+        <BalanceAmount>{balance.red}</BalanceAmount>
+      </BalanceItem>
     </BalanceContainer>
   );
 };

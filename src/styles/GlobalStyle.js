@@ -7,22 +7,87 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    touch-action: none;
   }
 
   body {
     font-family: ${props => props.theme.fonts.primary};
     background-color: ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.text};
-    min-height: 100vh;
-    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overscroll-behavior: none;
   }
 
   #root {
-    min-height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* Стили для контейнера приложения */
+  .app-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* Стили для основного контента */
+  .main-content {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Стили для лидерборда */
+  .leaderboard-container {
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Стили для баланса */
+  .balance-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 0.5rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .balance-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: rgba(139, 69, 19, 0.8);
+    border-radius: 8px;
+    border: 2px solid ${props => props.theme.colors.accent};
+  }
+
+  .balance-amount {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: ${props => props.theme.colors.accent};
   }
 
   button {
@@ -78,15 +143,6 @@ const GlobalStyle = createGlobalStyle`
     .game-button {
       width: 100%;
       padding: 0.8rem;
-    }
-
-    .balance-container {
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .balance-item {
-      width: 100%;
     }
 
     .nav-menu {
