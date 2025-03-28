@@ -47,8 +47,8 @@ const AppContainer = styled.div`
 
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     max-width: 100%;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
   }
 `;
 
@@ -71,7 +71,7 @@ const MainContent = styled.main`
     padding: ${({ theme }) => theme.spacing.xl};
     padding-top: 70px;
     padding-bottom: 80px;
-    height: calc(100vh - 150px);
+    height: calc(100% - 150px);
   }
 
   & > * {
@@ -97,40 +97,63 @@ const App = () => {
     };
 
     const initTelegramWebApp = () => {
-      if (window.Telegram?.WebApp) {
-        // Инициализируем Telegram Web App
-        window.Telegram.WebApp.ready();
-        
-        // Устанавливаем цвет фона
-        window.Telegram.WebApp.setBackgroundColor('#000000');
-        
-        // Расширяем на весь экран
-        window.Telegram.WebApp.expand();
+      try {
+        if (window.Telegram?.WebApp) {
+          // Получаем объект WebApp
+          const WebApp = window.Telegram.WebApp;
 
-        // Отключаем свайп для закрытия
-        window.Telegram.WebApp.disableClosingConfirmation();
+          // Сообщаем что приложение готово
+          WebApp.ready();
 
-        // Устанавливаем основной цвет приложения
-        window.Telegram.WebApp.setHeaderColor('#000000');
+          // Устанавливаем параметры отображения
+          WebApp.expand();
+          WebApp.enableClosingConfirmation();
+          
+          // Устанавливаем тему
+          WebApp.setHeaderColor('#000000');
+          WebApp.setBackgroundColor('#000000');
+
+          // Проверяем, что приложение действительно развернулось
+          const viewportHeight = WebApp.viewportHeight;
+          const viewportWidth = WebApp.viewportWidth;
+          
+          console.log('TWA viewport size:', { width: viewportWidth, height: viewportHeight });
+          console.log('TWA isExpanded:', WebApp.isExpanded);
+
+          // Если не развернулось, пробуем еще раз
+          if (!WebApp.isExpanded) {
+            setTimeout(() => {
+              WebApp.expand();
+              console.log('TWA second expand attempt');
+            }, 100);
+          }
+        } else {
+          console.log('TWA not available');
+        }
+      } catch (error) {
+        console.error('TWA initialization error:', error);
       }
     };
 
-    // Проверяем ориентацию при загрузке и при изменении размера окна
+    // Проверяем ориентацию
     checkOrientation();
     window.addEventListener('resize', checkOrientation);
     window.addEventListener('orientationchange', checkOrientation);
 
-    // Инициализируем TWA при загрузке
+    // Инициализируем TWA
     initTelegramWebApp();
 
-    // Добавляем обработчик для повторной инициализации при необходимости
+    // Добавляем обработчик для повторной инициализации
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible') {
-        initTelegramWebApp();
+        setTimeout(initTelegramWebApp, 100);
       }
     };
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    // Пробуем повторно развернуть через небольшую задержку
+    setTimeout(initTelegramWebApp, 500);
 
     return () => {
       window.removeEventListener('resize', checkOrientation);
