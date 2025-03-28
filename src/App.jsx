@@ -96,19 +96,33 @@ const App = () => {
       setShowOrientationWarning(isMobile() && !isPortraitMode);
     };
 
-    const expandApp = () => {
+    const initTelegramWebApp = () => {
       try {
         if (window.Telegram?.WebApp) {
-          // Сначала сообщаем что приложение готово
-          window.Telegram.WebApp.ready();
+          const tg = window.Telegram.WebApp;
           
-          // Затем пытаемся развернуть
-          window.Telegram.WebApp.expand();
-          
-          console.log('TWA initialized and expanded');
+          // Сообщаем что приложение готово
+          tg.ready();
+
+          // Если это мобильное устройство, используем expand()
+          if (isMobile()) {
+            tg.expand();
+            console.log('Mobile TWA: trying to expand');
+          } else {
+            // Для десктопа пробуем запросить полноэкранный режим
+            tg.requestFullscreen();
+            console.log('Desktop TWA: requesting fullscreen');
+          }
+
+          // Проверяем результат
+          console.log('TWA viewport size:', {
+            viewportHeight: tg.viewportHeight,
+            viewportStableHeight: tg.viewportStableHeight,
+            isExpanded: tg.isExpanded
+          });
         }
       } catch (error) {
-        console.error('TWA error:', error);
+        console.error('TWA initialization error:', error);
       }
     };
 
@@ -117,11 +131,8 @@ const App = () => {
     window.addEventListener('resize', checkOrientation);
     window.addEventListener('orientationchange', checkOrientation);
 
-    // Пытаемся развернуть приложение несколько раз с разными задержками
-    expandApp(); // Сразу
-    setTimeout(expandApp, 100); // Через 100мс
-    setTimeout(expandApp, 500); // Через 500мс
-    setTimeout(expandApp, 1000); // Через 1с
+    // Инициализируем TWA с небольшой задержкой
+    setTimeout(initTelegramWebApp, 100);
 
     return () => {
       window.removeEventListener('resize', checkOrientation);
