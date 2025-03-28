@@ -14,17 +14,33 @@ import Roulette from './pages/Roulette';
 import Balance from './components/Balance';
 
 const AppContainer = styled.div`
-  height: 100%;
+  height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  background: ${({ theme }) => theme.gradients.dark};
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 `;
 
 const MainContent = styled.main`
   flex: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding-bottom: env(safe-area-inset-bottom);
+  padding: ${({ theme }) => theme.spacing.md};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    padding: ${({ theme }) => theme.spacing.xl};
+  }
 `;
 
 const App = () => {
@@ -37,28 +53,39 @@ const App = () => {
     // Функция для открытия в полноэкранном режиме
     const openFullscreen = () => {
       const element = document.documentElement;
-      if (element.requestFullscreen) {
-        element.requestFullscreen();
-      } else if (element.webkitRequestFullscreen) {
-        element.webkitRequestFullscreen();
-      } else if (element.msRequestFullscreen) {
-        element.msRequestFullscreen();
+      try {
+        if (element.requestFullscreen) {
+          element.requestFullscreen();
+        } else if (element.webkitRequestFullscreen) {
+          element.webkitRequestFullscreen();
+        } else if (element.msRequestFullscreen) {
+          element.msRequestFullscreen();
+        }
+      } catch (error) {
+        console.error('Failed to open fullscreen:', error);
       }
     };
 
-    // Если это не мобильное устройство, открываем в полноэкранном режиме
+    // Если это не мобильное устройство, пытаемся открыть в полноэкранном режиме сразу
     if (!isMobile()) {
-      // Добавляем обработчик клика для открытия в полноэкранном режиме
+      const handleLoad = () => {
+        openFullscreen();
+        window.removeEventListener('load', handleLoad);
+      };
+
+      // Пробуем открыть полноэкранный режим при загрузке
+      window.addEventListener('load', handleLoad);
+
+      // Также добавляем обработчик клика как запасной вариант
       const handleClick = () => {
         openFullscreen();
-        // Удаляем обработчик после первого клика
         document.removeEventListener('click', handleClick);
       };
 
       document.addEventListener('click', handleClick);
 
-      // Очистка обработчика при размонтировании
       return () => {
+        window.removeEventListener('load', handleLoad);
         document.removeEventListener('click', handleClick);
       };
     }

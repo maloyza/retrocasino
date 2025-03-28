@@ -12,26 +12,172 @@ const GlobalStyle = createGlobalStyle`
 
   html, body {
     height: 100%;
+    width: 100%;
     overflow: hidden;
     position: fixed;
-    width: 100%;
     touch-action: none;
+    background: ${props => props.theme.colors.primary};
   }
 
   body {
     font-family: ${props => props.theme.fonts.primary};
-    background-color: ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.text};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overscroll-behavior: none;
+    line-height: 1.5;
   }
 
   #root {
     height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     overflow: hidden;
+  }
+
+  /* Стили для игровых компонентов */
+  .game-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: ${props => props.theme.spacing.md};
+    background: ${props => props.theme.colors.game.background};
+    border: 2px solid ${props => props.theme.colors.game.border};
+    border-radius: ${props => props.theme.borderRadius.large};
+    box-shadow: ${props => props.theme.shadows.card};
+
+    @media (min-width: ${props => props.theme.breakpoints.desktop}) {
+      padding: ${props => props.theme.spacing.lg};
+    }
+  }
+
+  .game-button {
+    ${props => props.theme.gameStyles.button};
+    margin: ${props => props.theme.spacing.sm};
+  }
+
+  .game-card {
+    ${props => props.theme.gameStyles.card};
+    margin: ${props => props.theme.spacing.xs};
+  }
+
+  .game-table {
+    ${props => props.theme.gameStyles.table};
+    margin-bottom: ${props => props.theme.spacing.md};
+  }
+
+  /* Стили для баланса */
+  .balance-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: ${props => props.theme.gradients.dark};
+    padding: ${props => props.theme.spacing.sm};
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 2px solid ${props => props.theme.colors.game.border};
+  }
+
+  .balance-item {
+    display: flex;
+    align-items: center;
+    gap: ${props => props.theme.spacing.sm};
+    padding: ${props => props.theme.spacing.sm};
+    background: ${props => props.theme.gradients.primary};
+    border-radius: ${props => props.theme.borderRadius.medium};
+    border: 2px solid ${props => props.theme.colors.accent};
+    box-shadow: ${props => props.theme.shadows.button};
+  }
+
+  .balance-amount {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: ${props => props.theme.colors.accent};
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Стили для навигации */
+  .nav-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: ${props => props.theme.gradients.dark};
+    padding: ${props => props.theme.spacing.sm};
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 2px solid ${props => props.theme.colors.game.border};
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: ${props => props.theme.colors.text};
+    padding: ${props => props.theme.spacing.sm};
+    border-radius: ${props => props.theme.borderRadius.medium};
+    transition: ${props => props.theme.transitions.default};
+
+    &:hover, &.active {
+      background: ${props => props.theme.gradients.primary};
+      transform: translateY(-2px);
+    }
+  }
+
+  /* Анимации */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .fade-in {
+    animation: fadeIn ${props => props.theme.transitions.default};
+  }
+
+  .slide-up {
+    animation: slideUp ${props => props.theme.transitions.default};
+  }
+
+  /* Стили для полноэкранного режима */
+  :fullscreen {
+    background: ${props => props.theme.colors.primary};
+  }
+
+  :-webkit-full-screen {
+    background: ${props => props.theme.colors.primary};
+  }
+
+  :-moz-full-screen {
+    background: ${props => props.theme.colors.primary};
+  }
+
+  :-ms-fullscreen {
+    background: ${props => props.theme.colors.primary};
   }
 
   /* Стили для контейнера приложения */
@@ -58,38 +204,6 @@ const GlobalStyle = createGlobalStyle`
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     padding-bottom: env(safe-area-inset-bottom);
-  }
-
-  /* Стили для баланса */
-  .balance-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    background: rgba(0, 0, 0, 0.8);
-    padding: 0.5rem;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
-
-  .balance-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem;
-    background: rgba(139, 69, 19, 0.8);
-    border-radius: 8px;
-    border: 2px solid ${props => props.theme.colors.accent};
-  }
-
-  .balance-amount {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: ${props => props.theme.colors.accent};
   }
 
   button {
