@@ -5,21 +5,26 @@ import Balance from '../components/Balance';
 import { Howl } from 'howler';
 
 const RouletteContainer = styled.div`
-  padding: 2rem;
-  min-height: 100vh;
-  background: url('/assets/background.png') center/cover;
+  padding: 1rem;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
+  overflow-y: auto;
 `;
 
 const WheelContainer = styled.div`
-  width: 100%;
-  max-width: 600px;
+  width: 90%;
+  max-width: 400px;
   aspect-ratio: 1;
   position: relative;
-  margin: 2rem 0;
+  margin: 1rem 0;
+
+  @media (min-width: ${props => props.theme.breakpoints.tablet}) {
+    max-width: 500px;
+  }
 `;
 
 const Wheel = styled(motion.div)`
@@ -34,30 +39,30 @@ const Wheel = styled(motion.div)`
 
 const WheelNumber = styled.div`
   position: absolute;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   background: ${props => props.color};
   color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: bold;
   border-radius: 50%;
   transform-origin: center;
-  transform: rotate(${props => props.rotation}deg) translateY(-50%);
+  transform: rotate(${props => props.rotation}deg) translateY(-45%);
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 
-  @media (max-width: 768px) {
-    width: 30px;
-    height: 30px;
-    font-size: 1rem;
+  @media (min-width: ${props => props.theme.breakpoints.tablet}) {
+    width: 35px;
+    height: 35px;
+    font-size: 1.1rem;
   }
 `;
 
 const Ball = styled(motion.div)`
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   background: #ffd700;
   border-radius: 50%;
   position: absolute;
@@ -67,26 +72,28 @@ const Ball = styled(motion.div)`
   z-index: 2;
   box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 
-  @media (max-width: 768px) {
-    width: 15px;
-    height: 15px;
+  @media (min-width: ${props => props.theme.breakpoints.tablet}) {
+    width: 18px;
+    height: 18px;
   }
 `;
 
 const BettingTable = styled.div`
-  width: 100%;
-  max-width: 800px;
+  width: 95%;
+  max-width: 600px;
   background: rgba(0, 0, 0, 0.7);
   border: 4px solid #8b4513;
   border-radius: 10px;
-  padding: 1rem;
+  padding: 0.5rem;
   display: grid;
   grid-template-columns: repeat(13, 1fr);
-  gap: 0.5rem;
-  margin-top: 2rem;
+  gap: 0.25rem;
+  margin: 1rem 0;
 
-  @media (max-width: 768px) {
-    gap: 0.25rem;
+  @media (min-width: ${props => props.theme.breakpoints.tablet}) {
+    padding: 1rem;
+    gap: 0.5rem;
+    max-width: 700px;
   }
 `;
 
@@ -97,7 +104,7 @@ const BettingCell = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   color: #fff;
   cursor: pointer;
   user-select: none;
@@ -113,53 +120,61 @@ const BettingCell = styled(motion.div)`
     color: #000;
   }
 
-  @media (max-width: 768px) {
-    font-size: 0.6rem;
+  @media (min-width: ${props => props.theme.breakpoints.tablet}) {
+    font-size: 0.9rem;
   }
 `;
 
 const Controls = styled.div`
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
   justify-content: center;
-  margin-top: 1rem;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+
+  @media (min-width: ${props => props.theme.breakpoints.tablet}) {
+    gap: 1rem;
+  }
 `;
 
 const Button = styled(motion.button)`
-  padding: 0.8rem 1.5rem;
+  padding: 0.6rem 1rem;
   font-family: 'Press Start 2P', cursive;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   background: #8b4513;
   color: #ffd700;
-  border: none;
+  border: 2px solid #ffd700;
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s ease;
 
   &:hover {
     background: #a0522d;
+    transform: translateY(-2px);
   }
 
   &:disabled {
     background: #666;
     cursor: not-allowed;
+    border-color: #999;
   }
 
-  @media (max-width: 768px) {
-    padding: 0.6rem 1rem;
-    font-size: 0.7rem;
+  @media (min-width: ${props => props.theme.breakpoints.tablet}) {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.8rem;
   }
 `;
 
 const GameInfo = styled.div`
   text-align: center;
-  margin-bottom: 1rem;
-  font-size: 1.2rem;
+  margin: 0.5rem 0;
+  font-size: 1rem;
   color: #ffd700;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 
-  @media (max-width: 768px) {
-    font-size: 1rem;
+  @media (min-width: ${props => props.theme.breakpoints.tablet}) {
+    font-size: 1.2rem;
+    margin: 1rem 0;
   }
 `;
 

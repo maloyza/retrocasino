@@ -25,6 +25,14 @@ const AppContainer = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
+  max-width: 100%;
+  margin: 0 auto;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    max-width: 1200px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 `;
 
 const MainContent = styled.main`
@@ -35,11 +43,23 @@ const MainContent = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
   position: relative;
-  
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  padding-top: 60px; // Для Balance компонента
+  padding-bottom: 70px; // Для Navbar
+
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     padding: ${({ theme }) => theme.spacing.xl};
+    padding-top: 70px;
+    padding-bottom: 80px;
+  }
+
+  & > * {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
   }
 `;
 

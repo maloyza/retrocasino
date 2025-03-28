@@ -46,25 +46,41 @@ const GlobalStyle = createGlobalStyle`
     border: 2px solid ${props => props.theme.colors.game.border};
     border-radius: ${props => props.theme.borderRadius.large};
     box-shadow: ${props => props.theme.shadows.card};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    overflow-x: hidden;
 
     @media (min-width: ${props => props.theme.breakpoints.desktop}) {
       padding: ${props => props.theme.spacing.lg};
+      gap: 1.5rem;
     }
   }
 
   .game-button {
     ${props => props.theme.gameStyles.button};
     margin: ${props => props.theme.spacing.sm};
+    min-width: 120px;
+    max-width: 200px;
+    white-space: nowrap;
   }
 
   .game-card {
     ${props => props.theme.gameStyles.card};
     margin: ${props => props.theme.spacing.xs};
+    min-width: 60px;
+    max-width: 100px;
+    aspect-ratio: 2/3;
   }
 
   .game-table {
     ${props => props.theme.gameStyles.table};
     margin-bottom: ${props => props.theme.spacing.md};
+    width: 100%;
+    max-width: 600px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   /* Стили для баланса */
@@ -75,13 +91,18 @@ const GlobalStyle = createGlobalStyle`
     right: 0;
     z-index: 1000;
     background: ${props => props.theme.gradients.dark};
-    padding: ${props => props.theme.spacing.sm};
+    padding: ${props => props.theme.spacing.sm} ${props => props.theme.spacing.md};
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    gap: 1rem;
+    height: 60px;
     border-bottom: 2px solid ${props => props.theme.colors.game.border};
+
+    @media (min-width: ${props => props.theme.breakpoints.desktop}) {
+      height: 70px;
+      padding: ${props => props.theme.spacing.md} ${props => props.theme.spacing.lg};
+    }
   }
 
   .balance-item {
@@ -113,9 +134,14 @@ const GlobalStyle = createGlobalStyle`
     display: flex;
     justify-content: space-around;
     align-items: center;
+    height: 70px;
     border-top: 2px solid ${props => props.theme.colors.game.border};
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    z-index: 1000;
+
+    @media (min-width: ${props => props.theme.breakpoints.desktop}) {
+      height: 80px;
+      padding: ${props => props.theme.spacing.md};
+    }
   }
 
   .nav-item {
@@ -373,28 +399,52 @@ const GlobalStyle = createGlobalStyle`
     .nav-item {
       font-size: 0.8rem;
     }
+
+    .game-container {
+      padding: ${props => props.theme.spacing.sm};
+      gap: 0.5rem;
+    }
+
+    .game-button {
+      min-width: 100px;
+      padding: 0.5rem;
+      font-size: 0.7rem;
+    }
+
+    .game-card {
+      min-width: 40px;
+      max-width: 80px;
+    }
+
+    .game-table {
+      max-width: 100%;
+      padding: 0.5rem;
+    }
   }
 
   /* Стили для ландшафтной ориентации */
   @media (max-height: 480px) and (orientation: landscape) {
     .game-container {
+      padding: 0.5rem;
       flex-direction: row;
       flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
     }
 
-    .game-card {
-      width: calc(50% - 1rem);
-      margin: 0.5rem;
+    .balance-container {
+      height: 50px;
+      padding: 0.25rem 0.5rem;
     }
 
-    .nav-menu {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(0, 0, 0, 0.8);
-      padding: 0.5rem;
-      z-index: 1000;
+    .nav-container {
+      height: 60px;
+      padding: 0.25rem;
+    }
+
+    .main-content {
+      padding-top: 50px;
+      padding-bottom: 60px;
     }
   }
 `;
