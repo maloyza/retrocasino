@@ -96,24 +96,41 @@ const App = () => {
       setShowOrientationWarning(isMobile() && !isPortraitMode);
     };
 
-    const requestFullscreen = () => {
-      // Проверяем, запущено ли приложение в Telegram Web App
-      if (window.Telegram?.WebApp) {
-        window.Telegram.WebApp.expand();
-      } else {
-        // Для обычного браузера используем стандартный API
-        const element = document.documentElement;
-        try {
-          if (element.requestFullscreen) {
-            element.requestFullscreen();
-          } else if (element.webkitRequestFullscreen) {
-            element.webkitRequestFullscreen();
-          } else if (element.msRequestFullscreen) {
-            element.msRequestFullscreen();
-          }
-        } catch (error) {
-          console.error('Failed to open fullscreen:', error);
+    const isFullscreenSupported = () => {
+      return document.fullscreenEnabled || 
+             document.webkitFullscreenEnabled || 
+             document.msFullscreenEnabled;
+    };
+
+    const requestFullscreen = async () => {
+      try {
+        // Проверяем, запущено ли приложение в Telegram Web App
+        if (window.Telegram?.WebApp) {
+          console.log('Telegram Web App detected, trying to expand...');
+          window.Telegram.WebApp.expand();
+          return;
         }
+
+        // Проверяем поддержку полноэкранного режима
+        if (!isFullscreenSupported()) {
+          console.log('Fullscreen mode is not supported');
+          return;
+        }
+
+        const element = document.documentElement;
+        console.log('Requesting fullscreen mode...');
+
+        if (element.requestFullscreen) {
+          await element.requestFullscreen();
+        } else if (element.webkitRequestFullscreen) {
+          await element.webkitRequestFullscreen();
+        } else if (element.msRequestFullscreen) {
+          await element.msRequestFullscreen();
+        }
+
+        console.log('Fullscreen mode activated successfully');
+      } catch (error) {
+        console.error('Failed to open fullscreen:', error);
       }
     };
 
@@ -122,37 +139,41 @@ const App = () => {
     window.addEventListener('resize', checkOrientation);
     window.addEventListener('orientationchange', checkOrientation);
 
-    // Если это не мобильное устройство, пытаемся открыть в полноэкранном режиме
+    // Пробуем открыть полноэкранный режим при загрузке
+    const handleLoad = () => {
+      console.log('Page loaded, attempting to enter fullscreen mode...');
+      // Увеличиваем задержку для гарантии загрузки всех ресурсов
+      setTimeout(requestFullscreen, 500);
+      window.removeEventListener('load', handleLoad);
+    };
+
+    window.addEventListener('load', handleLoad);
+
+    // Добавляем обработчик клика как запасной вариант
+    const handleClick = () => {
+      console.log('Click detected, attempting to enter fullscreen mode...');
+      requestFullscreen();
+      document.removeEventListener('click', handleClick);
+    };
+
+    document.addEventListener('click', handleClick);
+
+    // Добавляем обработчик клавиши F11 (только для ПК)
     if (!isMobile()) {
-      // Пробуем открыть полноэкранный режим при загрузке
-      const handleLoad = () => {
-        setTimeout(requestFullscreen, 100);
-        window.removeEventListener('load', handleLoad);
-      };
-
-      window.addEventListener('load', handleLoad);
-
-      // Добавляем обработчик клика как запасной вариант
-      const handleClick = () => {
-        requestFullscreen();
-        document.removeEventListener('click', handleClick);
-      };
-
-      document.addEventListener('click', handleClick);
-
-      // Добавляем обработчик клавиши F11
       const handleKeyPress = (e) => {
         if (e.key === 'F11') {
           e.preventDefault();
+          console.log('F11 pressed, attempting to enter fullscreen mode...');
           requestFullscreen();
         }
       };
 
       document.addEventListener('keydown', handleKeyPress);
 
-      // Добавляем обработчик изменения размера окна
+      // Добавляем обработчик изменения размера окна (только для ПК)
       const handleResize = () => {
         if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+          console.log('Window resized, attempting to enter fullscreen mode...');
           requestFullscreen();
         }
       };
@@ -168,6 +189,8 @@ const App = () => {
     }
 
     return () => {
+      window.removeEventListener('load', handleLoad);
+      document.removeEventListener('click', handleClick);
       window.removeEventListener('resize', checkOrientation);
       window.removeEventListener('orientationchange', checkOrientation);
     };
