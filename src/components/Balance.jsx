@@ -14,6 +14,17 @@ const BalanceContainer = styled.div`
   align-items: center;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 183, 0, 0.2);
+
+  @media (orientation: landscape) and (max-height: 600px) {
+    left: 60px;
+    top: 0;
+    right: 0;
+    height: 50px;
+    padding: 0.25rem 1rem;
+    justify-content: flex-start;
+    gap: 1rem;
+  }
 `;
 
 const BalanceItem = styled.div`
@@ -24,17 +35,40 @@ const BalanceItem = styled.div`
   background: rgba(139, 69, 19, 0.8);
   border-radius: 8px;
   border: 2px solid ${props => props.theme.colors.accent};
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 183, 0, 0.3);
+  }
+
+  @media (orientation: landscape) and (max-height: 600px) {
+    padding: 0.25rem 0.5rem;
+    min-width: 100px;
+    justify-content: center;
+  }
 `;
 
 const BalanceIcon = styled.img`
   width: 24px;
   height: 24px;
+  filter: drop-shadow(0 0 3px rgba(255, 183, 0, 0.5));
+
+  @media (orientation: landscape) and (max-height: 600px) {
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 const BalanceAmount = styled.span`
   font-size: 1.2rem;
   font-weight: bold;
   color: ${props => props.theme.colors.accent};
+  text-shadow: 0 0 5px rgba(255, 183, 0, 0.5);
+
+  @media (orientation: landscape) and (max-height: 600px) {
+    font-size: 1rem;
+  }
 `;
 
 const Balance = () => {

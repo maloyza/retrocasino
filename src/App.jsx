@@ -25,16 +25,31 @@ const OrientationWarning = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  color: ${({ theme }) => theme.colors.accent};
   text-align: center;
   padding: 2rem;
+  border: 4px solid ${({ theme }) => theme.colors.accent};
+  box-shadow: 0 0 20px rgba(255, 183, 0, 0.3);
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border: 2px solid ${({ theme }) => theme.colors.accent};
+    pointer-events: none;
+  }
 
   h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
     color: ${({ theme }) => theme.colors.accent};
     text-transform: uppercase;
     letter-spacing: 1px;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+    animation: glow 1.5s ease-in-out infinite alternate;
   }
 
   p {
@@ -42,12 +57,16 @@ const OrientationWarning = styled.div`
     color: ${({ theme }) => theme.colors.text};
     max-width: 280px;
     line-height: 1.4;
+    margin-bottom: 1rem;
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
   }
 
   &::before {
     content: '↺';
     font-size: 3rem;
     margin-bottom: 1rem;
+    color: ${({ theme }) => theme.colors.accent};
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
     animation: rotate 2s infinite linear;
   }
 
@@ -57,6 +76,17 @@ const OrientationWarning = styled.div`
     }
     to {
       transform: rotate(360deg);
+    }
+  }
+
+  @keyframes glow {
+    from {
+      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px ${({ theme }) => theme.colors.accent},
+                   0 0 20px ${({ theme }) => theme.colors.accent}, 0 0 25px ${({ theme }) => theme.colors.accent};
+    }
+    to {
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px ${({ theme }) => theme.colors.accent},
+                   0 0 40px ${({ theme }) => theme.colors.accent}, 0 0 50px ${({ theme }) => theme.colors.accent};
     }
   }
 `;
@@ -81,6 +111,10 @@ const AppContainer = styled.div`
     width: 100%;
     height: 100%;
   }
+
+  @media (orientation: landscape) and (max-height: 600px) {
+    flex-direction: row;
+  }
 `;
 
 const MainContent = styled.main`
@@ -103,6 +137,13 @@ const MainContent = styled.main`
     padding-top: 70px;
     padding-bottom: 80px;
     height: calc(100% - 150px);
+  }
+
+  @media (orientation: landscape) and (max-height: 600px) {
+    padding-top: ${({ theme }) => theme.spacing.md};
+    padding-bottom: ${({ theme }) => theme.spacing.md};
+    padding-left: 70px;
+    height: 100%;
   }
 
   & > * {

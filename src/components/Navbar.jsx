@@ -16,6 +16,17 @@ const NavContainer = styled.nav`
   align-items: center;
   z-index: 1000;
   padding-bottom: calc(0.5rem + env(safe-area-inset-bottom));
+
+  @media (orientation: landscape) and (max-height: 600px) {
+    bottom: 0;
+    left: 0;
+    top: 0;
+    right: auto;
+    width: 60px;
+    flex-direction: column;
+    padding: 1rem 0.5rem;
+    border-right: 1px solid rgba(255, 183, 0, 0.2);
+  }
 `;
 
 const NavItem = styled(Link)`
@@ -30,6 +41,17 @@ const NavItem = styled(Link)`
 
   &:hover {
     background: rgba(139, 69, 19, 0.2);
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  @media (orientation: landscape) and (max-height: 600px) {
+    margin: 0.5rem 0;
+    width: 100%;
+    padding: 0.75rem 0;
   }
 `;
 
@@ -37,10 +59,27 @@ const NavIcon = styled.img`
   width: 24px;
   height: 24px;
   margin-bottom: 0.25rem;
+  filter: ${props => props.active ? 'drop-shadow(0 0 5px ' + props.theme.colors.accent + ')' : 'none'};
+  transition: filter 0.3s ease;
+
+  @media (orientation: landscape) and (max-height: 600px) {
+    width: 28px;
+    height: 28px;
+    margin-bottom: 0.5rem;
+  }
 `;
 
 const NavLabel = styled.span`
   font-size: 0.8rem;
+  transition: all 0.3s ease;
+
+  @media (orientation: landscape) and (max-height: 600px) {
+    font-size: 0.7rem;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    margin-top: 0.5rem;
+  }
 `;
 
 const Navbar = () => {
