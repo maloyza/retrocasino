@@ -336,11 +336,19 @@ const VideoPoker = () => {
   };
 
   const isTwoPair = (valueCounts) => {
-    return Object.values(valueCounts).filter(count => count === 2).length === 2;
+    // Проверяем только пары от вальтов и выше
+    const highCards = ['J', 'Q', 'K', 'A'];
+    const pairs = Object.entries(valueCounts)
+      .filter(([value, count]) => count === 2 && highCards.includes(value));
+    return pairs.length === 2;
   };
 
   const isPair = (valueCounts) => {
-    return Object.values(valueCounts).includes(2);
+    // Проверяем только пары от вальтов и выше
+    const highCards = ['J', 'Q', 'K', 'A'];
+    return Object.entries(valueCounts).some(([value, count]) => 
+      count === 2 && highCards.includes(value)
+    );
   };
 
   // Новая игра

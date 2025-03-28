@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import { AnimatePresence } from 'framer-motion';
@@ -12,6 +12,23 @@ import Blackjack from './pages/Blackjack';
 import VideoPoker from './pages/VideoPoker';
 import Roulette from './pages/Roulette';
 import Balance from './components/Balance';
+
+const OrientationWarning = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: ${({ theme }) => theme.colors.primary};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  color: ${({ theme }) => theme.colors.accent};
+  text-align: center;
+  padding: 2rem;
+`;
 
 const AppContainer = styled.div`
   height: 100vh;
@@ -47,8 +64,8 @@ const MainContent = styled.main`
   width: 100%;
   height: 100%;
   margin: 0 auto;
-  padding-top: 60px; // Для Balance компонента
-  padding-bottom: 70px; // Для Navbar
+  padding-top: 60px;
+  padding-bottom: 70px;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     padding: ${({ theme }) => theme.spacing.xl};
@@ -64,10 +81,20 @@ const MainContent = styled.main`
 `;
 
 const App = () => {
+  const [isPortrait, setIsPortrait] = useState(true);
+  const [showOrientationWarning, setShowOrientationWarning] = useState(false);
+
   useEffect(() => {
     // Функция для определения мобильного устройства
     const isMobile = () => {
       return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    };
+
+    // Функция для определения ориентации
+    const checkOrientation = () => {
+      const isPortraitMode = window.innerHeight > window.innerWidth;
+      setIsPortrait(isPortraitMode);
+      setShowOrientationWarning(isMobile() && !isPortraitMode);
     };
 
     // Функция для открытия в полноэкранном режиме
@@ -86,17 +113,20 @@ const App = () => {
       }
     };
 
-    // Если это не мобильное устройство, пытаемся открыть в полноэкранном режиме сразу
+    // Проверяем ориентацию при загрузке и при изменении размера окна
+    checkOrientation();
+    window.addEventListener('resize', checkOrientation);
+    window.addEventListener('orientationchange', checkOrientation);
+
+    // Если это не мобильное устройство, пытаемся открыть в полноэкранном режиме
     if (!isMobile()) {
       const handleLoad = () => {
         openFullscreen();
         window.removeEventListener('load', handleLoad);
       };
 
-      // Пробуем открыть полноэкранный режим при загрузке
       window.addEventListener('load', handleLoad);
 
-      // Также добавляем обработчик клика как запасной вариант
       const handleClick = () => {
         openFullscreen();
         document.removeEventListener('click', handleClick);
@@ -109,7 +139,23 @@ const App = () => {
         document.removeEventListener('click', handleClick);
       };
     }
+
+    return () => {
+      window.removeEventListener('resize', checkOrientation);
+      window.removeEventListener('orientationchange', checkOrientation);
+    };
   }, []);
+
+  if (showOrientationWarning) {
+    return (
+      <ThemeProvider theme={theme}>
+        <OrientationWarning>
+          <h2>Пожалуйста, переверните устройство</h2>
+          <p>Для лучшего игрового опыта рекомендуется использовать портретную ориентацию</p>
+        </OrientationWarning>
+      </ThemeProvider>
+    );
+  }
 
   return (
     <ThemeProvider theme={theme}>

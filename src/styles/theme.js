@@ -2,7 +2,7 @@ const theme = {
   colors: {
     primary: '#1a1a1a',
     secondary: '#2a2a2a',
-    accent: '#ffd700',
+    accent: '#00ff9d',
     text: '#ffffff',
     error: '#ff0000',
     success: '#00ff00',
@@ -12,12 +12,12 @@ const theme = {
       text: '#ffd700'
     },
     game: {
-      background: '#000000',
+      background: 'rgba(0, 0, 0, 0.8)',
       border: '#8b4513',
       card: '#ffffff',
       table: '#006400',
       chip: '#ffd700',
-      highlight: '#ff4500'
+      highlight: '#00ff9d'
     }
   },
   fonts: {
