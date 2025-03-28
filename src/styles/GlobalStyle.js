@@ -40,6 +40,8 @@ const GlobalStyle = createGlobalStyle`
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    max-width: 100%;
+    margin: 0 auto;
   }
 
   /* Стили для основного контента */
@@ -113,6 +115,63 @@ const GlobalStyle = createGlobalStyle`
     
     &:hover {
       color: ${props => props.theme.colors.text};
+    }
+  }
+
+  /* Стили для полноэкранного режима на ПК */
+  @media (min-width: 1024px) {
+    body {
+      background-size: cover;
+      background-position: center;
+    }
+
+    .app-container {
+      max-width: 100%;
+      height: 100vh;
+    }
+
+    .main-content {
+      padding: 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .balance-container {
+      padding: 1rem;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .balance-item {
+      padding: 0.75rem 1.5rem;
+    }
+
+    .balance-amount {
+      font-size: 1.5rem;
+    }
+  }
+
+  /* Стили для мобильных устройств */
+  @media (max-width: 1023px) {
+    .app-container {
+      max-width: 100%;
+    }
+
+    .main-content {
+      padding: 0.5rem;
+    }
+
+    .balance-container {
+      padding: 0.5rem;
+    }
+
+    .balance-item {
+      padding: 0.5rem;
+    }
+
+    .balance-amount {
+      font-size: 1rem;
     }
   }
 

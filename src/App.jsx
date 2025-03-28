@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { AnimatePresence } from 'framer-motion';
@@ -27,6 +27,42 @@ const MainContent = styled.main`
 `;
 
 const App = () => {
+  useEffect(() => {
+    // Функция для определения мобильного устройства
+    const isMobile = () => {
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    };
+
+    // Функция для открытия в полноэкранном режиме
+    const openFullscreen = () => {
+      const element = document.documentElement;
+      if (element.requestFullscreen) {
+        element.requestFullscreen();
+      } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+      } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen();
+      }
+    };
+
+    // Если это не мобильное устройство, открываем в полноэкранном режиме
+    if (!isMobile()) {
+      // Добавляем обработчик клика для открытия в полноэкранном режиме
+      const handleClick = () => {
+        openFullscreen();
+        // Удаляем обработчик после первого клика
+        document.removeEventListener('click', handleClick);
+      };
+
+      document.addEventListener('click', handleClick);
+
+      // Очистка обработчика при размонтировании
+      return () => {
+        document.removeEventListener('click', handleClick);
+      };
+    }
+  }, []);
+
   return (
     <Router>
       <GlobalStyle />
