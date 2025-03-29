@@ -11,126 +11,145 @@ const HomeContainer = styled.div`
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
-  padding-top: 60px;
-  padding-bottom: 80px;
 `;
 
-const ContentWrapper = styled.div`
+const WelcomeSection = styled.div`
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  justify-content: center;
+  gap: 40px;
   padding: 20px;
-  gap: 20px;
 `;
 
-const Title = styled.h1`
+const Title = styled(motion.h1)`
   color: ${props => props.theme.colors.accent};
   text-align: center;
   margin: 0;
   padding: 0;
-  margin-bottom: 20px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   font-family: 'Press Start 2P', cursive;
-  font-size: 1.8rem;
-`;
-
-const GamesGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-  width: 100%;
-  max-width: 1200px;
-  padding: 0 10px;
-`;
-
-const GameCard = styled(motion.div)`
-  background: rgba(0, 0, 0, 0.8);
-  border-radius: 10px;
-  padding: 15px;
-  text-align: center;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  border: 2px solid ${props => props.theme.colors.accent};
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  height: 250px;
-
-  @media (max-width: 768px) {
-    height: 180px;
-    padding: 10px;
-    gap: 5px;
-  }
-`;
-
-const GameImage = styled.img`
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-  border-radius: 5px;
-
-  @media (max-width: 768px) {
-    height: 120px;
-  }
-`;
-
-const GameTitle = styled.h2`
-  color: ${props => props.theme.colors.text};
-  font-size: 0.9rem;
-  font-family: 'Press Start 2P', cursive;
-  margin: 0;
-  padding: 0;
+  font-size: 2.5rem;
 `;
 
 const DailyBonus = styled(motion.button)`
   background: ${props => props.theme.colors.accent};
   color: ${props => props.theme.colors.black};
-  padding: 10px 20px;
+  padding: 15px 30px;
   border-radius: 8px;
   cursor: pointer;
   text-align: center;
   font-weight: bold;
   font-family: 'Press Start 2P', cursive;
-  font-size: 0.8rem;
+  font-size: 1rem;
   border: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  margin-bottom: 10px;
+`;
+
+const GamesSection = styled.div`
+  min-height: 100vh;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const GamesGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 20px;
+`;
+
+const GameCard = styled(motion.div)`
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  border: 2px solid ${props => props.theme.colors.accent};
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  height: 300px;
+`;
+
+const GameImage = styled.img`
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+`;
+
+const GameTitle = styled.h2`
+  color: ${props => props.theme.colors.text};
+  font-size: 1.1rem;
+  font-family: 'Press Start 2P', cursive;
+  margin: 0;
+  padding: 0;
 `;
 
 const GameBalance = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  padding: 4px 8px;
+  gap: 8px;
+  padding: 8px 15px;
   background: rgba(0, 0, 0, 0.8);
-  border: 1px solid ${props => props.theme.colors.accent};
-  border-radius: 5px;
+  border: 2px solid ${props => props.theme.colors.accent};
+  border-radius: 8px;
   margin-top: auto;
 `;
 
 const CoinIcon = styled.div`
-  width: 14px;
-  height: 14px;
+  width: 20px;
+  height: 20px;
   background: ${props => props.theme.colors.accent};
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 8px;
+  font-size: 12px;
   font-family: 'Press Start 2P', cursive;
   color: ${props => props.theme.colors.black};
 `;
 
 const CoinsAmount = styled.span`
   font-family: 'Press Start 2P', cursive;
-  font-size: 10px;
+  font-size: 14px;
   color: ${props => props.theme.colors.accent};
 `;
 
 const Home = () => {
+  const titleAnimation = {
+    initial: { scale: 0.5, opacity: 0 },
+    animate: { 
+      scale: 1, 
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const bonusAnimation = {
+    initial: { y: 50, opacity: 0 },
+    animate: { 
+      y: 0, 
+      opacity: 1,
+      transition: {
+        delay: 0.5,
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  };
+
   const games = [
     {
       id: 'blackjack',
@@ -154,15 +173,27 @@ const Home = () => {
 
   return (
     <HomeContainer>
-      <ContentWrapper>
-        <Title>Retro Casino</Title>
+      <WelcomeSection>
+        <Title
+          variants={titleAnimation}
+          initial="initial"
+          animate="animate"
+        >
+          Retro Casino
+        </Title>
         <DailyBonus
           as={motion.button}
+          variants={bonusAnimation}
+          initial="initial"
+          animate="animate"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
           Получить ежедневный бонус
         </DailyBonus>
+      </WelcomeSection>
+
+      <GamesSection>
         <GamesGrid>
           {games.map(game => (
             <Link to={`/${game.id}`} key={game.id} style={{ textDecoration: 'none' }}>
@@ -180,7 +211,7 @@ const Home = () => {
             </Link>
           ))}
         </GamesGrid>
-      </ContentWrapper>
+      </GamesSection>
     </HomeContainer>
   );
 };
