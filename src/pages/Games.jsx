@@ -6,25 +6,36 @@ import GameCard from '../components/GameCard';
 const GamesContainer = styled.div`
   width: 100%;
   height: 100%;
-  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-y: auto;
+  padding: 10px;
+
+  @media (orientation: landscape) {
+    padding: 5px;
+  }
 `;
 
 const GamesGrid = styled(motion.div)`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 15px;
   width: 100%;
+  height: 100%;
   max-width: 1200px;
+  gap: 15px;
   padding: 10px;
-  
-  @media (max-width: 600px) {
-    grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-auto-flow: column;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+
+  @media (orientation: landscape) {
     gap: 10px;
     padding: 5px;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
   }
 `;
 
