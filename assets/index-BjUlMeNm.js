@@ -570,15 +570,15 @@ Error generating stack: `+o.message+`
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
-  scroll-behavior: smooth;
+  padding: 20px 10px;
 `,$P=j.div`
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 40px;
-  padding: 20px;
+  justify-content: flex-start;
+  gap: 20px;
+  padding-top: 20px;
+  padding-bottom: 30px;
 `,VP=j(Se.h1)`
   color: ${e=>e.theme.colors.accent};
   text-align: center;
@@ -586,52 +586,51 @@ Error generating stack: `+o.message+`
   padding: 0;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   font-family: 'Press Start 2P', cursive;
-  font-size: 2.5rem;
+  font-size: 1.8rem;
 `,OP=j(Se.button)`
   background: ${e=>e.theme.colors.accent};
   color: ${e=>e.theme.colors.black};
-  padding: 15px 30px;
+  padding: 12px 24px;
   border-radius: 8px;
   cursor: pointer;
   text-align: center;
   font-weight: bold;
   font-family: 'Press Start 2P', cursive;
-  font-size: 1rem;
+  font-size: 0.9rem;
   border: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 `,NP=j.div`
-  padding: 20px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 `,FP=j.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
+  gap: 10px;
   width: 100%;
   max-width: 1200px;
-  padding: 0 10px;
 `,BP=j(Se.div)`
   background: rgba(0, 0, 0, 0.8);
-  border-radius: 12px;
-  padding: 12px;
+  border-radius: 10px;
+  padding: 10px;
   text-align: center;
   cursor: pointer;
   position: relative;
   border: 2px solid ${e=>e.theme.colors.accent};
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  height: 220px;
+  gap: 8px;
+  height: 180px;
   transform-origin: center;
 `,zP=j.img`
   width: 100%;
-  height: 140px;
+  height: 100px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 6px;
 `,UP=j.h2`
   color: ${e=>e.theme.colors.text};
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-family: 'Press Start 2P', cursive;
   margin: 0;
   padding: 0;
@@ -639,26 +638,26 @@ Error generating stack: `+o.message+`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 6px 10px;
+  gap: 5px;
+  padding: 5px 8px;
   background: rgba(0, 0, 0, 0.8);
-  border: 2px solid ${e=>e.theme.colors.accent};
-  border-radius: 6px;
+  border: 1px solid ${e=>e.theme.colors.accent};
+  border-radius: 5px;
   margin-top: auto;
 `,WP=j.div`
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   background: ${e=>e.theme.colors.accent};
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
+  font-size: 8px;
   font-family: 'Press Start 2P', cursive;
   color: ${e=>e.theme.colors.black};
 `,GP=j.span`
   font-family: 'Press Start 2P', cursive;
-  font-size: 12px;
+  font-size: 10px;
   color: ${e=>e.theme.colors.accent};
 `,KP=()=>{const e={initial:{scale:.5,opacity:0},animate:{scale:1,opacity:1,transition:{duration:.8,ease:"easeOut"}}},t={initial:{y:50,opacity:0},animate:{y:0,opacity:1,transition:{delay:.5,duration:.5,ease:"easeOut"}}},n={initial:{y:50,opacity:0},whileInView:{y:0,opacity:1,transition:{duration:.5,ease:"easeOut"}},viewport:{once:!0}},r=[{id:"blackjack",title:"Блэкджек",image:"/games/blackjack.jpg",coins:2e3},{id:"video-poker",title:"Видеопокер",image:"/games/poker.jpg",coins:3e3},{id:"roulette",title:"Рулетка",image:"/games/roulette.jpg",coins:5e3}];return _.jsxs(IP,{children:[_.jsxs($P,{children:[_.jsx(VP,{variants:e,initial:"initial",animate:"animate",children:"Retro Casino"}),_.jsx(OP,{as:Se.button,variants:t,initial:"initial",animate:"animate",whileHover:{scale:1.05},whileTap:{scale:.95},children:"Получить ежедневный бонус"})]}),_.jsx(NP,{id:"games-section",children:_.jsx(FP,{children:r.map((i,o)=>_.jsx(nw,{to:`/${i.id}`,style:{textDecoration:"none"},children:_.jsxs(BP,{variants:n,initial:"initial",whileInView:"whileInView",viewport:{once:!0,margin:"-100px"},whileHover:{scale:1.02},whileTap:{scale:.98},transition:{delay:o*.1},children:[_.jsx(zP,{src:i.image,alt:i.title}),_.jsx(UP,{children:i.title}),_.jsxs(HP,{children:[_.jsx(WP,{children:"$"}),_.jsx(GP,{children:i.coins})]})]})},i.id))})})]})},QP=j.div`
   position: fixed;
@@ -1523,4 +1522,4 @@ Error generating stack: `+o.message+`
   display: flex;
   align-items: center;
 `,nA=()=>{const e=xc(),t=Vr();return k.useEffect(()=>{var n;try{const r=(n=window.Telegram)==null?void 0:n.WebApp;r&&(r.MainButton.setParams({is_visible:!1}),t.pathname!=="/"?r.BackButton.show():r.BackButton.hide(),r.BackButton.onClick(()=>{e(-1)}))}catch(r){console.error("TWA initialization error:",r)}return document.body.style.overscrollBehavior="none",document.documentElement.style.overscrollBehavior="none",()=>{document.body.style.overscrollBehavior="",document.documentElement.style.overscrollBehavior=""}},[e,t]),_.jsxs(JC,{children:[_.jsx(tA,{children:_.jsx(ro,{})}),_.jsx(eA,{children:_.jsx(u_,{mode:"wait",children:_.jsxs(Gx,{children:[_.jsx(Sn,{path:"/",element:_.jsx(KP,{})}),_.jsx(Sn,{path:"/profile",element:_.jsx(mC,{})}),_.jsx(Sn,{path:"/leaderboard",element:_.jsx(EC,{})}),_.jsx(Sn,{path:"/blackjack",element:_.jsx(IC,{})}),_.jsx(Sn,{path:"/video-poker",element:_.jsx(UC,{})}),_.jsx(Sn,{path:"/roulette",element:_.jsx(ZC,{})})]})})}),_.jsx(LP,{})]})},rA=()=>{const[e,t]=k.useState(!0),[n,r]=k.useState(!1);return k.useEffect(()=>{const i=()=>/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),o=()=>{const l=window.innerHeight>window.innerWidth;t(l),r(i()&&l)},s=()=>{var l;try{if((l=window.Telegram)!=null&&l.WebApp){const u=window.Telegram.WebApp;u.ready(),u.expand(),u.setHeaderColor("#000000"),u.setBackgroundColor("#000000"),console.log("TWA viewport info:",{viewportHeight:u.viewportHeight,viewportStableHeight:u.viewportStableHeight,isExpanded:u.isExpanded,headerColor:u.headerColor,backgroundColor:u.backgroundColor})}}catch(u){console.error("TWA initialization error:",u)}};return o(),window.addEventListener("resize",o),window.addEventListener("orientationchange",o),s(),()=>{window.removeEventListener("resize",o),window.removeEventListener("orientationchange",o)}},[]),n?_.jsx(Ld,{theme:Jp,children:_.jsxs(qC,{children:[_.jsx("h2",{children:"Пожалуйста, переверните устройство"}),_.jsx("p",{children:"Для лучшего игрового опыта используйте горизонтальную ориентацию экрана"})]})}):_.jsx(Ld,{theme:Jp,children:_.jsxs(Jx,{basename:"/retrocasino",children:[_.jsx(MP,{}),_.jsx(nA,{})]})})};nl.createRoot(document.getElementById("root")).render(_.jsx(Ue.StrictMode,{children:_.jsx(rA,{})}));
-//# sourceMappingURL=index-T-4nlCPG.js.map
+//# sourceMappingURL=index-BjUlMeNm.js.map
