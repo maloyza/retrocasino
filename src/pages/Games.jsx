@@ -15,15 +15,16 @@ const GamesContainer = styled.div`
 
 const GamesGrid = styled(motion.div)`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
   width: 100%;
   max-width: 1200px;
   padding: 10px;
   
   @media (max-width: 600px) {
-    grid-template-columns: 1fr;
-    gap: 15px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 5px;
   }
 `;
 

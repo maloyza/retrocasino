@@ -7,17 +7,19 @@ const Card = styled(motion.div)`
   background: rgba(0, 0, 0, 0.8);
   border: 2px solid ${props => props.theme.colors.accent};
   border-radius: 10px;
-  padding: 15px;
+  padding: 12px;
   width: 100%;
-  max-width: 300px;
+  aspect-ratio: 1.2;
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 `;
 
 const GameImage = styled.img`
   width: 100%;
-  height: 150px;
+  height: 60%;
   object-fit: cover;
   border-radius: 5px;
   margin-bottom: 10px;
@@ -34,14 +36,15 @@ const GameTitle = styled.h3`
 const GameDescription = styled.p`
   font-size: 12px;
   color: ${props => props.theme.colors.text};
-  margin-bottom: 15px;
+  margin-bottom: auto;
+  flex: 1;
 `;
 
 const CoinsInfo = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-top: auto;
+  margin-top: 8px;
 `;
 
 const CoinIcon = styled.div`
@@ -53,6 +56,7 @@ const CoinIcon = styled.div`
   align-items: center;
   justify-content: center;
   font-size: 12px;
+  font-family: 'Press Start 2P', cursive;
   color: ${props => props.theme.colors.black};
   border: 2px solid ${props => props.theme.colors.text};
 `;
@@ -82,7 +86,7 @@ const GameCard = ({ game }) => {
       <GameTitle>{title}</GameTitle>
       <GameDescription>{description}</GameDescription>
       <CoinsInfo>
-        <CoinIcon>₿</CoinIcon>
+        <CoinIcon>$</CoinIcon>
         <CoinsAmount>{coins}</CoinsAmount>
       </CoinsInfo>
     </Card>

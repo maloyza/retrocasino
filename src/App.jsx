@@ -108,11 +108,14 @@ const AppContainer = styled.div`
 const MainContent = styled.main`
   flex: 1;
   width: 100%;
-  height: calc(100vh - 120px); /* 60px для баланса + 60px для навигации */
+  height: 100%;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   position: relative;
-  padding: 60px 0 70px 0;
+  padding-top: 60px; /* Высота баланса */
+  padding-bottom: 70px; /* Высота навигации */
+  display: flex;
+  flex-direction: column;
 `;
 
 const BalanceWrapper = styled.div`
@@ -124,7 +127,7 @@ const BalanceWrapper = styled.div`
   background: rgba(0, 0, 0, 0.9);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  padding-top: max(10px, env(safe-area-inset-top));
+  padding-top: max(env(safe-area-inset-top), 10px);
   border-bottom: 2px solid ${props => props.theme.colors.accent};
   height: 60px;
   display: flex;

@@ -82,7 +82,7 @@ const BalanceAmount = styled.span`
 const CoinsWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 `;
 
 const CoinIcon = styled.div`
@@ -94,6 +94,7 @@ const CoinIcon = styled.div`
   align-items: center;
   justify-content: center;
   font-size: 14px;
+  font-family: 'Press Start 2P', cursive;
   color: ${props => props.theme.colors.black};
   border: 2px solid ${props => props.theme.colors.text};
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -101,7 +102,7 @@ const CoinIcon = styled.div`
 
 const CoinsAmount = styled.span`
   font-family: 'Press Start 2P', cursive;
-  font-size: 14px;
+  font-size: 16px;
   color: ${props => props.theme.colors.accent};
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 `;
@@ -111,7 +112,7 @@ const TopUpButton = styled(motion.button)`
   color: ${props => props.theme.colors.black};
   padding: 8px 16px;
   border-radius: 5px;
-  font-size: 12px;
+  font-size: 14px;
   font-family: 'Press Start 2P', cursive;
   border: 2px solid ${props => props.theme.colors.text};
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -130,7 +131,7 @@ const Balance = () => {
   return (
     <BalanceContainer>
       <CoinsWrapper>
-        <CoinIcon>₿</CoinIcon>
+        <CoinIcon>$</CoinIcon>
         <CoinsAmount>1000</CoinsAmount>
       </CoinsWrapper>
       <TopUpButton
