@@ -734,7 +734,7 @@ Error generating stack: `+o.message+`
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
-  padding: 20px 10px 120px 10px;
+  padding: 20px 10px 145px 10px;
 `,qP=j.div`
   display: flex;
   flex-direction: column;
@@ -1516,4 +1516,4 @@ Error generating stack: `+o.message+`
   display: flex;
   align-items: center;
 `,eA=()=>{const e=xc(),t=Vr();return k.useEffect(()=>{var n;try{const r=(n=window.Telegram)==null?void 0:n.WebApp;r&&(r.MainButton.setParams({is_visible:!1}),t.pathname!=="/"?r.BackButton.show():r.BackButton.hide(),r.BackButton.onClick(()=>{e(-1)}))}catch(r){console.error("TWA initialization error:",r)}return document.body.style.overscrollBehavior="none",document.documentElement.style.overscrollBehavior="none",()=>{document.body.style.overscrollBehavior="",document.documentElement.style.overscrollBehavior=""}},[e,t]),_.jsxs(ZC,{children:[_.jsx(JC,{children:_.jsx(ro,{})}),_.jsx(qC,{children:_.jsx(u_,{mode:"wait",children:_.jsxs(Gx,{children:[_.jsx(Sn,{path:"/",element:_.jsx(WP,{})}),_.jsx(Sn,{path:"/profile",element:_.jsx(pC,{})}),_.jsx(Sn,{path:"/leaderboard",element:_.jsx(CC,{})}),_.jsx(Sn,{path:"/blackjack",element:_.jsx(DC,{})}),_.jsx(Sn,{path:"/video-poker",element:_.jsx(BC,{})}),_.jsx(Sn,{path:"/roulette",element:_.jsx(YC,{})})]})})}),_.jsx(LP,{})]})},tA=()=>{const[e,t]=k.useState(!0),[n,r]=k.useState(!1);return k.useEffect(()=>{const i=()=>/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),o=()=>{const l=window.innerHeight>window.innerWidth;t(l),r(i()&&l)},s=()=>{var l;try{if((l=window.Telegram)!=null&&l.WebApp){const u=window.Telegram.WebApp;u.ready(),u.expand(),u.setHeaderColor("#000000"),u.setBackgroundColor("#000000"),console.log("TWA viewport info:",{viewportHeight:u.viewportHeight,viewportStableHeight:u.viewportStableHeight,isExpanded:u.isExpanded,headerColor:u.headerColor,backgroundColor:u.backgroundColor})}}catch(u){console.error("TWA initialization error:",u)}};return o(),window.addEventListener("resize",o),window.addEventListener("orientationchange",o),s(),()=>{window.removeEventListener("resize",o),window.removeEventListener("orientationchange",o)}},[]),n?_.jsx(Ld,{theme:Jp,children:_.jsxs(XC,{children:[_.jsx("h2",{children:"Пожалуйста, переверните устройство"}),_.jsx("p",{children:"Для лучшего игрового опыта используйте горизонтальную ориентацию экрана"})]})}):_.jsx(Ld,{theme:Jp,children:_.jsxs(Jx,{basename:"/retrocasino",children:[_.jsx(MP,{}),_.jsx(eA,{})]})})};nl.createRoot(document.getElementById("root")).render(_.jsx(ze.StrictMode,{children:_.jsx(tA,{})}));
-//# sourceMappingURL=index-CZ4ZaK66.js.map
+//# sourceMappingURL=index-CCOMMNdN.js.map
