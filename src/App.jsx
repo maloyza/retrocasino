@@ -94,14 +94,12 @@ const OrientationWarning = styled.div`
 const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  height: calc(100vh - env(safe-area-inset-bottom));
+  min-height: 100vh;
+  min-height: calc(100vh - env(safe-area-inset-bottom));
   width: 100vw;
   background: ${props => props.theme.colors.background};
   position: relative;
   overflow: hidden;
-  
-  /* Добавляем отступы для safe-area */
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
   padding-left: env(safe-area-inset-left);
@@ -114,10 +112,8 @@ const MainContent = styled.main`
   position: relative;
   -webkit-overflow-scrolling: touch;
   padding: 10px;
-  
-  /* Учитываем отступы для контента */
   padding-top: max(10px, env(safe-area-inset-top));
-  padding-bottom: max(10px, env(safe-area-inset-bottom));
+  padding-bottom: calc(70px + env(safe-area-inset-bottom)); /* Учитываем высоту навбара */
 `;
 
 const Navigation = styled.nav`

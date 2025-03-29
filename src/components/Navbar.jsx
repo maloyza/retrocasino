@@ -1,125 +1,96 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
 const NavContainer = styled.nav`
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.9);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  padding: 0.5rem;
+  border-top: 2px solid ${props => props.theme.colors.accent};
+  padding: 10px;
+  padding-bottom: max(10px, env(safe-area-inset-bottom));
+  z-index: 1000;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  z-index: 1000;
-  padding-bottom: calc(0.5rem + env(safe-area-inset-bottom));
-
-  @media (orientation: landscape) and (max-height: 600px) {
-    bottom: 0;
-    left: 0;
-    top: 0;
-    right: auto;
-    width: 60px;
-    flex-direction: column;
-    padding: 50px 0.25rem 0.5rem;
-    border-right: 2px solid ${props => props.theme.colors.accent};
-    background: rgba(0, 0, 0, 0.9);
-    justify-content: flex-start;
-    gap: 1rem;
-  }
 `;
 
-const NavItem = styled(Link)`
+const NavItem = styled(motion.button)`
+  background: none;
+  border: none;
+  color: ${props => props.active ? props.theme.colors.accent : props.theme.colors.text};
+  font-family: ${props => props.theme.fonts.primary};
+  font-size: 14px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-decoration: none;
-  color: ${props => props.active ? props.theme.colors.accent : props.theme.colors.text};
-  padding: 0.5rem;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+  gap: 5px;
+  padding: 5px;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s;
 
-  &:hover {
-    background: rgba(139, 69, 19, 0.2);
-    transform: scale(1.05);
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: ${props => props.active ? '20px' : '0'};
+    height: 2px;
+    background: ${props => props.theme.colors.accent};
+    transition: width 0.2s;
   }
 
-  &:active {
-    transform: scale(0.95);
-  }
-
-  @media (orientation: landscape) and (max-height: 600px) {
-    margin: 0;
-    width: 100%;
-    padding: 0.5rem 0;
-    position: relative;
-
-    &::after {
-      content: '';
-      position: absolute;
-      left: -5px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 3px;
-      height: 0;
-      background: ${props => props.theme.colors.accent};
-      transition: height 0.3s ease;
-      opacity: ${props => props.active ? 1 : 0};
-    }
-
-    &:hover::after {
-      height: 80%;
-      opacity: 1;
-    }
-
-    &.active::after {
-      height: 100%;
-    }
-  }
-`;
-
-const NavIcon = styled.img`
-  width: 24px;
-  height: 24px;
-  margin-bottom: 0.25rem;
-  filter: ${props => props.active ? 'drop-shadow(0 0 5px ' + props.theme.colors.accent + ')' : 'none'};
-  transition: filter 0.3s ease;
-
-  @media (orientation: landscape) and (max-height: 600px) {
-    width: 32px;
-    height: 32px;
-    margin-bottom: 0.25rem;
-  }
-`;
-
-const NavLabel = styled.span`
-  font-size: 0.8rem;
-  transition: all 0.3s ease;
-
-  @media (orientation: landscape) and (max-height: 600px) {
-    display: none;
+  svg {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 2px;
   }
 `;
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const location = useLocation();
+
+  const isActive = (path) => location.pathname === path;
 
   return (
     <NavContainer>
-      <NavItem to="/" active={location.pathname === '/'}>
-        <NavIcon src="/assets/icons/home.png" alt="Home" />
-        <NavLabel>Главная</NavLabel>
+      <NavItem
+        onClick={() => navigate('/')}
+        active={isActive('/')}
+        whileTap={{ scale: 0.95 }}
+      >
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 5.69l5 4.5V18h-2v-6H9v6H7v-7.81l5-4.5M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/>
+        </svg>
+        Игры
       </NavItem>
-      <NavItem to="/profile" active={location.pathname === '/profile'}>
-        <NavIcon src="/assets/icons/profile.png" alt="Profile" />
-        <NavLabel>Профиль</NavLabel>
+      <NavItem
+        onClick={() => navigate('/profile')}
+        active={isActive('/profile')}
+        whileTap={{ scale: 0.95 }}
+      >
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+        </svg>
+        Профиль
       </NavItem>
-      <NavItem to="/leaderboard" active={location.pathname === '/leaderboard'}>
-        <NavIcon src="/assets/icons/leaderboard.png" alt="Leaderboard" />
-        <NavLabel>Таблица</NavLabel>
+      <NavItem
+        onClick={() => navigate('/leaderboard')}
+        active={isActive('/leaderboard')}
+        whileTap={{ scale: 0.95 }}
+      >
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14h-2v-4H8V7h2v4h2V7h2v10z"/>
+        </svg>
+        Лидеры
       </NavItem>
     </NavContainer>
   );
