@@ -60,7 +60,7 @@ const TableHeader = styled.div`
 `;
 
 const TableContent = styled.div`
-  height: 300px;
+  height: 180px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;

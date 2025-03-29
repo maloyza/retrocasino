@@ -128,7 +128,6 @@ const BalanceWrapper = styled.div`
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   padding-top: max(env(safe-area-inset-top), 10px);
-  border-bottom: 2px solid ${props => props.theme.colors.accent};
   height: 60px;
   display: flex;
   align-items: center;
