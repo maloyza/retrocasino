@@ -92,73 +92,46 @@ const OrientationWarning = styled.div`
 `;
 
 const AppContainer = styled.div`
-  height: 100vh;
-  width: 100vw;
   display: flex;
   flex-direction: column;
+  height: 100vh;
+  height: calc(100vh - env(safe-area-inset-bottom));
+  width: 100vw;
+  background: ${props => props.theme.colors.background};
+  position: relative;
   overflow: hidden;
-  background: ${({ theme }) => theme.gradients.dark};
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  max-width: 100%;
-  margin: 0 auto;
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    max-width: 100%;
-    width: 100%;
-    height: 100%;
-  }
-
-  @media (orientation: landscape) and (max-height: 600px) {
-    flex-direction: row;
-    padding: 0;
-    gap: 0;
-  }
+  
+  /* Добавляем отступы для safe-area */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 `;
 
 const MainContent = styled.main`
   flex: 1;
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  padding: ${({ theme }) => theme.spacing.md};
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   position: relative;
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-  padding-top: 60px;
-  padding-bottom: 70px;
+  -webkit-overflow-scrolling: touch;
+  padding: 10px;
+  
+  /* Учитываем отступы для контента */
+  padding-top: max(10px, env(safe-area-inset-top));
+  padding-bottom: max(10px, env(safe-area-inset-bottom));
+`;
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    padding: ${({ theme }) => theme.spacing.xl};
-    padding-top: 70px;
-    padding-bottom: 80px;
-    height: calc(100% - 150px);
-  }
-
-  @media (orientation: landscape) and (max-height: 600px) {
-    padding: ${({ theme }) => theme.spacing.sm};
-    padding-top: 50px;
-    padding-left: 70px;
-    padding-right: ${({ theme }) => theme.spacing.sm};
-    height: 100%;
-    justify-content: center;
-
-    & > * {
-      max-width: calc(100vw - 80px);
-    }
-  }
-
-  & > * {
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-  }
+const Navigation = styled.nav`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.9);
+  padding: 10px;
+  padding-bottom: max(10px, env(safe-area-inset-bottom));
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 2px solid ${props => props.theme.colors.accent};
 `;
 
 const AppContent = () => {
