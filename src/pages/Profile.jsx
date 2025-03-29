@@ -11,7 +11,7 @@ const ProfileContainer = styled.div`
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
-  padding: 20px 10px 140px 10px;
+  padding: 20px 10px 135px 10px;
 `;
 
 const ContentWrapper = styled.div`

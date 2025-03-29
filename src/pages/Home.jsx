@@ -13,7 +13,7 @@ const HomeContainer = styled.div`
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
-  padding: 20px 10px 120px 10px;
+  padding: 20px 10px 130px 10px;
 `;
 
 const Title = styled.h1`
