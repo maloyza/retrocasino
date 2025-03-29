@@ -2,15 +2,25 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-const BalanceContent = styled.div`
+const BalanceContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.9);
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 100%;
-  padding: 0 15px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 2px solid ${props => props.theme.colors.accent};
+  padding: 5px 15px;
+  height: 50px;
 
   @media (orientation: landscape) {
-    padding: 0 10px;
+    padding: 5px 10px;
+    height: 40px;
   }
 `;
 
@@ -23,15 +33,15 @@ const CoinsWrapper = styled.div`
 const CoinIcon = styled.div`
   width: 24px;
   height: 24px;
-  background: var(--tg-theme-button-color, ${props => props.theme.colors.accent});
+  background: ${props => props.theme.colors.accent};
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 14px;
   font-family: 'Press Start 2P', cursive;
-  color: var(--tg-theme-button-text-color, ${props => props.theme.colors.black});
-  border: 2px solid var(--tg-theme-text-color, ${props => props.theme.colors.text});
+  color: ${props => props.theme.colors.black};
+  border: 2px solid ${props => props.theme.colors.text};
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 
   @media (orientation: landscape) {
@@ -44,7 +54,7 @@ const CoinIcon = styled.div`
 const CoinsAmount = styled.span`
   font-family: 'Press Start 2P', cursive;
   font-size: 16px;
-  color: var(--tg-theme-button-color, ${props => props.theme.colors.accent});
+  color: ${props => props.theme.colors.accent};
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   margin-right: 10px;
 
@@ -54,13 +64,13 @@ const CoinsAmount = styled.span`
 `;
 
 const TopUpButton = styled(motion.button)`
-  background: var(--tg-theme-button-color, ${props => props.theme.colors.accent});
-  color: var(--tg-theme-button-text-color, ${props => props.theme.colors.black});
+  background: ${props => props.theme.colors.accent};
+  color: ${props => props.theme.colors.black};
   padding: 6px 12px;
   border-radius: 5px;
   font-size: 14px;
   font-family: 'Press Start 2P', cursive;
-  border: 2px solid var(--tg-theme-text-color, ${props => props.theme.colors.text});
+  border: 2px solid ${props => props.theme.colors.text};
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   
   @media (orientation: landscape) {
@@ -80,7 +90,7 @@ const Balance = () => {
   };
 
   return (
-    <BalanceContent>
+    <BalanceContainer>
       <CoinsWrapper>
         <CoinIcon>$</CoinIcon>
         <CoinsAmount>1000</CoinsAmount>
@@ -92,7 +102,7 @@ const Balance = () => {
           Пополнить
         </TopUpButton>
       </CoinsWrapper>
-    </BalanceContent>
+    </BalanceContainer>
   );
 };
 
