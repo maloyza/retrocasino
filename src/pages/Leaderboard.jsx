@@ -57,13 +57,10 @@ const TableHeader = styled.div`
   padding: 15px;
   background: rgba(0, 0, 0, 0.6);
   border-bottom: 2px solid ${props => props.theme.colors.accent};
-  position: sticky;
-  top: 0;
-  z-index: 1;
 `;
 
 const TableContent = styled.div`
-  max-height: calc(100vh - 250px);
+  height: 300px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
@@ -73,6 +70,8 @@ const TableRow = styled.div`
   display: grid;
   grid-template-columns: 0.5fr 2fr 1fr;
   padding: 12px 15px;
+  height: 60px;
+  align-items: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
   &:last-child {
@@ -163,7 +162,7 @@ const Rank = styled.div`
 
 const Leaderboard = () => {
   const [activeTab, setActiveTab] = useState('gold');
-  const players = Array.from({ length: 50 }, (_, i) => ({
+  const players = Array.from({ length: 5 }, (_, i) => ({
     id: i + 1,
     name: `Player${i + 1}`,
     score: Math.floor(Math.random() * 10000),
