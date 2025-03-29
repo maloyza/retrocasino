@@ -11,16 +11,12 @@ const HomeContainer = styled.div`
   padding: 20px;
   padding-top: max(20px, env(safe-area-inset-top));
   padding-bottom: max(20px, env(safe-area-inset-bottom));
+  min-height: 100vh;
   height: 100%;
-  min-height: 100%;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  background: ${props => props.theme.colors.background};
 
   @media (orientation: landscape) {
     padding: 15px;
@@ -37,11 +33,11 @@ const ContentWrapper = styled.div`
   width: 100%;
   max-width: 1200px;
   gap: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 70px;
 
   @media (orientation: landscape) {
     gap: 15px;
-    padding-bottom: 15px;
+    padding-bottom: 60px;
   }
 `;
 
