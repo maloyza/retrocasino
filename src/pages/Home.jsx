@@ -11,6 +11,7 @@ const HomeContainer = styled.div`
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
+  scroll-behavior: smooth;
 `;
 
 const WelcomeSection = styled.div`
@@ -21,6 +22,32 @@ const WelcomeSection = styled.div`
   justify-content: center;
   gap: 40px;
   padding: 20px;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    border: 2px solid ${props => props.theme.colors.accent};
+    border-radius: 50%;
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0) translateX(-50%);
+    }
+    40% {
+      transform: translateY(-20px) translateX(-50%);
+    }
+    60% {
+      transform: translateY(-10px) translateX(-50%);
+    }
+  }
 `;
 
 const Title = styled(motion.h1)`
@@ -49,10 +76,11 @@ const DailyBonus = styled(motion.button)`
 
 const GamesSection = styled.div`
   min-height: 100vh;
-  padding: 40px 20px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  scroll-margin-top: 20px;
 `;
 
 const GamesGrid = styled.div`
@@ -62,6 +90,7 @@ const GamesGrid = styled.div`
   width: 100%;
   max-width: 1200px;
   padding: 0 20px;
+  margin-top: 20px;
 `;
 
 const GameCard = styled(motion.div)`
@@ -75,7 +104,8 @@ const GameCard = styled(motion.div)`
   display: flex;
   flex-direction: column;
   gap: 15px;
-  height: 300px;
+  height: 280px;
+  transform-origin: center;
 `;
 
 const GameImage = styled.img`
@@ -150,6 +180,23 @@ const Home = () => {
     }
   };
 
+  const cardAnimation = {
+    initial: { y: 50, opacity: 0 },
+    whileInView: { 
+      y: 0, 
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    },
+    viewport: { once: true }
+  };
+
+  const handleScrollToGames = () => {
+    document.querySelector('#games-section').scrollIntoView({ behavior: 'smooth' });
+  };
+
   const games = [
     {
       id: 'blackjack',
@@ -193,13 +240,18 @@ const Home = () => {
         </DailyBonus>
       </WelcomeSection>
 
-      <GamesSection>
+      <GamesSection id="games-section">
         <GamesGrid>
-          {games.map(game => (
+          {games.map((game, index) => (
             <Link to={`/${game.id}`} key={game.id} style={{ textDecoration: 'none' }}>
               <GameCard
+                variants={cardAnimation}
+                initial="initial"
+                whileInView="whileInView"
+                viewport={{ once: true, margin: "-100px" }}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
+                transition={{ delay: index * 0.1 }}
               >
                 <GameImage src={game.image} alt={game.title} />
                 <GameTitle>{game.title}</GameTitle>
