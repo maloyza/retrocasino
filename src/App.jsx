@@ -116,20 +116,6 @@ const MainContent = styled.main`
   padding-bottom: calc(70px + env(safe-area-inset-bottom)); /* Учитываем высоту навбара */
 `;
 
-const Navigation = styled.nav`
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.9);
-  padding: 10px;
-  padding-bottom: max(10px, env(safe-area-inset-bottom));
-  z-index: 1000;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-top: 2px solid ${props => props.theme.colors.accent};
-`;
-
 const AppContent = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -172,15 +158,18 @@ const AppContent = () => {
 
   return (
     <AppContainer>
+      <Balance />
       <MainContent>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/leaderboard" element={<Leaderboard />} />
-          <Route path="/blackjack" element={<Blackjack />} />
-          <Route path="/video-poker" element={<VideoPoker />} />
-          <Route path="/roulette" element={<Roulette />} />
-        </Routes>
+        <AnimatePresence mode="wait">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="/blackjack" element={<Blackjack />} />
+            <Route path="/video-poker" element={<VideoPoker />} />
+            <Route path="/roulette" element={<Roulette />} />
+          </Routes>
+        </AnimatePresence>
       </MainContent>
       <Navbar />
     </AppContainer>
