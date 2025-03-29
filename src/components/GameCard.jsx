@@ -11,31 +11,31 @@ const CardWrapper = styled.div`
 `;
 
 const Card = styled(motion.div)`
-  background: var(--tg-theme-bg-color, rgba(0, 0, 0, 0.8));
-  border: 2px solid var(--tg-theme-button-color, ${props => props.theme.colors.accent});
-  border-radius: 8px;
-  padding: 8px;
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid ${props => props.theme.colors.accent};
+  border-radius: 10px;
+  padding: 10px;
   width: 100%;
-  height: calc(100% - 32px);
+  height: calc(100% - 32px); /* Оставляем место для баланса */
   cursor: pointer;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 
   @media (orientation: landscape) {
-    padding: 6px;
-    gap: 6px;
+    padding: 8px;
+    gap: 8px;
     height: calc(100% - 28px);
   }
 `;
 
 const GameImageWrapper = styled.div`
   width: 100%;
-  height: 55%;
+  height: 60%;
   position: relative;
-  min-height: 50px;
+  min-height: 60px;
 `;
 
 const GameImage = styled.img`
@@ -55,20 +55,21 @@ const GameContent = styled.div`
 
 const GameTitle = styled.h3`
   font-family: 'Press Start 2P', cursive;
-  font-size: 10px;
-  color: var(--tg-theme-button-color, ${props => props.theme.colors.accent});
-  margin-bottom: 2px;
+  font-size: 12px;
+  color: ${props => props.theme.colors.accent};
+  margin-bottom: 4px;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 
   @media (orientation: landscape) {
-    font-size: 9px;
+    font-size: 10px;
+    margin-bottom: 2px;
   }
 `;
 
 const GameDescription = styled.p`
-  font-size: 9px;
-  color: var(--tg-theme-text-color, ${props => props.theme.colors.text});
-  margin-bottom: 2px;
+  font-size: 10px;
+  color: ${props => props.theme.colors.text};
+  margin-bottom: 4px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -77,6 +78,7 @@ const GameDescription = styled.p`
 
   @media (orientation: landscape) {
     font-size: 8px;
+    margin-bottom: 2px;
     -webkit-line-clamp: 1;
   }
 `;
@@ -85,11 +87,11 @@ const GameBalance = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 8px;
   padding: 4px 8px;
-  background: var(--tg-theme-bg-color, rgba(0, 0, 0, 0.8));
-  border: 2px solid var(--tg-theme-button-color, ${props => props.theme.colors.accent});
-  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid ${props => props.theme.colors.accent};
+  border-radius: 5px;
   height: 24px;
 
   @media (orientation: landscape) {
@@ -101,15 +103,15 @@ const GameBalance = styled.div`
 const CoinIcon = styled.div`
   width: 16px;
   height: 16px;
-  background: var(--tg-theme-button-color, ${props => props.theme.colors.accent});
+  background: ${props => props.theme.colors.accent};
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 9px;
+  font-size: 10px;
   font-family: 'Press Start 2P', cursive;
-  color: var(--tg-theme-button-text-color, ${props => props.theme.colors.black});
-  border: 1px solid var(--tg-theme-text-color, ${props => props.theme.colors.text});
+  color: ${props => props.theme.colors.black};
+  border: 1px solid ${props => props.theme.colors.text};
 
   @media (orientation: landscape) {
     width: 14px;
@@ -120,11 +122,11 @@ const CoinIcon = styled.div`
 
 const CoinsAmount = styled.span`
   font-family: 'Press Start 2P', cursive;
-  font-size: 10px;
-  color: var(--tg-theme-button-color, ${props => props.theme.colors.accent});
+  font-size: 12px;
+  color: ${props => props.theme.colors.accent};
 
   @media (orientation: landscape) {
-    font-size: 9px;
+    font-size: 10px;
   }
 `;
 
