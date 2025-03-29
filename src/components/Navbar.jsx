@@ -8,13 +8,13 @@ const NavContainer = styled.nav`
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 100;
   background: rgba(0, 0, 0, 0.9);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-top: 2px solid ${props => props.theme.colors.accent};
-  padding: 10px;
-  padding-bottom: max(10px, env(safe-area-inset-bottom));
-  z-index: 1000;
+  padding: 5px 10px;
+  padding-bottom: max(5px, env(safe-area-inset-bottom));
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -25,32 +25,24 @@ const NavItem = styled(motion.button)`
   border: none;
   color: ${props => props.active ? props.theme.colors.accent : props.theme.colors.text};
   font-family: ${props => props.theme.fonts.primary};
-  font-size: 14px;
+  font-size: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 2px;
   padding: 5px;
+  min-width: 60px;
   cursor: pointer;
-  position: relative;
   transition: color 0.2s;
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: ${props => props.active ? '20px' : '0'};
-    height: 2px;
-    background: ${props => props.theme.colors.accent};
-    transition: width 0.2s;
-  }
 
   svg {
     width: 24px;
     height: 24px;
     margin-bottom: 2px;
+  }
+
+  &:active {
+    transform: scale(0.95);
   }
 `;
 

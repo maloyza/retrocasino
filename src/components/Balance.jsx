@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
 const BalanceContainer = styled.div`
   position: fixed;
@@ -78,33 +79,67 @@ const BalanceAmount = styled.span`
   }
 `;
 
+const CoinsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+const CoinIcon = styled.div`
+  width: 24px;
+  height: 24px;
+  background: ${props => props.theme.colors.accent};
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: ${props => props.theme.colors.black};
+  border: 2px solid ${props => props.theme.colors.text};
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+`;
+
+const CoinsAmount = styled.span`
+  font-family: 'Press Start 2P', cursive;
+  font-size: 14px;
+  color: ${props => props.theme.colors.accent};
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+`;
+
+const TopUpButton = styled(motion.button)`
+  background: ${props => props.theme.colors.accent};
+  color: ${props => props.theme.colors.black};
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-family: 'Press Start 2P', cursive;
+  border: 2px solid ${props => props.theme.colors.text};
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  
+  &:active {
+    transform: scale(0.95);
+  }
+`;
+
 const Balance = () => {
-  // Демо-данные
-  const balance = {
-    gold: 1000,
-    blue: 500,
-    green: 300,
-    red: 200
+  const handleTopUp = () => {
+    // Здесь будет логика пополнения баланса
+    console.log('Top up clicked');
   };
 
   return (
     <BalanceContainer>
-      <BalanceItem>
-        <BalanceIcon src="/assets/icons/gold-coin.png" alt="Gold" />
-        <BalanceAmount>{balance.gold}</BalanceAmount>
-      </BalanceItem>
-      <BalanceItem>
-        <BalanceIcon src="/assets/icons/blue-coin.png" alt="Blue" />
-        <BalanceAmount>{balance.blue}</BalanceAmount>
-      </BalanceItem>
-      <BalanceItem>
-        <BalanceIcon src="/assets/icons/green-coin.png" alt="Green" />
-        <BalanceAmount>{balance.green}</BalanceAmount>
-      </BalanceItem>
-      <BalanceItem>
-        <BalanceIcon src="/assets/icons/red-coin.png" alt="Red" />
-        <BalanceAmount>{balance.red}</BalanceAmount>
-      </BalanceItem>
+      <CoinsWrapper>
+        <CoinIcon>₿</CoinIcon>
+        <CoinsAmount>1000</CoinsAmount>
+      </CoinsWrapper>
+      <TopUpButton
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={handleTopUp}
+      >
+        Пополнить
+      </TopUpButton>
     </BalanceContainer>
   );
 };

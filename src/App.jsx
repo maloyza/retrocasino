@@ -94,26 +94,41 @@ const OrientationWarning = styled.div`
 const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
+  height: 100%;
   min-height: 100vh;
   min-height: calc(100vh - env(safe-area-inset-bottom));
-  width: 100vw;
+  width: 100%;
+  max-width: 100vw;
   background: ${props => props.theme.colors.background};
   position: relative;
   overflow: hidden;
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
-  padding-left: env(safe-area-inset-left);
-  padding-right: env(safe-area-inset-right);
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 `;
 
 const MainContent = styled.main`
   flex: 1;
+  width: 100%;
+  height: calc(100vh - 120px); /* 60px для баланса + 60px для навигации */
   overflow-y: auto;
-  position: relative;
   -webkit-overflow-scrolling: touch;
-  padding: 10px;
+  position: relative;
+  padding: 60px 0 70px 0;
+`;
+
+const BalanceWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   padding-top: max(10px, env(safe-area-inset-top));
-  padding-bottom: calc(70px + env(safe-area-inset-bottom)); /* Учитываем высоту навбара */
+  border-bottom: 2px solid ${props => props.theme.colors.accent};
+  height: 60px;
+  display: flex;
+  align-items: center;
 `;
 
 const AppContent = () => {
@@ -158,7 +173,9 @@ const AppContent = () => {
 
   return (
     <AppContainer>
-      <Balance />
+      <BalanceWrapper>
+        <Balance />
+      </BalanceWrapper>
       <MainContent>
         <AnimatePresence mode="wait">
           <Routes>
