@@ -566,18 +566,19 @@ Error generating stack: `+o.message+`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  height: 100%;
   background: ${e=>e.theme.colors.background};
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
+  padding-top: 60px;
+  padding-bottom: 80px;
 `,$P=j.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 0 10px;
-  margin-top: 60px;
+  padding: 20px;
+  gap: 20px;
 `,VP=j.h1`
   color: ${e=>e.theme.colors.accent};
   text-align: center;
@@ -590,14 +591,14 @@ Error generating stack: `+o.message+`
 `,OP=j.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 15px;
   width: 100%;
-  padding: 0 5px;
-  margin-top: 20px;
+  max-width: 1200px;
+  padding: 0 10px;
 `,NP=j(be.div)`
   background: rgba(0, 0, 0, 0.8);
   border-radius: 10px;
-  padding: 10px;
+  padding: 15px;
   text-align: center;
   cursor: pointer;
   position: relative;
@@ -605,13 +606,23 @@ Error generating stack: `+o.message+`
   border: 2px solid ${e=>e.theme.colors.accent};
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  height: 180px;
+  gap: 10px;
+  height: 250px;
+
+  @media (max-width: 768px) {
+    height: 180px;
+    padding: 10px;
+    gap: 5px;
+  }
 `,FP=j.img`
   width: 100%;
-  height: 120px;
+  height: 160px;
   object-fit: cover;
   border-radius: 5px;
+
+  @media (max-width: 768px) {
+    height: 120px;
+  }
 `,BP=j.h2`
   color: ${e=>e.theme.colors.text};
   font-size: 0.9rem;
@@ -730,45 +741,28 @@ Error generating stack: `+o.message+`
 `,ro=()=>{const e=()=>{console.log("Top up clicked")};return _.jsx(KP,{children:_.jsxs(QP,{children:[_.jsx(YP,{children:"$"}),_.jsx(XP,{children:"1000"}),_.jsx(ZP,{whileHover:{scale:1.05},whileTap:{scale:.95},onClick:e,children:"Пополнить"})]})})},qP=j.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   min-height: 100vh;
-  height: 100%;
   background: ${e=>e.theme.colors.background};
-  position: relative;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
-  padding-bottom: 70px;
-
-  @media (orientation: landscape) {
-    padding-bottom: 60px;
-  }
+  padding-top: 60px;
+  padding-bottom: 80px;
 `,JP=j.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 1200px;
-  gap: 20px;
   padding: 20px;
-  padding-top: max(20px, env(safe-area-inset-top));
-
-  @media (orientation: landscape) {
-    gap: 15px;
-    padding: 15px;
-    padding-top: max(15px, env(safe-area-inset-top));
-  }
+  gap: 20px;
 `,eC=j.div`
   background: rgba(0, 0, 0, 0.8);
-  border-radius: 15px;
-  padding: 15px;
+  border-radius: 10px;
+  padding: 20px;
   width: 100%;
-  max-width: 1200px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  max-width: 800px;
   border: 2px solid ${e=>e.theme.colors.accent};
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  margin-bottom: 20px;
 `;j.div`
   display: flex;
   flex-direction: column;
@@ -907,19 +901,13 @@ Error generating stack: `+o.message+`
 `,hC=()=>{const[e,t]=k.useState("Player123"),[n,r]=k.useState({blueCoins:1e3,greenCoins:1e3,redCoins:1e3,goldCoins:100}),i={level:5,xp:750,nextLevelXp:1e3,gamesPlayed:42,totalWins:28,winRate:"67%",referralCount:3},o=()=>{console.log("Changing nickname to:",e)},s=()=>{console.log("Copying referral code")};return _.jsx(qP,{children:_.jsxs(JP,{children:[_.jsx(ro,{...n}),_.jsxs(eC,{children:[_.jsxs(tC,{children:[_.jsx(nC,{}),_.jsx(rC,{whileHover:{scale:1.05},whileTap:{scale:.95},children:"Сменить аватар"})]}),_.jsxs(iC,{children:[_.jsx(oC,{value:e,onChange:l=>t(l.target.value),placeholder:"Введите никнейм"}),_.jsx(sC,{onClick:o,whileHover:{scale:1.05},whileTap:{scale:.95},children:"Изменить"})]}),_.jsxs(lC,{children:[_.jsxs(xn,{children:["Уровень ",i.level]}),_.jsx(uC,{children:_.jsx(cC,{progress:i.xp/i.nextLevelXp*100})}),_.jsxs(xn,{style:{marginTop:"5px"},children:[i.xp,"/",i.nextLevelXp," XP"]})]}),_.jsxs(aC,{children:[_.jsxs(bo,{children:[_.jsx(xn,{children:"Игр сыграно"}),_.jsx(Ro,{children:i.gamesPlayed})]}),_.jsxs(bo,{children:[_.jsx(xn,{children:"Побед"}),_.jsx(Ro,{children:i.totalWins})]}),_.jsxs(bo,{children:[_.jsx(xn,{children:"Винрейт"}),_.jsx(Ro,{children:i.winRate})]}),_.jsxs(bo,{children:[_.jsx(xn,{children:"Рефералов"}),_.jsx(Ro,{children:i.referralCount})]})]}),_.jsxs(fC,{children:[_.jsx(xn,{children:"Реферальная программа"}),_.jsxs("div",{style:{color:"#fff",fontSize:"14px",marginTop:"5px"},children:["Приглашено друзей: ",i.referralCount]}),_.jsx(dC,{children:"REF123456"}),_.jsx(pC,{onClick:s,whileHover:{scale:1.05},whileTap:{scale:.95},children:"Скопировать код"})]})]})]})})},mC=j.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   min-height: 100vh;
-  height: 100%;
   background: ${e=>e.theme.colors.background};
-  position: relative;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
-  padding-bottom: 70px;
-
-  @media (orientation: landscape) {
-    padding-bottom: 60px;
-  }
+  padding-top: 60px;
+  padding-bottom: 80px;
 `;j.div`
   display: flex;
   flex-direction: column;
@@ -945,24 +933,16 @@ Error generating stack: `+o.message+`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 1200px;
-  gap: 20px;
   padding: 20px;
-  padding-top: max(20px, env(safe-area-inset-top));
-
-  @media (orientation: landscape) {
-    gap: 15px;
-    padding: 15px;
-    padding-top: max(15px, env(safe-area-inset-top));
-  }
+  gap: 20px;
 `,vC=j.div`
   background: rgba(0, 0, 0, 0.8);
   border-radius: 10px;
-  border: 2px solid ${e=>e.theme.colors.accent};
-  overflow: hidden;
+  padding: 20px;
   width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
+  max-width: 800px;
+  border: 2px solid ${e=>e.theme.colors.accent};
+  margin-bottom: 20px;
 `,yC=j.div`
   display: grid;
   grid-template-columns: 50px 1fr 100px;
@@ -1550,4 +1530,4 @@ Error generating stack: `+o.message+`
   display: flex;
   align-items: center;
 `,tA=()=>{const e=xc(),t=Vr();return k.useEffect(()=>{var n;try{const r=(n=window.Telegram)==null?void 0:n.WebApp;r&&(r.MainButton.setParams({is_visible:!1}),t.pathname!=="/"?r.BackButton.show():r.BackButton.hide(),r.BackButton.onClick(()=>{e(-1)}))}catch(r){console.error("TWA initialization error:",r)}return document.body.style.overscrollBehavior="none",document.documentElement.style.overscrollBehavior="none",()=>{document.body.style.overscrollBehavior="",document.documentElement.style.overscrollBehavior=""}},[e,t]),_.jsxs(qC,{children:[_.jsx(eA,{children:_.jsx(ro,{})}),_.jsx(JC,{children:_.jsx(u_,{mode:"wait",children:_.jsxs(Gx,{children:[_.jsx(Sn,{path:"/",element:_.jsx(GP,{})}),_.jsx(Sn,{path:"/profile",element:_.jsx(hC,{})}),_.jsx(Sn,{path:"/leaderboard",element:_.jsx(AC,{})}),_.jsx(Sn,{path:"/blackjack",element:_.jsx(LC,{})}),_.jsx(Sn,{path:"/video-poker",element:_.jsx(zC,{})}),_.jsx(Sn,{path:"/roulette",element:_.jsx(XC,{})})]})})}),_.jsx(LP,{})]})},nA=()=>{const[e,t]=k.useState(!0),[n,r]=k.useState(!1);return k.useEffect(()=>{const i=()=>/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),o=()=>{const l=window.innerHeight>window.innerWidth;t(l),r(i()&&l)},s=()=>{var l;try{if((l=window.Telegram)!=null&&l.WebApp){const u=window.Telegram.WebApp;u.ready(),u.expand(),u.setHeaderColor("#000000"),u.setBackgroundColor("#000000"),console.log("TWA viewport info:",{viewportHeight:u.viewportHeight,viewportStableHeight:u.viewportStableHeight,isExpanded:u.isExpanded,headerColor:u.headerColor,backgroundColor:u.backgroundColor})}}catch(u){console.error("TWA initialization error:",u)}};return o(),window.addEventListener("resize",o),window.addEventListener("orientationchange",o),s(),()=>{window.removeEventListener("resize",o),window.removeEventListener("orientationchange",o)}},[]),n?_.jsx(Ld,{theme:Jp,children:_.jsxs(ZC,{children:[_.jsx("h2",{children:"Пожалуйста, переверните устройство"}),_.jsx("p",{children:"Для лучшего игрового опыта используйте горизонтальную ориентацию экрана"})]})}):_.jsx(Ld,{theme:Jp,children:_.jsxs(Jx,{basename:"/retrocasino",children:[_.jsx(MP,{}),_.jsx(tA,{})]})})};nl.createRoot(document.getElementById("root")).render(_.jsx(Ue.StrictMode,{children:_.jsx(nA,{})}));
-//# sourceMappingURL=index-Dw629ClP.js.map
+//# sourceMappingURL=index-CWw9WVag.js.map
