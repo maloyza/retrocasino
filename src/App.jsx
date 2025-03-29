@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import { AnimatePresence } from 'framer-motion';
 import GlobalStyle from './styles/GlobalStyle';
@@ -161,6 +161,61 @@ const MainContent = styled.main`
   }
 `;
 
+const AppContent = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  
+  useEffect(() => {
+    const twa = window.Telegram.WebApp;
+    
+    if (twa) {
+      twa.disableSwipeToClose();
+      
+      // Показываем кнопку "назад" только если мы не на главной странице
+      if (location.pathname !== '/') {
+        twa.BackButton.show();
+      } else {
+        twa.BackButton.hide();
+      }
+      
+      // Обработка кнопки "назад"
+      twa.BackButton.onClick(() => {
+        navigate(-1);
+      });
+    }
+    
+    // Предотвращаем стандартное поведение свайпа
+    const handleTouchMove = (e) => {
+      const touchDelta = e.touches[0].clientY - e.touches[0].clientY;
+      if (Math.abs(touchDelta) > 10) {
+        e.preventDefault();
+      }
+    };
+    
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    
+    return () => {
+      document.removeEventListener('touchmove', handleTouchMove);
+    };
+  }, [navigate, location]);
+
+  return (
+    <AppContainer>
+      <MainContent>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/blackjack" element={<Blackjack />} />
+          <Route path="/video-poker" element={<VideoPoker />} />
+          <Route path="/roulette" element={<Roulette />} />
+        </Routes>
+      </MainContent>
+      <Navbar />
+    </AppContainer>
+  );
+};
+
 const App = () => {
   const [isPortrait, setIsPortrait] = useState(true);
   const [showOrientationWarning, setShowOrientationWarning] = useState(false);
@@ -206,6 +261,34 @@ const App = () => {
       }
     };
 
+    // Получаем объект Telegram WebApp
+    const twa = window.Telegram.WebApp;
+    
+    // Отключаем свайп для закрытия приложения
+    if (twa) {
+      twa.disableSwipeToClose();
+      
+      // Обработка кнопки "назад"
+      twa.BackButton.onClick(() => {
+        // Здесь будет логика навигации внутри приложения
+        console.log('Back button clicked');
+        // Пример: history.goBack();
+      });
+      
+      // Показываем кнопку "назад" когда нужно
+      // twa.BackButton.show();
+    }
+    
+    // Предотвращаем стандартное поведение свайпа
+    const handleTouchMove = (e) => {
+      const touchDelta = e.touches[0].clientY - e.touches[0].clientY;
+      if (Math.abs(touchDelta) > 10) {
+        e.preventDefault();
+      }
+    };
+    
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+
     // Проверяем ориентацию
     checkOrientation();
     window.addEventListener('resize', checkOrientation);
@@ -217,6 +300,7 @@ const App = () => {
     return () => {
       window.removeEventListener('resize', checkOrientation);
       window.removeEventListener('orientationchange', checkOrientation);
+      document.removeEventListener('touchmove', handleTouchMove);
     };
   }, []);
 
@@ -235,22 +319,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <Router basename="/retrocasino">
         <GlobalStyle />
-        <AppContainer className="app-container">
-          <Balance />
-          <MainContent className="main-content">
-            <AnimatePresence mode="wait">
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/leaderboard" element={<Leaderboard />} />
-                <Route path="/blackjack" element={<Blackjack />} />
-                <Route path="/video-poker" element={<VideoPoker />} />
-                <Route path="/roulette" element={<Roulette />} />
-              </Routes>
-            </AnimatePresence>
-          </MainContent>
-          <Navbar />
-        </AppContainer>
+        <AppContent />
       </Router>
     </ThemeProvider>
   );
