@@ -7,11 +7,12 @@ const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  height: 100%;
   background: ${props => props.theme.colors.background};
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
+  padding-top: 60px;
+  padding-bottom: 80px;
 `;
 
 const ContentWrapper = styled.div`
@@ -19,8 +20,8 @@ const ContentWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 0 10px;
-  margin-top: 60px;
+  padding: 20px;
+  gap: 20px;
 `;
 
 const Title = styled.h1`
@@ -37,16 +38,16 @@ const Title = styled.h1`
 const GamesGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 15px;
   width: 100%;
-  padding: 0 5px;
-  margin-top: 20px;
+  max-width: 1200px;
+  padding: 0 10px;
 `;
 
 const GameCard = styled(motion.div)`
   background: rgba(0, 0, 0, 0.8);
   border-radius: 10px;
-  padding: 10px;
+  padding: 15px;
   text-align: center;
   cursor: pointer;
   position: relative;
@@ -54,15 +55,25 @@ const GameCard = styled(motion.div)`
   border: 2px solid ${props => props.theme.colors.accent};
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  height: 180px;
+  gap: 10px;
+  height: 250px;
+
+  @media (max-width: 768px) {
+    height: 180px;
+    padding: 10px;
+    gap: 5px;
+  }
 `;
 
 const GameImage = styled.img`
   width: 100%;
-  height: 120px;
+  height: 160px;
   object-fit: cover;
   border-radius: 5px;
+
+  @media (max-width: 768px) {
+    height: 120px;
+  }
 `;
 
 const GameTitle = styled.h2`

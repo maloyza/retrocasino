@@ -6,19 +6,13 @@ import Balance from '../components/Balance';
 const ProfileContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   min-height: 100vh;
-  height: 100%;
   background: ${props => props.theme.colors.background};
-  position: relative;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
-  padding-bottom: 70px;
-
-  @media (orientation: landscape) {
-    padding-bottom: 60px;
-  }
+  padding-top: 60px;
+  padding-bottom: 80px;
 `;
 
 const ContentWrapper = styled.div`
@@ -26,29 +20,18 @@ const ContentWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 1200px;
-  gap: 20px;
   padding: 20px;
-  padding-top: max(20px, env(safe-area-inset-top));
-
-  @media (orientation: landscape) {
-    gap: 15px;
-    padding: 15px;
-    padding-top: max(15px, env(safe-area-inset-top));
-  }
+  gap: 20px;
 `;
 
 const ProfileCard = styled.div`
   background: rgba(0, 0, 0, 0.8);
-  border-radius: 15px;
-  padding: 15px;
+  border-radius: 10px;
+  padding: 20px;
   width: 100%;
-  max-width: 1200px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  max-width: 800px;
   border: 2px solid ${props => props.theme.colors.accent};
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  margin-bottom: 20px;
 `;
 
 const LeftSection = styled.div`
