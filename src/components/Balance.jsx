@@ -28,6 +28,7 @@ const CoinsWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+  border-bottom: none;
 `;
 
 const CoinIcon = styled.div`

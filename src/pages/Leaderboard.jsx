@@ -162,7 +162,7 @@ const Rank = styled.div`
 
 const Leaderboard = () => {
   const [activeTab, setActiveTab] = useState('gold');
-  const players = Array.from({ length: 5 }, (_, i) => ({
+  const players = Array.from({ length: 50 }, (_, i) => ({
     id: i + 1,
     name: `Player${i + 1}`,
     score: Math.floor(Math.random() * 10000),
