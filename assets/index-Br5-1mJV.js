@@ -570,16 +570,12 @@ Error generating stack: `+o.message+`
   padding: 20px;
   padding-top: max(20px, env(safe-area-inset-top));
   padding-bottom: max(20px, env(safe-area-inset-bottom));
+  min-height: 100vh;
   height: 100%;
-  min-height: 100%;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  background: ${e=>e.theme.colors.background};
 
   @media (orientation: landscape) {
     padding: 15px;
@@ -594,11 +590,11 @@ Error generating stack: `+o.message+`
   width: 100%;
   max-width: 1200px;
   gap: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 70px;
 
   @media (orientation: landscape) {
     gap: 15px;
-    padding-bottom: 15px;
+    padding-bottom: 60px;
   }
 `,VP=j.h1`
   color: ${e=>e.theme.colors.accent};
@@ -1555,4 +1551,4 @@ Error generating stack: `+o.message+`
   display: flex;
   align-items: center;
 `,JC=()=>{const e=xc(),t=Vr();return k.useEffect(()=>{var n;try{const r=(n=window.Telegram)==null?void 0:n.WebApp;r&&(r.MainButton.setParams({is_visible:!1}),t.pathname!=="/"?r.BackButton.show():r.BackButton.hide(),r.BackButton.onClick(()=>{e(-1)}))}catch(r){console.error("TWA initialization error:",r)}return document.body.style.overscrollBehavior="none",document.documentElement.style.overscrollBehavior="none",()=>{document.body.style.overscrollBehavior="",document.documentElement.style.overscrollBehavior=""}},[e,t]),_.jsxs(XC,{children:[_.jsx(qC,{children:_.jsx(ro,{})}),_.jsx(ZC,{children:_.jsx(u_,{mode:"wait",children:_.jsxs(Gx,{children:[_.jsx(Sn,{path:"/",element:_.jsx(GP,{})}),_.jsx(Sn,{path:"/profile",element:_.jsx(pC,{})}),_.jsx(Sn,{path:"/leaderboard",element:_.jsx(PC,{})}),_.jsx(Sn,{path:"/blackjack",element:_.jsx(MC,{})}),_.jsx(Sn,{path:"/video-poker",element:_.jsx(FC,{})}),_.jsx(Sn,{path:"/roulette",element:_.jsx(QC,{})})]})})}),_.jsx(LP,{})]})},eA=()=>{const[e,t]=k.useState(!0),[n,r]=k.useState(!1);return k.useEffect(()=>{const i=()=>/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),o=()=>{const l=window.innerHeight>window.innerWidth;t(l),r(i()&&l)},s=()=>{var l;try{if((l=window.Telegram)!=null&&l.WebApp){const u=window.Telegram.WebApp;u.ready(),u.expand(),u.setHeaderColor("#000000"),u.setBackgroundColor("#000000"),console.log("TWA viewport info:",{viewportHeight:u.viewportHeight,viewportStableHeight:u.viewportStableHeight,isExpanded:u.isExpanded,headerColor:u.headerColor,backgroundColor:u.backgroundColor})}}catch(u){console.error("TWA initialization error:",u)}};return o(),window.addEventListener("resize",o),window.addEventListener("orientationchange",o),s(),()=>{window.removeEventListener("resize",o),window.removeEventListener("orientationchange",o)}},[]),n?_.jsx(Ld,{theme:Jp,children:_.jsxs(YC,{children:[_.jsx("h2",{children:"Пожалуйста, переверните устройство"}),_.jsx("p",{children:"Для лучшего игрового опыта используйте горизонтальную ориентацию экрана"})]})}):_.jsx(Ld,{theme:Jp,children:_.jsxs(Jx,{basename:"/retrocasino",children:[_.jsx(MP,{}),_.jsx(JC,{})]})})};nl.createRoot(document.getElementById("root")).render(_.jsx(Ue.StrictMode,{children:_.jsx(eA,{})}));
-//# sourceMappingURL=index-B0tnfDeb.js.map
+//# sourceMappingURL=index-Br5-1mJV.js.map
