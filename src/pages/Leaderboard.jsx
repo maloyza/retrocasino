@@ -6,11 +6,41 @@ import Balance from '../components/Balance';
 const LeaderboardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 10px;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  padding-top: max(20px, env(safe-area-inset-top));
+  padding-bottom: max(20px, env(safe-area-inset-bottom));
+  min-height: 100vh;
   height: 100%;
-  background: url('/assets/leaderboard-bg.jpg') center/cover;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  background: ${props => props.theme.colors.background};
+  position: relative;
+  padding-bottom: calc(70px + env(safe-area-inset-bottom));
+
+  @media (orientation: landscape) {
+    padding: 15px;
+    padding-top: max(15px, env(safe-area-inset-top));
+    padding-bottom: calc(60px + env(safe-area-inset-bottom));
+    gap: 15px;
+  }
+`;
+
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  gap: 20px;
+  margin-bottom: 20px;
+
+  @media (orientation: landscape) {
+    gap: 15px;
+    margin-bottom: 15px;
+  }
 `;
 
 const LeaderboardTable = styled.div`

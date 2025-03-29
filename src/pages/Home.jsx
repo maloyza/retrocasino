@@ -17,11 +17,13 @@ const HomeContainer = styled.div`
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
   background: ${props => props.theme.colors.background};
+  position: relative;
+  padding-bottom: calc(70px + env(safe-area-inset-bottom));
 
   @media (orientation: landscape) {
     padding: 15px;
     padding-top: max(15px, env(safe-area-inset-top));
-    padding-bottom: max(15px, env(safe-area-inset-bottom));
+    padding-bottom: calc(60px + env(safe-area-inset-bottom));
     gap: 15px;
   }
 `;
@@ -33,11 +35,11 @@ const ContentWrapper = styled.div`
   width: 100%;
   max-width: 1200px;
   gap: 20px;
-  padding-bottom: 70px;
+  margin-bottom: 20px;
 
   @media (orientation: landscape) {
     gap: 15px;
-    padding-bottom: 60px;
+    margin-bottom: 15px;
   }
 `;
 
