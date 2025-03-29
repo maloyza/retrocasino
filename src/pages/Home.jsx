@@ -6,19 +6,12 @@ import { motion } from 'framer-motion';
 const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   min-height: 100vh;
   height: 100%;
   background: ${props => props.theme.colors.background};
-  position: relative;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
-  padding-bottom: 70px;
-
-  @media (orientation: landscape) {
-    padding-bottom: 60px;
-  }
 `;
 
 const ContentWrapper = styled.div`
@@ -26,16 +19,8 @@ const ContentWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 1200px;
-  gap: 20px;
-  padding: 20px;
-  padding-top: max(20px, env(safe-area-inset-top));
-
-  @media (orientation: landscape) {
-    gap: 15px;
-    padding: 15px;
-    padding-top: max(15px, env(safe-area-inset-top));
-  }
+  padding: 0 10px;
+  margin-top: 60px;
 `;
 
 const Title = styled.h1`
@@ -43,33 +28,25 @@ const Title = styled.h1`
   text-align: center;
   margin: 0;
   padding: 0;
+  margin-bottom: 20px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   font-family: 'Press Start 2P', cursive;
   font-size: 1.8rem;
-
-  @media (orientation: landscape) {
-    font-size: 1.5rem;
-  }
 `;
 
 const GamesGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
   width: 100%;
-  max-width: 1200px;
   padding: 0 5px;
-
-  @media (orientation: landscape) {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-  }
+  margin-top: 20px;
 `;
 
 const GameCard = styled(motion.div)`
   background: rgba(0, 0, 0, 0.8);
   border-radius: 10px;
-  padding: 12px;
+  padding: 10px;
   text-align: center;
   cursor: pointer;
   position: relative;
@@ -77,109 +54,68 @@ const GameCard = styled(motion.div)`
   border: 2px solid ${props => props.theme.colors.accent};
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  height: 200px;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transform: translateX(-100%);
-    transition: transform 0.6s;
-  }
-  
-  &:hover::before {
-    transform: translateX(100%);
-  }
-
-  @media (orientation: landscape) {
-    padding: 10px;
-    height: 180px;
-    gap: 6px;
-  }
+  gap: 5px;
+  height: 180px;
 `;
 
 const GameImage = styled.img`
   width: 100%;
-  height: 130px;
+  height: 120px;
   object-fit: cover;
   border-radius: 5px;
-
-  @media (orientation: landscape) {
-    height: 120px;
-  }
 `;
 
 const GameTitle = styled.h2`
   color: ${props => props.theme.colors.text};
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-family: 'Press Start 2P', cursive;
   margin: 0;
   padding: 0;
-
-  @media (orientation: landscape) {
-    font-size: 0.9rem;
-  }
 `;
 
 const DailyBonus = styled(motion.button)`
   background: ${props => props.theme.colors.accent};
   color: ${props => props.theme.colors.black};
-  padding: 12px 24px;
+  padding: 10px 20px;
   border-radius: 8px;
   cursor: pointer;
-  margin-bottom: 15px;
   text-align: center;
   font-weight: bold;
   font-family: 'Press Start 2P', cursive;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   border: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  
-  &:active {
-    transform: scale(0.95);
-  }
-
-  @media (orientation: landscape) {
-    padding: 10px 20px;
-    margin-bottom: 10px;
-    font-size: 0.8rem;
-  }
+  margin-bottom: 10px;
 `;
 
 const GameBalance = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 5px;
   padding: 4px 8px;
   background: rgba(0, 0, 0, 0.8);
-  border: 2px solid ${props => props.theme.colors.accent};
+  border: 1px solid ${props => props.theme.colors.accent};
   border-radius: 5px;
   margin-top: auto;
 `;
 
 const CoinIcon = styled.div`
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   background: ${props => props.theme.colors.accent};
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
+  font-size: 8px;
   font-family: 'Press Start 2P', cursive;
   color: ${props => props.theme.colors.black};
-  border: 1px solid ${props => props.theme.colors.text};
 `;
 
 const CoinsAmount = styled.span`
   font-family: 'Press Start 2P', cursive;
-  font-size: 12px;
+  font-size: 10px;
   color: ${props => props.theme.colors.accent};
 `;
 
