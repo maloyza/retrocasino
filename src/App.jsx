@@ -166,36 +166,38 @@ const AppContent = () => {
   const location = useLocation();
   
   useEffect(() => {
-    const twa = window.Telegram.WebApp;
-    
-    if (twa) {
-      twa.disableSwipeToClose();
+    try {
+      const twa = window.Telegram?.WebApp;
       
-      // Показываем кнопку "назад" только если мы не на главной странице
-      if (location.pathname !== '/') {
-        twa.BackButton.show();
-      } else {
-        twa.BackButton.hide();
+      if (twa) {
+        // Отключаем свайп через MainButton, так как disableSwipeToClose не поддерживается
+        twa.MainButton.setParams({
+          is_visible: false
+        });
+        
+        // Показываем кнопку "назад" только если мы не на главной странице
+        if (location.pathname !== '/') {
+          twa.BackButton.show();
+        } else {
+          twa.BackButton.hide();
+        }
+        
+        // Обработка кнопки "назад"
+        twa.BackButton.onClick(() => {
+          navigate(-1);
+        });
       }
-      
-      // Обработка кнопки "назад"
-      twa.BackButton.onClick(() => {
-        navigate(-1);
-      });
+    } catch (error) {
+      console.error('TWA initialization error:', error);
     }
     
-    // Предотвращаем стандартное поведение свайпа
-    const handleTouchMove = (e) => {
-      const touchDelta = e.touches[0].clientY - e.touches[0].clientY;
-      if (Math.abs(touchDelta) > 10) {
-        e.preventDefault();
-      }
-    };
-    
-    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    // Предотвращаем стандартное поведение свайпа через CSS
+    document.body.style.overscrollBehavior = 'none';
+    document.documentElement.style.overscrollBehavior = 'none';
     
     return () => {
-      document.removeEventListener('touchmove', handleTouchMove);
+      document.body.style.overscrollBehavior = '';
+      document.documentElement.style.overscrollBehavior = '';
     };
   }, [navigate, location]);
 
@@ -238,22 +240,21 @@ const App = () => {
           
           // Сообщаем что приложение готово
           tg.ready();
-
-          // Если это мобильное устройство, используем expand()
-          if (isMobile()) {
-            tg.expand();
-            console.log('Mobile TWA: trying to expand');
-          } else {
-            // Для десктопа пробуем запросить полноэкранный режим
-            tg.requestFullscreen();
-            console.log('Desktop TWA: requesting fullscreen');
-          }
-
+          
+          // Расширяем окно приложения
+          tg.expand();
+          
+          // Устанавливаем цвета для хедера и нижней панели
+          tg.setHeaderColor('#000000');
+          tg.setBackgroundColor('#000000');
+          
           // Проверяем результат
-          console.log('TWA viewport size:', {
+          console.log('TWA viewport info:', {
             viewportHeight: tg.viewportHeight,
             viewportStableHeight: tg.viewportStableHeight,
-            isExpanded: tg.isExpanded
+            isExpanded: tg.isExpanded,
+            headerColor: tg.headerColor,
+            backgroundColor: tg.backgroundColor
           });
         }
       } catch (error) {
@@ -261,46 +262,17 @@ const App = () => {
       }
     };
 
-    // Получаем объект Telegram WebApp
-    const twa = window.Telegram.WebApp;
-    
-    // Отключаем свайп для закрытия приложения
-    if (twa) {
-      twa.disableSwipeToClose();
-      
-      // Обработка кнопки "назад"
-      twa.BackButton.onClick(() => {
-        // Здесь будет логика навигации внутри приложения
-        console.log('Back button clicked');
-        // Пример: history.goBack();
-      });
-      
-      // Показываем кнопку "назад" когда нужно
-      // twa.BackButton.show();
-    }
-    
-    // Предотвращаем стандартное поведение свайпа
-    const handleTouchMove = (e) => {
-      const touchDelta = e.touches[0].clientY - e.touches[0].clientY;
-      if (Math.abs(touchDelta) > 10) {
-        e.preventDefault();
-      }
-    };
-    
-    document.addEventListener('touchmove', handleTouchMove, { passive: false });
-
     // Проверяем ориентацию
     checkOrientation();
     window.addEventListener('resize', checkOrientation);
     window.addEventListener('orientationchange', checkOrientation);
 
-    // Инициализируем TWA с небольшой задержкой
-    setTimeout(initTelegramWebApp, 100);
+    // Инициализируем TWA
+    initTelegramWebApp();
 
     return () => {
       window.removeEventListener('resize', checkOrientation);
       window.removeEventListener('orientationchange', checkOrientation);
-      document.removeEventListener('touchmove', handleTouchMove);
     };
   }, []);
 
