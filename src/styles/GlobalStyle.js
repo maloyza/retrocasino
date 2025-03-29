@@ -11,76 +11,85 @@ const GlobalStyle = createGlobalStyle`
   }
 
   html, body {
-    height: 100%;
     width: 100%;
-    position: fixed;
-    background: ${props => props.theme.colors.primary};
+    height: 100%;
     overflow: hidden;
-    font-family: ${props => props.theme.fonts.primary};
-  }
-
-  body {
+    position: fixed;
+    background: ${props => props.theme.colors.background};
     color: ${props => props.theme.colors.text};
+    font-family: ${props => props.theme.fonts.primary};
+    font-size: 16px;
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overscroll-behavior: none;
-    line-height: 1.5;
   }
 
   #root {
-    height: 100%;
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+  }
+
+  button {
+    font-family: ${props => props.theme.fonts.primary};
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    color: inherit;
+    font-size: inherit;
+    
+    &:focus {
+      outline: none;
+    }
+  }
+
+  input {
+    font-family: ${props => props.theme.fonts.primary};
+    border: none;
+    outline: none;
+    background: none;
+    color: inherit;
+    font-size: inherit;
+    
+    &:focus {
+      outline: none;
+    }
   }
 
   /* Стили для игровых компонентов */
   .game-container {
     width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: ${props => props.theme.spacing.md};
-    background: ${props => props.theme.colors.game.background};
-    border: 2px solid ${props => props.theme.colors.game.border};
-    border-radius: ${props => props.theme.borderRadius.large};
-    box-shadow: ${props => props.theme.shadows.card};
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
-    overflow-x: hidden;
-
-    @media (min-width: ${props => props.theme.breakpoints.desktop}) {
-      padding: ${props => props.theme.spacing.lg};
-      gap: 1.5rem;
-      max-width: 1200px;
-    }
+    justify-content: center;
+    padding: 10px;
+    gap: 10px;
   }
 
   .game-button {
-    ${props => props.theme.gameStyles.button};
-    margin: ${props => props.theme.spacing.sm};
-    min-width: 120px;
-    max-width: 200px;
-    white-space: nowrap;
+    background: ${props => props.theme.colors.accent};
+    color: ${props => props.theme.colors.black};
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: transform 0.2s;
+
+    &:active {
+      transform: scale(0.95);
+    }
   }
 
   .game-card {
-    ${props => props.theme.gameStyles.card};
-    margin: ${props => props.theme.spacing.xs};
-    min-width: 60px;
-    max-width: 100px;
-    aspect-ratio: 2/3;
-  }
-
-  .game-table {
-    ${props => props.theme.gameStyles.table};
-    margin-bottom: ${props => props.theme.spacing.md};
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid ${props => props.theme.colors.accent};
+    border-radius: 10px;
+    padding: 15px;
     width: 100%;
-    max-width: 600px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    max-width: 400px;
   }
 
   /* Стили для баланса */
@@ -162,31 +171,21 @@ const GlobalStyle = createGlobalStyle`
 
   /* Анимации */
   @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
   @keyframes slideUp {
-    from {
-      transform: translateY(20px);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
   }
 
   .fade-in {
-    animation: fadeIn ${props => props.theme.transitions.default};
+    animation: fadeIn 0.3s ease-in-out;
   }
 
   .slide-up {
-    animation: slideUp ${props => props.theme.transitions.default};
+    animation: slideUp 0.3s ease-in-out;
   }
 
   /* Стили для полноэкранного режима */
@@ -238,22 +237,6 @@ const GlobalStyle = createGlobalStyle`
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     padding-bottom: env(safe-area-inset-bottom);
-  }
-
-  button {
-    font-family: ${props => props.theme.fonts.primary};
-    cursor: pointer;
-    border: none;
-    background: ${props => props.theme.colors.secondary};
-    color: ${props => props.theme.colors.text};
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: ${props => props.theme.transitions.default};
-    
-    &:hover {
-      background: ${props => props.theme.colors.accent};
-      transform: scale(1.05);
-    }
   }
 
   a {
