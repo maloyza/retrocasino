@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 8px;
   height: 100%;
 `;
 
@@ -14,27 +14,28 @@ const Card = styled(motion.div)`
   background: rgba(0, 0, 0, 0.8);
   border: 2px solid ${props => props.theme.colors.accent};
   border-radius: 10px;
-  padding: 8px;
+  padding: 10px;
   width: 100%;
-  flex: 1;
+  height: calc(100% - 40px); // Оставляем место для баланса
   cursor: pointer;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 
   @media (orientation: landscape) {
-    padding: 6px;
-    gap: 6px;
+    padding: 8px;
+    gap: 8px;
+    height: calc(100% - 35px);
   }
 `;
 
 const GameImageWrapper = styled.div`
   width: 100%;
-  height: 50%;
+  height: 60%;
   position: relative;
-  min-height: 80px;
+  min-height: 60px;
 `;
 
 const GameImage = styled.img`
@@ -87,15 +88,21 @@ const GameBalance = styled.div`
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 4px 8px;
+  padding: 6px 12px;
   background: rgba(0, 0, 0, 0.8);
   border: 2px solid ${props => props.theme.colors.accent};
   border-radius: 5px;
+  height: 32px;
+
+  @media (orientation: landscape) {
+    height: 27px;
+    padding: 4px 8px;
+  }
 `;
 
 const CoinIcon = styled.div`
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   background: ${props => props.theme.colors.accent};
   border-radius: 50%;
   display: flex;
@@ -107,19 +114,19 @@ const CoinIcon = styled.div`
   border: 2px solid ${props => props.theme.colors.text};
 
   @media (orientation: landscape) {
-    width: 14px;
-    height: 14px;
+    width: 15px;
+    height: 15px;
     font-size: 8px;
   }
 `;
 
 const CoinsAmount = styled.span`
   font-family: 'Press Start 2P', cursive;
-  font-size: 10px;
+  font-size: 12px;
   color: ${props => props.theme.colors.accent};
 
   @media (orientation: landscape) {
-    font-size: 8px;
+    font-size: 10px;
   }
 `;
 

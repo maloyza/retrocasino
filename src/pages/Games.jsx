@@ -1,91 +1,78 @@
 import React from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
 import GameCard from '../components/GameCard';
+import { motion } from 'framer-motion';
 
-const GamesContainer = styled.div`
+const GamesContainer = styled(motion.div)`
+  height: calc(100vh - 110px);
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px;
-  padding-top: 50px;
-
+  padding: 15px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  
   @media (orientation: landscape) {
-    padding: 5px;
-    padding-top: 45px;
+    padding: 10px;
+    height: calc(100vh - 90px);
   }
 `;
 
-const GamesGrid = styled(motion.div)`
+const GamesGrid = styled.div`
   display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  grid-auto-rows: 250px;
   width: 100%;
-  max-width: 1200px;
-  gap: 10px;
-  padding: 5px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-auto-rows: minmax(180px, 1fr);
-  align-items: stretch;
-
+  
   @media (orientation: landscape) {
-    gap: 8px;
-    padding: 4px;
-    grid-auto-rows: minmax(140px, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 220px;
+    gap: 10px;
   }
 `;
-
-const games = [
-  {
-    id: 'blackjack',
-    title: 'Блэкджек',
-    description: 'Классическая карточная игра. Набери 21 очко и обыграй дилера!',
-    image: '/assets/games/blackjack.jpg',
-    coins: 500
-  },
-  {
-    id: 'video-poker',
-    title: 'Видео Покер',
-    description: 'Собирай комбинации и выигрывай крупные призы!',
-    image: '/assets/games/poker.jpg',
-    coins: 300
-  },
-  {
-    id: 'roulette',
-    title: 'Рулетка',
-    description: 'Испытай удачу в классической игре казино!',
-    image: '/assets/games/roulette.jpg',
-    coins: 1000
-  }
-];
-
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-};
-
-const item = {
-  hidden: { y: 20, opacity: 0 },
-  show: { y: 0, opacity: 1 }
-};
 
 const Games = () => {
+  const games = [
+    {
+      id: 'slots',
+      title: 'Retro Slots',
+      description: 'Classic slot machine with retro symbols',
+      image: '/games/slots.jpg',
+      coins: 1000
+    },
+    {
+      id: 'blackjack',
+      title: 'Blackjack',
+      description: 'Classic card game against the dealer',
+      image: '/games/blackjack.jpg',
+      coins: 2000
+    },
+    {
+      id: 'poker',
+      title: 'Video Poker',
+      description: 'Draw poker with classic rules',
+      image: '/games/poker.jpg',
+      coins: 3000
+    },
+    {
+      id: 'roulette',
+      title: 'Roulette',
+      description: 'European roulette with classic bets',
+      image: '/games/roulette.jpg',
+      coins: 5000
+    }
+  ];
+
   return (
-    <GamesContainer>
-      <GamesGrid
-        variants={container}
-        initial="hidden"
-        animate="show"
-      >
+    <GamesContainer
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <GamesGrid>
         {games.map(game => (
-          <motion.div key={game.id} variants={item} style={{ height: '100%' }}>
-            <GameCard game={game} />
-          </motion.div>
+          <GameCard key={game.id} game={game} />
         ))}
       </GamesGrid>
     </GamesContainer>
