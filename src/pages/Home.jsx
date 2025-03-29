@@ -53,16 +53,16 @@ const GamesSection = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding-bottom: 100px;
+  padding-bottom: 120px;
 `;
 
 const GamesGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 12px;
   width: 100%;
   max-width: 1200px;
-  min-height: calc(100vh - 200px);
+  min-height: calc(100vh - 180px);
 `;
 
 const GameCard = styled(motion.div)`
@@ -76,13 +76,13 @@ const GameCard = styled(motion.div)`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  height: 160px;
+  height: 175px;
   transform-origin: center;
 `;
 
 const GameImage = styled.img`
   width: 100%;
-  height: 90px;
+  height: 100px;
   object-fit: cover;
   border-radius: 6px;
 `;
