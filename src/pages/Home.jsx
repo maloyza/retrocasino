@@ -10,50 +10,57 @@ const HomeContainer = styled.div`
   gap: 20px;
   padding: 20px;
   height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: calc(20px + env(safe-area-inset-bottom));
 
-  @media (orientation: landscape) and (max-height: 600px) {
-    padding: 10px;
-    gap: 10px;
+  @media (orientation: landscape) {
+    padding: 15px;
+    gap: 15px;
   }
 `;
 
 const Title = styled.h1`
   color: ${props => props.theme.colors.accent};
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   font-family: 'Press Start 2P', cursive;
-  font-size: 2rem;
+  font-size: 1.8rem;
 
-  @media (orientation: landscape) and (max-height: 600px) {
+  @media (orientation: landscape) {
     font-size: 1.5rem;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
   }
 `;
 
 const GamesGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
   width: 100%;
   max-width: 1200px;
+  padding: 0 5px;
 
-  @media (orientation: landscape) and (max-height: 600px) {
+  @media (orientation: landscape) {
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    padding: 0 10px;
+    gap: 12px;
   }
 `;
 
 const GameCard = styled(motion.div)`
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.8);
   border-radius: 10px;
-  padding: 15px;
+  padding: 12px;
   text-align: center;
   cursor: pointer;
   position: relative;
   overflow: hidden;
   border: 2px solid ${props => props.theme.colors.accent};
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 200px;
   
   &::before {
     content: '';
@@ -71,60 +78,91 @@ const GameCard = styled(motion.div)`
     transform: translateX(100%);
   }
 
-  @media (orientation: landscape) and (max-height: 600px) {
+  @media (orientation: landscape) {
     padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    height: 180px;
+    gap: 6px;
   }
 `;
 
 const GameImage = styled.img`
   width: 100%;
-  height: 150px;
+  height: 130px;
   object-fit: cover;
   border-radius: 5px;
-  margin-bottom: 10px;
 
-  @media (orientation: landscape) and (max-height: 600px) {
-    height: 100px;
-    margin-bottom: 5px;
+  @media (orientation: landscape) {
+    height: 120px;
   }
 `;
 
 const GameTitle = styled.h2`
   color: ${props => props.theme.colors.text};
-  margin-bottom: 10px;
-  font-size: 1.2rem;
+  font-size: 1rem;
+  font-family: 'Press Start 2P', cursive;
+  margin: 0;
+  padding: 0;
 
-  @media (orientation: landscape) and (max-height: 600px) {
-    font-size: 1rem;
-    margin-bottom: 5px;
+  @media (orientation: landscape) {
+    font-size: 0.9rem;
   }
 `;
 
-const DailyBonus = styled(motion.div)`
+const DailyBonus = styled(motion.button)`
   background: ${props => props.theme.colors.accent};
   color: ${props => props.theme.colors.black};
-  padding: 15px 30px;
-  border-radius: 10px;
+  padding: 12px 24px;
+  border-radius: 8px;
   cursor: pointer;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   text-align: center;
   font-weight: bold;
-  box-shadow: 0 0 10px rgba(255, 183, 0, 0.3);
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.9rem;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   
-  &:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(255, 183, 0, 0.5);
+  &:active {
+    transform: scale(0.95);
   }
 
-  @media (orientation: landscape) and (max-height: 600px) {
-    padding: 8px 20px;
+  @media (orientation: landscape) {
+    padding: 10px 20px;
     margin-bottom: 10px;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
+`;
+
+const GameBalance = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid ${props => props.theme.colors.accent};
+  border-radius: 5px;
+  margin-top: auto;
+`;
+
+const CoinIcon = styled.div`
+  width: 16px;
+  height: 16px;
+  background: ${props => props.theme.colors.accent};
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-family: 'Press Start 2P', cursive;
+  color: ${props => props.theme.colors.black};
+  border: 1px solid ${props => props.theme.colors.text};
+`;
+
+const CoinsAmount = styled.span`
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  color: ${props => props.theme.colors.accent};
 `;
 
 const Home = () => {
@@ -132,20 +170,20 @@ const Home = () => {
     {
       id: 'blackjack',
       title: 'Блэкджек',
-      image: '/assets/blackjack.jpg',
-      color: '#0000FF'
+      image: '/games/blackjack.jpg',
+      coins: 2000
     },
     {
       id: 'video-poker',
       title: 'Видеопокер',
-      image: '/assets/video-poker.jpg',
-      color: '#00FF00'
+      image: '/games/poker.jpg',
+      coins: 3000
     },
     {
       id: 'roulette',
       title: 'Рулетка',
-      image: '/assets/roulette.jpg',
-      color: '#FF0000'
+      image: '/games/roulette.jpg',
+      coins: 5000
     }
   ];
 
@@ -153,6 +191,7 @@ const Home = () => {
     <HomeContainer>
       <Title>Retro Casino</Title>
       <DailyBonus
+        as={motion.button}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
@@ -167,6 +206,10 @@ const Home = () => {
             >
               <GameImage src={game.image} alt={game.title} />
               <GameTitle>{game.title}</GameTitle>
+              <GameBalance>
+                <CoinIcon>$</CoinIcon>
+                <CoinsAmount>{game.coins}</CoinsAmount>
+              </GameBalance>
             </GameCard>
           </Link>
         ))}
