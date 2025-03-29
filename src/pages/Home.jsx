@@ -6,25 +6,17 @@ import { motion } from 'framer-motion';
 const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: 30px;
   min-height: 100vh;
   background: ${props => props.theme.colors.background};
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
-  padding: 20px 10px;
+  padding: 20px 10px 120px 10px;
 `;
 
-const WelcomeSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 20px;
-  padding-top: 20px;
-  padding-bottom: 30px;
-`;
-
-const Title = styled(motion.h1)`
+const Title = styled.h1`
   color: ${props => props.theme.colors.accent};
   text-align: center;
   margin: 0;
@@ -34,7 +26,7 @@ const Title = styled(motion.h1)`
   font-size: 1.8rem;
 `;
 
-const DailyBonus = styled(motion.button)`
+const DailyBonus = styled.button`
   background: ${props => props.theme.colors.accent};
   color: ${props => props.theme.colors.black};
   padding: 12px 24px;
@@ -46,14 +38,10 @@ const DailyBonus = styled(motion.button)`
   font-size: 0.9rem;
   border: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-`;
 
-const GamesSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  padding-bottom: 120px;
+  &:active {
+    transform: scale(0.98);
+  }
 `;
 
 const GamesGrid = styled.div`
@@ -62,10 +50,9 @@ const GamesGrid = styled.div`
   gap: 12px;
   width: 100%;
   max-width: 1200px;
-  min-height: calc(100vh - 180px);
 `;
 
-const GameCard = styled(motion.div)`
+const GameCard = styled.div`
   background: rgba(0, 0, 0, 0.8);
   border-radius: 10px;
   padding: 10px;
@@ -77,7 +64,10 @@ const GameCard = styled(motion.div)`
   flex-direction: column;
   gap: 8px;
   height: 175px;
-  transform-origin: center;
+
+  &:active {
+    transform: scale(0.98);
+  }
 `;
 
 const GameImage = styled.img`
@@ -127,48 +117,6 @@ const CoinsAmount = styled.span`
 `;
 
 const Home = () => {
-  const titleAnimation = {
-    initial: { scale: 0.5, opacity: 0 },
-    animate: { 
-      scale: 1, 
-      opacity: 1,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut"
-      }
-    }
-  };
-
-  const bonusAnimation = {
-    initial: { y: 50, opacity: 0 },
-    animate: { 
-      y: 0, 
-      opacity: 1,
-      transition: {
-        delay: 0.5,
-        duration: 0.5,
-        ease: "easeOut"
-      }
-    }
-  };
-
-  const cardAnimation = {
-    initial: { y: 50, opacity: 0 },
-    whileInView: { 
-      y: 0, 
-      opacity: 1,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut"
-      }
-    },
-    viewport: { once: true }
-  };
-
-  const handleScrollToGames = () => {
-    document.querySelector('#games-section').scrollIntoView({ behavior: 'smooth' });
-  };
-
   const games = [
     {
       id: 'blackjack',
@@ -192,50 +140,22 @@ const Home = () => {
 
   return (
     <HomeContainer>
-      <WelcomeSection>
-        <Title
-          variants={titleAnimation}
-          initial="initial"
-          animate="animate"
-        >
-          Retro Casino
-        </Title>
-        <DailyBonus
-          as={motion.button}
-          variants={bonusAnimation}
-          initial="initial"
-          animate="animate"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          Получить ежедневный бонус
-        </DailyBonus>
-      </WelcomeSection>
-
-      <GamesSection id="games-section">
-        <GamesGrid>
-          {games.map((game, index) => (
-            <Link to={`/${game.id}`} key={game.id} style={{ textDecoration: 'none' }}>
-              <GameCard
-                variants={cardAnimation}
-                initial="initial"
-                whileInView="whileInView"
-                viewport={{ once: true, margin: "-100px" }}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <GameImage src={game.image} alt={game.title} />
-                <GameTitle>{game.title}</GameTitle>
-                <GameBalance>
-                  <CoinIcon>$</CoinIcon>
-                  <CoinsAmount>{game.coins}</CoinsAmount>
-                </GameBalance>
-              </GameCard>
-            </Link>
-          ))}
-        </GamesGrid>
-      </GamesSection>
+      <Title>Retro Casino</Title>
+      <DailyBonus>Получить ежедневный бонус</DailyBonus>
+      <GamesGrid>
+        {games.map(game => (
+          <Link to={`/${game.id}`} key={game.id} style={{ textDecoration: 'none' }}>
+            <GameCard>
+              <GameImage src={game.image} alt={game.title} />
+              <GameTitle>{game.title}</GameTitle>
+              <GameBalance>
+                <CoinIcon>$</CoinIcon>
+                <CoinsAmount>{game.coins}</CoinsAmount>
+              </GameBalance>
+            </GameCard>
+          </Link>
+        ))}
+      </GamesGrid>
     </HomeContainer>
   );
 };

@@ -11,8 +11,7 @@ const ProfileContainer = styled.div`
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
-  padding-top: 60px;
-  padding-bottom: 80px;
+  padding: 20px 10px 120px 10px;
 `;
 
 const ContentWrapper = styled.div`
@@ -20,7 +19,6 @@ const ContentWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 20px;
   gap: 20px;
 `;
 
