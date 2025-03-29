@@ -4,31 +4,30 @@ import GameCard from '../components/GameCard';
 import { motion } from 'framer-motion';
 
 const GamesContainer = styled(motion.div)`
-  height: calc(100vh - 110px);
+  height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 60px);
   width: 100%;
-  padding: 15px;
+  padding: 10px;
+  padding-bottom: calc(10px + env(safe-area-inset-bottom));
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
   
   @media (orientation: landscape) {
-    padding: 10px;
-    height: calc(100vh - 90px);
+    padding: 8px;
+    height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 50px);
   }
 `;
 
 const GamesGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-  grid-auto-rows: 250px;
+  gap: 10px;
+  grid-auto-rows: 200px;
   width: 100%;
   
   @media (orientation: landscape) {
     grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 220px;
-    gap: 10px;
+    grid-auto-rows: 180px;
+    gap: 8px;
   }
 `;
 
