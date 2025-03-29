@@ -565,62 +565,39 @@ Error generating stack: `+o.message+`
 `,LP=()=>{const e=xc(),t=Vr(),n=r=>t.pathname===r;return _.jsxs(DP,{children:[_.jsxs(Ja,{onClick:()=>e("/"),active:n("/"),whileTap:{scale:.95},children:[_.jsx("svg",{viewBox:"0 0 24 24",fill:"currentColor",children:_.jsx("path",{d:"M12 5.69l5 4.5V18h-2v-6H9v6H7v-7.81l5-4.5M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"})}),"Игры"]}),_.jsxs(Ja,{onClick:()=>e("/profile"),active:n("/profile"),whileTap:{scale:.95},children:[_.jsx("svg",{viewBox:"0 0 24 24",fill:"currentColor",children:_.jsx("path",{d:"M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"})}),"Профиль"]}),_.jsxs(Ja,{onClick:()=>e("/leaderboard"),active:n("/leaderboard"),whileTap:{scale:.95},children:[_.jsx("svg",{viewBox:"0 0 24 24",fill:"currentColor",children:_.jsx("path",{d:"M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14h-2v-4H8V7h2v4h2V7h2v10z"})}),"Лидеры"]})]})},IP=j.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   min-height: 100vh;
   height: 100%;
   background: ${e=>e.theme.colors.background};
-  position: relative;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
-  padding-bottom: 70px;
-
-  @media (orientation: landscape) {
-    padding-bottom: 60px;
-  }
 `,$P=j.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 1200px;
-  gap: 20px;
-  padding: 20px;
-  padding-top: max(20px, env(safe-area-inset-top));
-
-  @media (orientation: landscape) {
-    gap: 15px;
-    padding: 15px;
-    padding-top: max(15px, env(safe-area-inset-top));
-  }
+  padding: 0 10px;
+  margin-top: 60px;
 `,VP=j.h1`
   color: ${e=>e.theme.colors.accent};
   text-align: center;
   margin: 0;
   padding: 0;
+  margin-bottom: 20px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   font-family: 'Press Start 2P', cursive;
   font-size: 1.8rem;
-
-  @media (orientation: landscape) {
-    font-size: 1.5rem;
-  }
 `,OP=j.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
   width: 100%;
-  max-width: 1200px;
   padding: 0 5px;
-
-  @media (orientation: landscape) {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-  }
+  margin-top: 20px;
 `,NP=j(be.div)`
   background: rgba(0, 0, 0, 0.8);
   border-radius: 10px;
-  padding: 12px;
+  padding: 10px;
   text-align: center;
   cursor: pointer;
   position: relative;
@@ -628,97 +605,56 @@ Error generating stack: `+o.message+`
   border: 2px solid ${e=>e.theme.colors.accent};
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  height: 200px;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transform: translateX(-100%);
-    transition: transform 0.6s;
-  }
-  
-  &:hover::before {
-    transform: translateX(100%);
-  }
-
-  @media (orientation: landscape) {
-    padding: 10px;
-    height: 180px;
-    gap: 6px;
-  }
+  gap: 5px;
+  height: 180px;
 `,FP=j.img`
   width: 100%;
-  height: 130px;
+  height: 120px;
   object-fit: cover;
   border-radius: 5px;
-
-  @media (orientation: landscape) {
-    height: 120px;
-  }
 `,BP=j.h2`
   color: ${e=>e.theme.colors.text};
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-family: 'Press Start 2P', cursive;
   margin: 0;
   padding: 0;
-
-  @media (orientation: landscape) {
-    font-size: 0.9rem;
-  }
 `,zP=j(be.button)`
   background: ${e=>e.theme.colors.accent};
   color: ${e=>e.theme.colors.black};
-  padding: 12px 24px;
+  padding: 10px 20px;
   border-radius: 8px;
   cursor: pointer;
-  margin-bottom: 15px;
   text-align: center;
   font-weight: bold;
   font-family: 'Press Start 2P', cursive;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   border: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  
-  &:active {
-    transform: scale(0.95);
-  }
-
-  @media (orientation: landscape) {
-    padding: 10px 20px;
-    margin-bottom: 10px;
-    font-size: 0.8rem;
-  }
+  margin-bottom: 10px;
 `,UP=j.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 5px;
   padding: 4px 8px;
   background: rgba(0, 0, 0, 0.8);
-  border: 2px solid ${e=>e.theme.colors.accent};
+  border: 1px solid ${e=>e.theme.colors.accent};
   border-radius: 5px;
   margin-top: auto;
 `,HP=j.div`
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   background: ${e=>e.theme.colors.accent};
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
+  font-size: 8px;
   font-family: 'Press Start 2P', cursive;
   color: ${e=>e.theme.colors.black};
-  border: 1px solid ${e=>e.theme.colors.text};
 `,WP=j.span`
   font-family: 'Press Start 2P', cursive;
-  font-size: 12px;
+  font-size: 10px;
   color: ${e=>e.theme.colors.accent};
 `,GP=()=>{const e=[{id:"blackjack",title:"Блэкджек",image:"/games/blackjack.jpg",coins:2e3},{id:"video-poker",title:"Видеопокер",image:"/games/poker.jpg",coins:3e3},{id:"roulette",title:"Рулетка",image:"/games/roulette.jpg",coins:5e3}];return _.jsx(IP,{children:_.jsxs($P,{children:[_.jsx(VP,{children:"Retro Casino"}),_.jsx(zP,{as:be.button,whileHover:{scale:1.05},whileTap:{scale:.95},children:"Получить ежедневный бонус"}),_.jsx(OP,{children:e.map(t=>_.jsx(nw,{to:`/${t.id}`,style:{textDecoration:"none"},children:_.jsxs(NP,{whileHover:{scale:1.02},whileTap:{scale:.98},children:[_.jsx(FP,{src:t.image,alt:t.title}),_.jsx(BP,{children:t.title}),_.jsxs(UP,{children:[_.jsx(HP,{children:"$"}),_.jsx(WP,{children:t.coins})]})]})},t.id))})]})})},KP=j.div`
   position: fixed;
@@ -1614,4 +1550,4 @@ Error generating stack: `+o.message+`
   display: flex;
   align-items: center;
 `,tA=()=>{const e=xc(),t=Vr();return k.useEffect(()=>{var n;try{const r=(n=window.Telegram)==null?void 0:n.WebApp;r&&(r.MainButton.setParams({is_visible:!1}),t.pathname!=="/"?r.BackButton.show():r.BackButton.hide(),r.BackButton.onClick(()=>{e(-1)}))}catch(r){console.error("TWA initialization error:",r)}return document.body.style.overscrollBehavior="none",document.documentElement.style.overscrollBehavior="none",()=>{document.body.style.overscrollBehavior="",document.documentElement.style.overscrollBehavior=""}},[e,t]),_.jsxs(qC,{children:[_.jsx(eA,{children:_.jsx(ro,{})}),_.jsx(JC,{children:_.jsx(u_,{mode:"wait",children:_.jsxs(Gx,{children:[_.jsx(Sn,{path:"/",element:_.jsx(GP,{})}),_.jsx(Sn,{path:"/profile",element:_.jsx(hC,{})}),_.jsx(Sn,{path:"/leaderboard",element:_.jsx(AC,{})}),_.jsx(Sn,{path:"/blackjack",element:_.jsx(LC,{})}),_.jsx(Sn,{path:"/video-poker",element:_.jsx(zC,{})}),_.jsx(Sn,{path:"/roulette",element:_.jsx(XC,{})})]})})}),_.jsx(LP,{})]})},nA=()=>{const[e,t]=k.useState(!0),[n,r]=k.useState(!1);return k.useEffect(()=>{const i=()=>/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),o=()=>{const l=window.innerHeight>window.innerWidth;t(l),r(i()&&l)},s=()=>{var l;try{if((l=window.Telegram)!=null&&l.WebApp){const u=window.Telegram.WebApp;u.ready(),u.expand(),u.setHeaderColor("#000000"),u.setBackgroundColor("#000000"),console.log("TWA viewport info:",{viewportHeight:u.viewportHeight,viewportStableHeight:u.viewportStableHeight,isExpanded:u.isExpanded,headerColor:u.headerColor,backgroundColor:u.backgroundColor})}}catch(u){console.error("TWA initialization error:",u)}};return o(),window.addEventListener("resize",o),window.addEventListener("orientationchange",o),s(),()=>{window.removeEventListener("resize",o),window.removeEventListener("orientationchange",o)}},[]),n?_.jsx(Ld,{theme:Jp,children:_.jsxs(ZC,{children:[_.jsx("h2",{children:"Пожалуйста, переверните устройство"}),_.jsx("p",{children:"Для лучшего игрового опыта используйте горизонтальную ориентацию экрана"})]})}):_.jsx(Ld,{theme:Jp,children:_.jsxs(Jx,{basename:"/retrocasino",children:[_.jsx(MP,{}),_.jsx(tA,{})]})})};nl.createRoot(document.getElementById("root")).render(_.jsx(Ue.StrictMode,{children:_.jsx(nA,{})}));
-//# sourceMappingURL=index-CKBGVEwo.js.map
+//# sourceMappingURL=index-Dw629ClP.js.map
