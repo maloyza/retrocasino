@@ -9,9 +9,6 @@ const ProfileContainer = styled.div`
   min-height: 100vh;
   background: ${props => props.theme.colors.background};
   padding: 20px 10px 160px 10px;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-y: contain;
 `;
 
 const MainContent = styled.div`

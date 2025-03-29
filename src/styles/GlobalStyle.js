@@ -13,8 +13,8 @@ const GlobalStyle = createGlobalStyle`
   html, body {
     width: 100%;
     height: 100%;
-    overflow: hidden;
-    position: fixed;
+    margin: 0;
+    padding: 0;
     background: ${props => props.theme.colors.background};
     color: ${props => props.theme.colors.text};
     font-family: ${props => props.theme.fonts.primary};

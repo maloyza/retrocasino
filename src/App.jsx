@@ -101,7 +101,6 @@ const AppContainer = styled.div`
   max-width: 100vw;
   background: ${props => props.theme.colors.background};
   position: relative;
-  overflow: hidden;
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 `;
 
@@ -111,9 +110,10 @@ const MainContent = styled.main`
   height: 100%;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
   position: relative;
-  padding-top: 60px; /* Высота баланса */
-  padding-bottom: 70px; /* Высота навигации */
+  padding-top: 60px;
+  padding-bottom: 70px;
   display: flex;
   flex-direction: column;
 `;
