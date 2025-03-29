@@ -14,7 +14,7 @@ const Card = styled(motion.div)`
   position: relative;
   overflow: hidden;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 10px;
 
   @media (orientation: landscape) {
@@ -24,8 +24,8 @@ const Card = styled(motion.div)`
 `;
 
 const GameImageWrapper = styled.div`
-  width: 40%;
-  height: 100%;
+  width: 100%;
+  height: 60%;
   position: relative;
 `;
 

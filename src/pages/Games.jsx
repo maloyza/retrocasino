@@ -10,28 +10,28 @@ const GamesContainer = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 10px;
+  padding-top: 60px;
 
   @media (orientation: landscape) {
     padding: 5px;
+    padding-top: 50px;
   }
 `;
 
 const GamesGrid = styled(motion.div)`
   display: grid;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 60px);
   max-width: 1200px;
   gap: 15px;
   padding: 10px;
-  grid-template-rows: repeat(2, 1fr);
-  grid-auto-flow: column;
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
 
   @media (orientation: landscape) {
     gap: 10px;
     padding: 5px;
+    height: calc(100% - 50px);
   }
 
   &::-webkit-scrollbar {

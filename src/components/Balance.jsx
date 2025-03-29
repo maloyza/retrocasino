@@ -10,7 +10,7 @@ const BalanceContainer = styled.div`
   z-index: 1000;
   background: rgba(0, 0, 0, 0.9);
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -56,6 +56,7 @@ const CoinsAmount = styled.span`
   font-size: 16px;
   color: ${props => props.theme.colors.accent};
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin-right: 10px;
 
   @media (orientation: landscape) {
     font-size: 14px;
@@ -93,14 +94,14 @@ const Balance = () => {
       <CoinsWrapper>
         <CoinIcon>$</CoinIcon>
         <CoinsAmount>1000</CoinsAmount>
+        <TopUpButton
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={handleTopUp}
+        >
+          Пополнить
+        </TopUpButton>
       </CoinsWrapper>
-      <TopUpButton
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        onClick={handleTopUp}
-      >
-        Пополнить
-      </TopUpButton>
     </BalanceContainer>
   );
 };
