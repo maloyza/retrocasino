@@ -682,6 +682,7 @@ Error generating stack: `+o.message+`
   display: flex;
   align-items: center;
   gap: 8px;
+  border-bottom: none;
 `,XP=j.div`
   width: 24px;
   height: 24px;
@@ -1010,7 +1011,7 @@ Error generating stack: `+o.message+`
   font-family: ${e=>e.theme.fonts.primary};
   font-size: 14px;
   text-align: center;
-`;const CC=()=>{const[e,t]=k.useState("gold"),n=Array.from({length:5},(r,i)=>({id:i+1,name:`Player${i+1}`,score:Math.floor(Math.random()*1e4),avatar:"/assets/default-avatar.jpg"})).sort((r,i)=>i.score-r.score);return _.jsx(gC,{children:_.jsxs(vC,{children:[_.jsxs(PC,{children:[_.jsx(nl,{active:e==="gold",onClick:()=>t("gold"),children:"Золото"}),_.jsx(nl,{active:e==="wins",onClick:()=>t("wins"),children:"Победы"}),_.jsx(nl,{active:e==="level",onClick:()=>t("level"),children:"Уровень"})]}),_.jsxs(yC,{children:[_.jsxs(xC,{children:[_.jsx(el,{children:"#"}),_.jsx(el,{children:"Игрок"}),_.jsx(el,{children:"Очки"})]}),_.jsx(wC,{children:n.map((r,i)=>_.jsxs(_C,{children:[_.jsx(tl,{children:i+1}),_.jsx(tl,{children:_.jsxs(SC,{children:[_.jsx(kC,{src:r.avatar}),_.jsx(TC,{children:r.name})]})}),_.jsx(tl,{children:r.score})]},r.id))})]})]})})};var kt={};/*!
+`;const CC=()=>{const[e,t]=k.useState("gold"),n=Array.from({length:50},(r,i)=>({id:i+1,name:`Player${i+1}`,score:Math.floor(Math.random()*1e4),avatar:"/assets/default-avatar.jpg"})).sort((r,i)=>i.score-r.score);return _.jsx(gC,{children:_.jsxs(vC,{children:[_.jsxs(PC,{children:[_.jsx(nl,{active:e==="gold",onClick:()=>t("gold"),children:"Золото"}),_.jsx(nl,{active:e==="wins",onClick:()=>t("wins"),children:"Победы"}),_.jsx(nl,{active:e==="level",onClick:()=>t("level"),children:"Уровень"})]}),_.jsxs(yC,{children:[_.jsxs(xC,{children:[_.jsx(el,{children:"#"}),_.jsx(el,{children:"Игрок"}),_.jsx(el,{children:"Очки"})]}),_.jsx(wC,{children:n.map((r,i)=>_.jsxs(_C,{children:[_.jsx(tl,{children:i+1}),_.jsx(tl,{children:_.jsxs(SC,{children:[_.jsx(kC,{src:r.avatar}),_.jsx(TC,{children:r.name})]})}),_.jsx(tl,{children:r.score})]},r.id))})]})]})})};var kt={};/*!
  *  howler.js v2.2.4
  *  howlerjs.com
  *
@@ -1521,4 +1522,4 @@ Error generating stack: `+o.message+`
   display: flex;
   align-items: center;
 `,eA=()=>{const e=_c(),t=Vr();return k.useEffect(()=>{var n;try{const r=(n=window.Telegram)==null?void 0:n.WebApp;r&&(r.MainButton.setParams({is_visible:!1}),t.pathname!=="/"?r.BackButton.show():r.BackButton.hide(),r.BackButton.onClick(()=>{e(-1)}))}catch(r){console.error("TWA initialization error:",r)}return document.body.style.overscrollBehavior="none",document.documentElement.style.overscrollBehavior="none",()=>{document.body.style.overscrollBehavior="",document.documentElement.style.overscrollBehavior=""}},[e,t]),_.jsxs(ZC,{children:[_.jsx(JC,{children:_.jsx(ro,{})}),_.jsx(qC,{children:_.jsx(f_,{mode:"wait",children:_.jsxs(Qx,{children:[_.jsx(Sn,{path:"/",element:_.jsx(KP,{})}),_.jsx(Sn,{path:"/profile",element:_.jsx(mC,{})}),_.jsx(Sn,{path:"/leaderboard",element:_.jsx(CC,{})}),_.jsx(Sn,{path:"/blackjack",element:_.jsx(DC,{})}),_.jsx(Sn,{path:"/video-poker",element:_.jsx(BC,{})}),_.jsx(Sn,{path:"/roulette",element:_.jsx(YC,{})})]})})}),_.jsx($P,{})]})},tA=()=>{const[e,t]=k.useState(!0),[n,r]=k.useState(!1);return k.useEffect(()=>{const i=()=>/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),o=()=>{const l=window.innerHeight>window.innerWidth;t(l),r(i()&&l)},s=()=>{var l;try{if((l=window.Telegram)!=null&&l.WebApp){const u=window.Telegram.WebApp;u.ready(),u.expand(),u.setHeaderColor("#000000"),u.setBackgroundColor("#000000"),console.log("TWA viewport info:",{viewportHeight:u.viewportHeight,viewportStableHeight:u.viewportStableHeight,isExpanded:u.isExpanded,headerColor:u.headerColor,backgroundColor:u.backgroundColor})}}catch(u){console.error("TWA initialization error:",u)}};return o(),window.addEventListener("resize",o),window.addEventListener("orientationchange",o),s(),()=>{window.removeEventListener("resize",o),window.removeEventListener("orientationchange",o)}},[]),n?_.jsx($d,{theme:th,children:_.jsxs(XC,{children:[_.jsx("h2",{children:"Пожалуйста, переверните устройство"}),_.jsx("p",{children:"Для лучшего игрового опыта используйте горизонтальную ориентацию экрана"})]})}):_.jsx($d,{theme:th,children:_.jsxs(tw,{basename:"/retrocasino",children:[_.jsx(LP,{}),_.jsx(eA,{})]})})};il.createRoot(document.getElementById("root")).render(_.jsx(ze.StrictMode,{children:_.jsx(tA,{})}));
-//# sourceMappingURL=index-BKI9baiB.js.map
+//# sourceMappingURL=index-DcculIIV.js.map
