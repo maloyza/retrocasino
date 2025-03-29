@@ -8,11 +8,7 @@ const LeaderboardContainer = styled.div`
   flex-direction: column;
   min-height: 100vh;
   background: ${props => props.theme.colors.background};
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-y: contain;
-  padding-top: 60px;
-  padding-bottom: 80px;
+  padding: 20px 10px 130px 10px;
 `;
 
 const MainContent = styled.div`
@@ -42,48 +38,60 @@ const ContentWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 20px;
   gap: 20px;
 `;
 
 const LeaderboardTable = styled.div`
   background: rgba(0, 0, 0, 0.8);
   border-radius: 10px;
-  padding: 20px;
   width: 100%;
   max-width: 800px;
   border: 2px solid ${props => props.theme.colors.accent};
-  margin-bottom: 20px;
+  overflow: hidden;
 `;
 
 const TableHeader = styled.div`
   display: grid;
-  grid-template-columns: 50px 1fr 100px;
-  padding: 10px;
-  background: ${props => props.theme.colors.accent};
-  color: ${props => props.theme.colors.black};
-  font-family: ${props => props.theme.fonts.primary};
-  text-align: left;
-  gap: 10px;
-  align-items: center;
+  grid-template-columns: 0.5fr 2fr 1fr;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.6);
+  border-bottom: 2px solid ${props => props.theme.colors.accent};
+  position: sticky;
+  top: 0;
+  z-index: 1;
+`;
+
+const TableContent = styled.div`
+  max-height: calc(100vh - 250px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
 `;
 
 const TableRow = styled.div`
   display: grid;
-  grid-template-columns: 50px 1fr 100px;
-  padding: 10px;
-  border-bottom: 1px solid ${props => props.theme.colors.accent};
-  color: ${props => props.theme.colors.text};
-  gap: 10px;
-  align-items: center;
+  grid-template-columns: 0.5fr 2fr 1fr;
+  padding: 12px 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
   &:last-child {
     border-bottom: none;
   }
+`;
 
-  &:nth-child(even) {
-    background: rgba(0, 0, 0, 0.3);
-  }
+const HeaderCell = styled.div`
+  color: ${props => props.theme.colors.accent};
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.8rem;
+`;
+
+const Cell = styled.div`
+  color: ${props => props.theme.colors.text};
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 `;
 
 const PlayerInfo = styled.div`
@@ -92,11 +100,11 @@ const PlayerInfo = styled.div`
   gap: 10px;
 `;
 
-const PlayerAvatar = styled.div`
+const Avatar = styled.div`
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: url('/assets/default-avatar.jpg') center/cover;
+  background: url(${props => props.src}) center/cover;
   border: 2px solid ${props => props.theme.colors.accent};
 `;
 
@@ -154,13 +162,12 @@ const Rank = styled.div`
 
 const Leaderboard = () => {
   const [activeTab, setActiveTab] = useState('gold');
-  const [players, setPlayers] = useState([
-    { id: 1, name: 'Player1', score: 1000, avatar: '/assets/default-avatar.jpg' },
-    { id: 2, name: 'Player2', score: 800, avatar: '/assets/default-avatar.jpg' },
-    { id: 3, name: 'Player3', score: 600, avatar: '/assets/default-avatar.jpg' },
-    { id: 4, name: 'Player4', score: 500, avatar: '/assets/default-avatar.jpg' },
-    { id: 5, name: 'Player5', score: 400, avatar: '/assets/default-avatar.jpg' },
-  ]);
+  const players = Array.from({ length: 50 }, (_, i) => ({
+    id: i + 1,
+    name: `Player${i + 1}`,
+    score: Math.floor(Math.random() * 10000),
+    avatar: '/assets/default-avatar.jpg'
+  })).sort((a, b) => b.score - a.score);
 
   return (
     <LeaderboardContainer>
@@ -179,23 +186,24 @@ const Leaderboard = () => {
         
         <LeaderboardTable>
           <TableHeader>
-            <div>#</div>
-            <div>Игрок</div>
-            <div>Значение</div>
+            <HeaderCell>#</HeaderCell>
+            <HeaderCell>Игрок</HeaderCell>
+            <HeaderCell>Очки</HeaderCell>
           </TableHeader>
-          {players.map((player, index) => (
-            <TableRow key={player.id}>
-              <Rank>{index + 1}</Rank>
-              <PlayerInfo>
-                <PlayerAvatar style={{ backgroundImage: `url(${player.avatar})` }} />
-                <PlayerName>{player.name}</PlayerName>
-              </PlayerInfo>
-              <Score>
-                {player.score}
-                <CoinIcon src="/assets/gold-coin.png" alt="Gold" />
-              </Score>
-            </TableRow>
-          ))}
+          <TableContent>
+            {players.map((player, index) => (
+              <TableRow key={player.id}>
+                <Cell>{index + 1}</Cell>
+                <Cell>
+                  <PlayerInfo>
+                    <Avatar src={player.avatar} />
+                    <PlayerName>{player.name}</PlayerName>
+                  </PlayerInfo>
+                </Cell>
+                <Cell>{player.score}</Cell>
+              </TableRow>
+            ))}
+          </TableContent>
         </LeaderboardTable>
       </ContentWrapper>
     </LeaderboardContainer>
