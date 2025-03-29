@@ -114,6 +114,8 @@ const AppContainer = styled.div`
 
   @media (orientation: landscape) and (max-height: 600px) {
     flex-direction: row;
+    padding: 0;
+    gap: 0;
   }
 `;
 
@@ -140,10 +142,16 @@ const MainContent = styled.main`
   }
 
   @media (orientation: landscape) and (max-height: 600px) {
-    padding-top: ${({ theme }) => theme.spacing.md};
-    padding-bottom: ${({ theme }) => theme.spacing.md};
+    padding: ${({ theme }) => theme.spacing.sm};
+    padding-top: 50px;
     padding-left: 70px;
+    padding-right: ${({ theme }) => theme.spacing.sm};
     height: 100%;
+    justify-content: center;
+
+    & > * {
+      max-width: calc(100vw - 80px);
+    }
   }
 
   & > * {

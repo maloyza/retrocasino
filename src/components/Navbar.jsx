@@ -24,8 +24,11 @@ const NavContainer = styled.nav`
     right: auto;
     width: 60px;
     flex-direction: column;
-    padding: 1rem 0.5rem;
-    border-right: 1px solid rgba(255, 183, 0, 0.2);
+    padding: 50px 0.25rem 0.5rem;
+    border-right: 2px solid ${props => props.theme.colors.accent};
+    background: rgba(0, 0, 0, 0.9);
+    justify-content: flex-start;
+    gap: 1rem;
   }
 `;
 
@@ -49,9 +52,32 @@ const NavItem = styled(Link)`
   }
 
   @media (orientation: landscape) and (max-height: 600px) {
-    margin: 0.5rem 0;
+    margin: 0;
     width: 100%;
-    padding: 0.75rem 0;
+    padding: 0.5rem 0;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: -5px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 0;
+      background: ${props => props.theme.colors.accent};
+      transition: height 0.3s ease;
+      opacity: ${props => props.active ? 1 : 0};
+    }
+
+    &:hover::after {
+      height: 80%;
+      opacity: 1;
+    }
+
+    &.active::after {
+      height: 100%;
+    }
   }
 `;
 
@@ -63,9 +89,9 @@ const NavIcon = styled.img`
   transition: filter 0.3s ease;
 
   @media (orientation: landscape) and (max-height: 600px) {
-    width: 28px;
-    height: 28px;
-    margin-bottom: 0.5rem;
+    width: 32px;
+    height: 32px;
+    margin-bottom: 0.25rem;
   }
 `;
 
@@ -74,11 +100,7 @@ const NavLabel = styled.span`
   transition: all 0.3s ease;
 
   @media (orientation: landscape) and (max-height: 600px) {
-    font-size: 0.7rem;
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    transform: rotate(180deg);
-    margin-top: 0.5rem;
+    display: none;
   }
 `;
 
