@@ -99,7 +99,7 @@ const AppContainer = styled.div`
   min-height: calc(100vh - env(safe-area-inset-bottom));
   width: 100%;
   max-width: 100vw;
-  background: ${props => props.theme.colors.background};
+  background: var(--tg-theme-bg-color, ${props => props.theme.colors.background});
   position: relative;
   overflow: hidden;
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
@@ -112,10 +112,15 @@ const MainContent = styled.main`
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   position: relative;
-  padding-top: 60px; /* Высота баланса */
-  padding-bottom: 70px; /* Высота навигации */
+  padding-top: calc(50px + env(safe-area-inset-top)); /* Высота баланса + отступ сверху */
+  padding-bottom: calc(60px + env(safe-area-inset-bottom)); /* Высота навигации + отступ снизу */
   display: flex;
   flex-direction: column;
+
+  @media (orientation: landscape) {
+    padding-top: calc(40px + env(safe-area-inset-top));
+    padding-bottom: calc(50px + env(safe-area-inset-bottom));
+  }
 `;
 
 const BalanceWrapper = styled.div`
@@ -124,14 +129,18 @@ const BalanceWrapper = styled.div`
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(0, 0, 0, 0.9);
+  background: var(--tg-theme-bg-color, rgba(0, 0, 0, 0.9));
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  padding-top: max(env(safe-area-inset-top), 10px);
-  border-bottom: 2px solid ${props => props.theme.colors.accent};
-  height: 60px;
+  padding-top: env(safe-area-inset-top);
+  border-bottom: 2px solid var(--tg-theme-button-color, ${props => props.theme.colors.accent});
+  height: calc(50px + env(safe-area-inset-top));
   display: flex;
   align-items: center;
+
+  @media (orientation: landscape) {
+    height: calc(40px + env(safe-area-inset-top));
+  }
 `;
 
 const AppContent = () => {
