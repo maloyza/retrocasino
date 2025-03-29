@@ -7,24 +7,31 @@ const ProfileContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  min-height: 100vh;
+  height: 100%;
+  background: ${props => props.theme.colors.background};
+  position: relative;
+`;
+
+const MainContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  flex: 1;
   padding: 20px;
   padding-top: max(20px, env(safe-area-inset-top));
   padding-bottom: max(20px, env(safe-area-inset-bottom));
-  min-height: 100vh;
-  height: 100%;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
-  background: ${props => props.theme.colors.background};
-  position: relative;
-  padding-bottom: calc(70px + env(safe-area-inset-bottom));
+  margin-bottom: 70px;
 
   @media (orientation: landscape) {
     padding: 15px;
     padding-top: max(15px, env(safe-area-inset-top));
-    padding-bottom: calc(60px + env(safe-area-inset-bottom));
-    gap: 15px;
+    padding-bottom: max(15px, env(safe-area-inset-bottom));
+    margin-bottom: 60px;
   }
 `;
 
@@ -35,11 +42,9 @@ const ContentWrapper = styled.div`
   width: 100%;
   max-width: 1200px;
   gap: 20px;
-  margin-bottom: 20px;
 
   @media (orientation: landscape) {
     gap: 15px;
-    margin-bottom: 15px;
   }
 `;
 
@@ -256,79 +261,81 @@ const Profile = () => {
 
   return (
     <ProfileContainer>
-      <Balance {...balance} />
-      <ContentWrapper>
-        <ProfileCard>
-          <AvatarContainer>
-            <Avatar />
-            <ChangeAvatarButton
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Сменить аватар
-            </ChangeAvatarButton>
-          </AvatarContainer>
+      <MainContent>
+        <Balance {...balance} />
+        <ContentWrapper>
+          <ProfileCard>
+            <AvatarContainer>
+              <Avatar />
+              <ChangeAvatarButton
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Сменить аватар
+              </ChangeAvatarButton>
+            </AvatarContainer>
 
-          <NicknameContainer>
-            <Nickname
-              value={nickname}
-              onChange={(e) => setNickname(e.target.value)}
-              placeholder="Введите никнейм"
-            />
-            <ChangeNicknameButton
-              onClick={handleChangeNickname}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Изменить
-            </ChangeNicknameButton>
-          </NicknameContainer>
+            <NicknameContainer>
+              <Nickname
+                value={nickname}
+                onChange={(e) => setNickname(e.target.value)}
+                placeholder="Введите никнейм"
+              />
+              <ChangeNicknameButton
+                onClick={handleChangeNickname}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Изменить
+              </ChangeNicknameButton>
+            </NicknameContainer>
 
-          <LevelProgress>
-            <StatTitle>Уровень {stats.level}</StatTitle>
-            <ProgressBar>
-              <Progress progress={(stats.xp / stats.nextLevelXp) * 100} />
-            </ProgressBar>
-            <StatTitle style={{ marginTop: '5px' }}>
-              {stats.xp}/{stats.nextLevelXp} XP
-            </StatTitle>
-          </LevelProgress>
+            <LevelProgress>
+              <StatTitle>Уровень {stats.level}</StatTitle>
+              <ProgressBar>
+                <Progress progress={(stats.xp / stats.nextLevelXp) * 100} />
+              </ProgressBar>
+              <StatTitle style={{ marginTop: '5px' }}>
+                {stats.xp}/{stats.nextLevelXp} XP
+              </StatTitle>
+            </LevelProgress>
 
-          <StatsContainer>
-            <StatCard>
-              <StatTitle>Игр сыграно</StatTitle>
-              <StatValue>{stats.gamesPlayed}</StatValue>
-            </StatCard>
-            <StatCard>
-              <StatTitle>Побед</StatTitle>
-              <StatValue>{stats.totalWins}</StatValue>
-            </StatCard>
-            <StatCard>
-              <StatTitle>Винрейт</StatTitle>
-              <StatValue>{stats.winRate}</StatValue>
-            </StatCard>
-            <StatCard>
-              <StatTitle>Рефералов</StatTitle>
-              <StatValue>{stats.referralCount}</StatValue>
-            </StatCard>
-          </StatsContainer>
+            <StatsContainer>
+              <StatCard>
+                <StatTitle>Игр сыграно</StatTitle>
+                <StatValue>{stats.gamesPlayed}</StatValue>
+              </StatCard>
+              <StatCard>
+                <StatTitle>Побед</StatTitle>
+                <StatValue>{stats.totalWins}</StatValue>
+              </StatCard>
+              <StatCard>
+                <StatTitle>Винрейт</StatTitle>
+                <StatValue>{stats.winRate}</StatValue>
+              </StatCard>
+              <StatCard>
+                <StatTitle>Рефералов</StatTitle>
+                <StatValue>{stats.referralCount}</StatValue>
+              </StatCard>
+            </StatsContainer>
 
-          <ReferralSection>
-            <StatTitle>Реферальная программа</StatTitle>
-            <div style={{ color: '#fff', fontSize: '14px', marginTop: '5px' }}>
-              Приглашено друзей: {stats.referralCount}
-            </div>
-            <ReferralCode>REF123456</ReferralCode>
-            <CopyButton
-              onClick={handleCopyReferralCode}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Скопировать код
-            </CopyButton>
-          </ReferralSection>
-        </ProfileCard>
-      </ContentWrapper>
+            <ReferralSection>
+              <StatTitle>Реферальная программа</StatTitle>
+              <div style={{ color: '#fff', fontSize: '14px', marginTop: '5px' }}>
+                Приглашено друзей: {stats.referralCount}
+              </div>
+              <ReferralCode>REF123456</ReferralCode>
+              <CopyButton
+                onClick={handleCopyReferralCode}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Скопировать код
+              </CopyButton>
+            </ReferralSection>
+          </ProfileCard>
+        </ContentWrapper>
+      </MainContent>
     </ProfileContainer>
   );
 };

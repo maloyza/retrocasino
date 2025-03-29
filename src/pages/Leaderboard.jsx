@@ -7,24 +7,31 @@ const LeaderboardContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  min-height: 100vh;
+  height: 100%;
+  background: ${props => props.theme.colors.background};
+  position: relative;
+`;
+
+const MainContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  flex: 1;
   padding: 20px;
   padding-top: max(20px, env(safe-area-inset-top));
   padding-bottom: max(20px, env(safe-area-inset-bottom));
-  min-height: 100vh;
-  height: 100%;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
-  background: ${props => props.theme.colors.background};
-  position: relative;
-  padding-bottom: calc(70px + env(safe-area-inset-bottom));
+  margin-bottom: 70px;
 
   @media (orientation: landscape) {
     padding: 15px;
     padding-top: max(15px, env(safe-area-inset-top));
-    padding-bottom: calc(60px + env(safe-area-inset-bottom));
-    gap: 15px;
+    padding-bottom: max(15px, env(safe-area-inset-bottom));
+    margin-bottom: 60px;
   }
 `;
 
@@ -35,11 +42,9 @@ const ContentWrapper = styled.div`
   width: 100%;
   max-width: 1200px;
   gap: 20px;
-  margin-bottom: 20px;
 
   @media (orientation: landscape) {
     gap: 15px;
-    margin-bottom: 15px;
   }
 `;
 
@@ -161,38 +166,42 @@ const Leaderboard = () => {
 
   return (
     <LeaderboardContainer>
-      <TabsContainer>
-        <Tab active={activeTab === 'gold'} onClick={() => setActiveTab('gold')}>
-          Золото
-        </Tab>
-        <Tab active={activeTab === 'wins'} onClick={() => setActiveTab('wins')}>
-          Победы
-        </Tab>
-        <Tab active={activeTab === 'level'} onClick={() => setActiveTab('level')}>
-          Уровень
-        </Tab>
-      </TabsContainer>
-      
-      <LeaderboardTable>
-        <TableHeader>
-          <div>#</div>
-          <div>Игрок</div>
-          <div>Значение</div>
-        </TableHeader>
-        {players.map((player, index) => (
-          <TableRow key={player.id}>
-            <Rank>{index + 1}</Rank>
-            <PlayerInfo>
-              <PlayerAvatar style={{ backgroundImage: `url(${player.avatar})` }} />
-              <PlayerName>{player.name}</PlayerName>
-            </PlayerInfo>
-            <Score>
-              {player.score}
-              <CoinIcon src="/assets/gold-coin.png" alt="Gold" />
-            </Score>
-          </TableRow>
-        ))}
-      </LeaderboardTable>
+      <MainContent>
+        <ContentWrapper>
+          <TabsContainer>
+            <Tab active={activeTab === 'gold'} onClick={() => setActiveTab('gold')}>
+              Золото
+            </Tab>
+            <Tab active={activeTab === 'wins'} onClick={() => setActiveTab('wins')}>
+              Победы
+            </Tab>
+            <Tab active={activeTab === 'level'} onClick={() => setActiveTab('level')}>
+              Уровень
+            </Tab>
+          </TabsContainer>
+          
+          <LeaderboardTable>
+            <TableHeader>
+              <div>#</div>
+              <div>Игрок</div>
+              <div>Значение</div>
+            </TableHeader>
+            {players.map((player, index) => (
+              <TableRow key={player.id}>
+                <Rank>{index + 1}</Rank>
+                <PlayerInfo>
+                  <PlayerAvatar style={{ backgroundImage: `url(${player.avatar})` }} />
+                  <PlayerName>{player.name}</PlayerName>
+                </PlayerInfo>
+                <Score>
+                  {player.score}
+                  <CoinIcon src="/assets/gold-coin.png" alt="Gold" />
+                </Score>
+              </TableRow>
+            ))}
+          </LeaderboardTable>
+        </ContentWrapper>
+      </MainContent>
     </LeaderboardContainer>
   );
 };
