@@ -11,27 +11,13 @@ const HomeContainer = styled.div`
   height: 100%;
   background: ${props => props.theme.colors.background};
   position: relative;
-`;
-
-const MainContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  flex: 1;
-  padding: 20px;
-  padding-top: max(20px, env(safe-area-inset-top));
-  padding-bottom: max(20px, env(safe-area-inset-bottom));
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
-  margin-bottom: 70px;
+  padding-bottom: 70px;
 
   @media (orientation: landscape) {
-    padding: 15px;
-    padding-top: max(15px, env(safe-area-inset-top));
-    padding-bottom: max(15px, env(safe-area-inset-bottom));
-    margin-bottom: 60px;
+    padding-bottom: 60px;
   }
 `;
 
@@ -42,9 +28,13 @@ const ContentWrapper = styled.div`
   width: 100%;
   max-width: 1200px;
   gap: 20px;
+  padding: 20px;
+  padding-top: max(20px, env(safe-area-inset-top));
 
   @media (orientation: landscape) {
     gap: 15px;
+    padding: 15px;
+    padding-top: max(15px, env(safe-area-inset-top));
   }
 `;
 
@@ -217,35 +207,33 @@ const Home = () => {
 
   return (
     <HomeContainer>
-      <MainContent>
-        <ContentWrapper>
-          <Title>Retro Casino</Title>
-          <DailyBonus
-            as={motion.button}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Получить ежедневный бонус
-          </DailyBonus>
-          <GamesGrid>
-            {games.map(game => (
-              <Link to={`/${game.id}`} key={game.id} style={{ textDecoration: 'none' }}>
-                <GameCard
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <GameImage src={game.image} alt={game.title} />
-                  <GameTitle>{game.title}</GameTitle>
-                  <GameBalance>
-                    <CoinIcon>$</CoinIcon>
-                    <CoinsAmount>{game.coins}</CoinsAmount>
-                  </GameBalance>
-                </GameCard>
-              </Link>
-            ))}
-          </GamesGrid>
-        </ContentWrapper>
-      </MainContent>
+      <ContentWrapper>
+        <Title>Retro Casino</Title>
+        <DailyBonus
+          as={motion.button}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          Получить ежедневный бонус
+        </DailyBonus>
+        <GamesGrid>
+          {games.map(game => (
+            <Link to={`/${game.id}`} key={game.id} style={{ textDecoration: 'none' }}>
+              <GameCard
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <GameImage src={game.image} alt={game.title} />
+                <GameTitle>{game.title}</GameTitle>
+                <GameBalance>
+                  <CoinIcon>$</CoinIcon>
+                  <CoinsAmount>{game.coins}</CoinsAmount>
+                </GameBalance>
+              </GameCard>
+            </Link>
+          ))}
+        </GamesGrid>
+      </ContentWrapper>
     </HomeContainer>
   );
 };
