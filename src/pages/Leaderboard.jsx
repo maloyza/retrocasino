@@ -8,7 +8,7 @@ const LeaderboardContainer = styled.div`
   flex-direction: column;
   min-height: 100vh;
   background: ${props => props.theme.colors.background};
-  padding: 20px 10px 120px 10px;
+  padding: 20px 10px 140px 10px;
 `;
 
 const MainContent = styled.div`
@@ -48,6 +48,7 @@ const LeaderboardTable = styled.div`
   max-width: 800px;
   border: 2px solid ${props => props.theme.colors.accent};
   overflow: hidden;
+  margin-top: 20px;
 `;
 
 const TableHeader = styled.div`

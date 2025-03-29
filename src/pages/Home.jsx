@@ -13,7 +13,7 @@ const HomeContainer = styled.div`
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
-  padding: 20px 10px 130px 10px;
+  padding: 20px 10px 140px 10px;
 `;
 
 const Title = styled.h1`
@@ -24,6 +24,7 @@ const Title = styled.h1`
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   font-family: 'Press Start 2P', cursive;
   font-size: 1.8rem;
+  margin-top: 20px;
 `;
 
 const DailyBonus = styled.button`
