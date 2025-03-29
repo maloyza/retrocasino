@@ -604,12 +604,14 @@ Error generating stack: `+o.message+`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  padding-bottom: 100px;
 `,FP=j.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   width: 100%;
   max-width: 1200px;
+  min-height: calc(100vh - 200px);
 `,BP=j(Se.div)`
   background: rgba(0, 0, 0, 0.8);
   border-radius: 10px;
@@ -621,11 +623,11 @@ Error generating stack: `+o.message+`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  height: 180px;
+  height: 160px;
   transform-origin: center;
 `,zP=j.img`
   width: 100%;
-  height: 100px;
+  height: 90px;
   object-fit: cover;
   border-radius: 6px;
 `,UP=j.h2`
@@ -1522,4 +1524,4 @@ Error generating stack: `+o.message+`
   display: flex;
   align-items: center;
 `,nA=()=>{const e=xc(),t=Vr();return k.useEffect(()=>{var n;try{const r=(n=window.Telegram)==null?void 0:n.WebApp;r&&(r.MainButton.setParams({is_visible:!1}),t.pathname!=="/"?r.BackButton.show():r.BackButton.hide(),r.BackButton.onClick(()=>{e(-1)}))}catch(r){console.error("TWA initialization error:",r)}return document.body.style.overscrollBehavior="none",document.documentElement.style.overscrollBehavior="none",()=>{document.body.style.overscrollBehavior="",document.documentElement.style.overscrollBehavior=""}},[e,t]),_.jsxs(JC,{children:[_.jsx(tA,{children:_.jsx(ro,{})}),_.jsx(eA,{children:_.jsx(u_,{mode:"wait",children:_.jsxs(Gx,{children:[_.jsx(Sn,{path:"/",element:_.jsx(KP,{})}),_.jsx(Sn,{path:"/profile",element:_.jsx(mC,{})}),_.jsx(Sn,{path:"/leaderboard",element:_.jsx(EC,{})}),_.jsx(Sn,{path:"/blackjack",element:_.jsx(IC,{})}),_.jsx(Sn,{path:"/video-poker",element:_.jsx(UC,{})}),_.jsx(Sn,{path:"/roulette",element:_.jsx(ZC,{})})]})})}),_.jsx(LP,{})]})},rA=()=>{const[e,t]=k.useState(!0),[n,r]=k.useState(!1);return k.useEffect(()=>{const i=()=>/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),o=()=>{const l=window.innerHeight>window.innerWidth;t(l),r(i()&&l)},s=()=>{var l;try{if((l=window.Telegram)!=null&&l.WebApp){const u=window.Telegram.WebApp;u.ready(),u.expand(),u.setHeaderColor("#000000"),u.setBackgroundColor("#000000"),console.log("TWA viewport info:",{viewportHeight:u.viewportHeight,viewportStableHeight:u.viewportStableHeight,isExpanded:u.isExpanded,headerColor:u.headerColor,backgroundColor:u.backgroundColor})}}catch(u){console.error("TWA initialization error:",u)}};return o(),window.addEventListener("resize",o),window.addEventListener("orientationchange",o),s(),()=>{window.removeEventListener("resize",o),window.removeEventListener("orientationchange",o)}},[]),n?_.jsx(Ld,{theme:Jp,children:_.jsxs(qC,{children:[_.jsx("h2",{children:"Пожалуйста, переверните устройство"}),_.jsx("p",{children:"Для лучшего игрового опыта используйте горизонтальную ориентацию экрана"})]})}):_.jsx(Ld,{theme:Jp,children:_.jsxs(Jx,{basename:"/retrocasino",children:[_.jsx(MP,{}),_.jsx(nA,{})]})})};nl.createRoot(document.getElementById("root")).render(_.jsx(Ue.StrictMode,{children:_.jsx(rA,{})}));
-//# sourceMappingURL=index-BjUlMeNm.js.map
+//# sourceMappingURL=index-B6Zus9cq.js.map
