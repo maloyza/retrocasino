@@ -238,6 +238,21 @@ const App = () => {
           // Устанавливаем цвета для хедера и нижней панели
           tg.setHeaderColor('#000000');
           tg.setBackgroundColor('#000000');
+
+          // Запрашиваем полноэкранный режим для десктопа
+          if (!tg.platform.includes('mobile_')) {
+            const requestFullscreen = () => {
+              const element = document.documentElement;
+              if (element.requestFullscreen) {
+                element.requestFullscreen();
+              } else if (element.webkitRequestFullscreen) {
+                element.webkitRequestFullscreen();
+              }
+            };
+            
+            // Запускаем полноэкранный режим после небольшой задержки
+            setTimeout(requestFullscreen, 1000);
+          }
           
           // Проверяем результат
           console.log('TWA viewport info:', {
@@ -245,7 +260,8 @@ const App = () => {
             viewportStableHeight: tg.viewportStableHeight,
             isExpanded: tg.isExpanded,
             headerColor: tg.headerColor,
-            backgroundColor: tg.backgroundColor
+            backgroundColor: tg.backgroundColor,
+            platform: tg.platform
           });
         }
       } catch (error) {

@@ -1,21 +1,17 @@
 {
   "name": "Retro Casino",
   "short_name": "Retro Casino",
-  "description": "Ретро-стиль казино с тремя играми",
-  "start_url": "/",
+  "description": "Классические азартные игры в ретро-стиле",
+  "start_url": "/?standalone=true",
   "display": "standalone",
-  "background_color": "#1a472a",
-  "theme_color": "#8b4513",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "landscape",
   "icons": [
     {
-      "src": "/assets/icon-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/assets/icon-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
     }
   ]
 } 
