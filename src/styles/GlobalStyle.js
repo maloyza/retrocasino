@@ -450,6 +450,31 @@ const GlobalStyle = createGlobalStyle`
       padding-bottom: 60px;
     }
   }
+
+  /* Стили для десктопной версии */
+  @media (min-width: 768px) {
+    #root {
+      max-width: 1200px;
+      margin: 0 auto;
+      height: 100vh;
+      border-left: 2px solid ${props => props.theme.colors.accent};
+      border-right: 2px solid ${props => props.theme.colors.accent};
+    }
+
+    /* Стилизация скроллбара */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: ${props => props.theme.colors.background};
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: ${props => props.theme.colors.accent};
+      border-radius: 4px;
+    }
+  }
 `;
 
 export default GlobalStyle; 

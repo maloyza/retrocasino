@@ -101,6 +101,13 @@ const AppContainer = styled.div`
   flex-direction: column;
   background: ${props => props.theme.colors.background};
   overflow: hidden;
+
+  @media (min-width: 768px) {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  }
 `;
 
 const MainContent = styled.main`
@@ -112,6 +119,11 @@ const MainContent = styled.main`
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
+
+  @media (min-width: 768px) {
+    padding: 20px;
+    overflow-y: auto;
+  }
 `;
 
 const BalanceWrapper = styled.div`
@@ -126,6 +138,13 @@ const BalanceWrapper = styled.div`
   height: 60px;
   display: flex;
   align-items: center;
+
+  @media (min-width: 768px) {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-bottom: 2px solid ${props => props.theme.colors.accent};
+  }
 `;
 
 const AppContent = () => {
