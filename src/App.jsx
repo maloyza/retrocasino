@@ -159,6 +159,20 @@ const AppContent = () => {
           navigate(-1);
         });
       }
+
+      // Автоматическое расширение на весь экран
+      const requestFullscreen = () => {
+        const element = document.documentElement;
+        if (element.requestFullscreen) {
+          element.requestFullscreen();
+        } else if (element.webkitRequestFullscreen) {
+          element.webkitRequestFullscreen();
+        }
+      };
+
+      // Запускаем расширение на весь экран после небольшой задержки
+      setTimeout(requestFullscreen, 1000);
+      
     } catch (error) {
       console.error('TWA initialization error:', error);
     }

@@ -22,6 +22,7 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
   }
 
   #root {
@@ -29,6 +30,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
   }
 
   button {
@@ -193,12 +195,14 @@ const GlobalStyle = createGlobalStyle`
     background: ${props => props.theme.colors.primary};
     width: 100vw !important;
     height: 100vh !important;
+    overflow: hidden;
   }
 
   :-webkit-full-screen {
     background: ${props => props.theme.colors.primary};
     width: 100vw !important;
     height: 100vh !important;
+    overflow: hidden;
   }
 
   :-moz-full-screen {
