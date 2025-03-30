@@ -142,26 +142,18 @@ const AppContent = () => {
       const twa = window.Telegram?.WebApp;
       
       if (twa) {
-        // Отключаем свайп через MainButton
-        twa.MainButton.setParams({
-          is_visible: false
-        });
+        // Сначала сообщаем что приложение готово
+        twa.ready();
         
-        // Показываем кнопку "назад" только если мы не на главной странице
-        if (location.pathname !== '/') {
-          twa.BackButton.show();
-        } else {
-          twa.BackButton.hide();
+        // После ready() вызываем expand()
+        setTimeout(() => {
+          twa.expand();
+        }, 50);
+        
+        // Отключаем MainButton, так как он не используется
+        if (twa.MainButton) {
+          twa.MainButton.hide();
         }
-        
-        // Обработка кнопки "назад"
-        twa.BackButton.onClick(() => {
-          navigate(-1);
-        });
-
-        // Расширяем окно и отключаем свайп
-        twa.expand();
-        twa.enableClosingConfirmation();
       }
     } catch (error) {
       console.error('TWA initialization error:', error);
@@ -219,27 +211,20 @@ const App = () => {
         if (window.Telegram?.WebApp) {
           const tg = window.Telegram.WebApp;
           
-          // Сообщаем что приложение готово
+          // Сначала сообщаем что приложение готово
           tg.ready();
           
-          // Расширяем окно приложения
-          tg.expand();
-          
-          // Отключаем свайп-вниз
-          tg.enableClosingConfirmation();
-          
-          // Устанавливаем цвета для хедера и нижней панели
-          tg.setHeaderColor('#000000');
-          tg.setBackgroundColor('#000000');
-          
-          // Проверяем результат
-          console.log('TWA viewport info:', {
-            viewportHeight: tg.viewportHeight,
-            viewportStableHeight: tg.viewportStableHeight,
-            isExpanded: tg.isExpanded,
-            headerColor: tg.headerColor,
-            backgroundColor: tg.backgroundColor
-          });
+          // После ready() вызываем expand()
+          setTimeout(() => {
+            tg.expand();
+            
+            // Проверяем результат
+            console.log('TWA viewport info:', {
+              viewportHeight: tg.viewportHeight,
+              viewportStableHeight: tg.viewportStableHeight,
+              isExpanded: tg.isExpanded
+            });
+          }, 50);
         }
       } catch (error) {
         console.error('TWA initialization error:', error);
