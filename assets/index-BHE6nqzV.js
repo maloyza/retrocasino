@@ -96,11 +96,19 @@ Error generating stack: `+o.message+`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
   }
 
   #root {
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -264,28 +272,18 @@ Error generating stack: `+o.message+`
   }
 
   /* Стили для полноэкранного режима */
-  :fullscreen {
-    background: ${e=>e.theme.colors.background};
-    width: 100vw !important;
-    height: 100vh !important;
-  }
-
-  :-webkit-full-screen {
-    background: ${e=>e.theme.colors.background};
-    width: 100vw !important;
-    height: 100vh !important;
-  }
-
-  :-moz-full-screen {
-    background: ${e=>e.theme.colors.background};
-    width: 100vw !important;
-    height: 100vh !important;
-  }
-
+  :fullscreen,
+  :-webkit-full-screen,
+  :-moz-full-screen,
   :-ms-fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100% !important;
+    height: 100% !important;
     background: ${e=>e.theme.colors.background};
-    width: 100vw !important;
-    height: 100vh !important;
   }
 
   /* Стили для контейнера приложения */
@@ -1499,28 +1497,24 @@ Error generating stack: `+o.message+`
     }
   }
 `,qC=j.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  min-height: 100vh;
-  min-height: calc(100vh - env(safe-area-inset-bottom));
-  width: 100%;
-  max-width: 100vw;
   background: ${e=>e.theme.colors.background};
-  position: relative;
-  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  overflow: hidden;
 `,JC=j.main`
   flex: 1;
   width: 100%;
-  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
-  position: relative;
-  padding-top: 60px;
-  padding-bottom: 70px;
-  display: flex;
-  flex-direction: column;
 `,eA=j.div`
   position: fixed;
   top: 0;
@@ -1530,9 +1524,8 @@ Error generating stack: `+o.message+`
   background: rgba(0, 0, 0, 0.9);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  padding-top: max(env(safe-area-inset-top), 10px);
   height: 60px;
   display: flex;
   align-items: center;
 `,tA=()=>(_c(),Vr(),k.useEffect(()=>{var e;try{const t=(e=window.Telegram)==null?void 0:e.WebApp;t&&(t.expand(),t.ready(),t.MainButton&&t.MainButton.hide())}catch(t){console.error("TWA initialization error:",t)}return document.body.style.overscrollBehavior="none",document.documentElement.style.overscrollBehavior="none",()=>{document.body.style.overscrollBehavior="",document.documentElement.style.overscrollBehavior=""}},[]),_.jsxs(qC,{children:[_.jsx(eA,{children:_.jsx(ro,{})}),_.jsx(JC,{children:_.jsx(f_,{mode:"wait",children:_.jsxs(Qx,{children:[_.jsx(Sn,{path:"/",element:_.jsx(KP,{})}),_.jsx(Sn,{path:"/profile",element:_.jsx(gC,{})}),_.jsx(Sn,{path:"/leaderboard",element:_.jsx(AC,{})}),_.jsx(Sn,{path:"/blackjack",element:_.jsx(LC,{})}),_.jsx(Sn,{path:"/video-poker",element:_.jsx(zC,{})}),_.jsx(Sn,{path:"/roulette",element:_.jsx(XC,{})})]})})}),_.jsx($P,{})]})),nA=()=>{const[e,t]=k.useState(!0),[n,r]=k.useState(!1);return k.useEffect(()=>{const i=()=>/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),o=()=>{const l=window.innerHeight>window.innerWidth;t(l),r(i()&&l)},s=()=>{var l;if((l=window.Telegram)!=null&&l.WebApp){const c=window.Telegram.WebApp;c.expand(),c.ready()}};return o(),window.addEventListener("resize",o),window.addEventListener("orientationchange",o),s(),()=>{window.removeEventListener("resize",o),window.removeEventListener("orientationchange",o)}},[]),n?_.jsx($d,{theme:th,children:_.jsxs(ZC,{children:[_.jsx("h2",{children:"Пожалуйста, переверните устройство"}),_.jsx("p",{children:"Для лучшего игрового опыта используйте горизонтальную ориентацию экрана"})]})}):_.jsx($d,{theme:th,children:_.jsxs(tw,{basename:"/retrocasino",children:[_.jsx(LP,{}),_.jsx(tA,{})]})})};il.createRoot(document.getElementById("root")).render(_.jsx(ze.StrictMode,{children:_.jsx(nA,{})}));
-//# sourceMappingURL=index-DkqVC_UB.js.map
+//# sourceMappingURL=index-BHE6nqzV.js.map
