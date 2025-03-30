@@ -142,8 +142,9 @@ const AppContent = () => {
       const twa = window.Telegram?.WebApp;
       
       if (twa) {
-        twa.ready();
+        // Сначала expand, потом ready
         twa.expand();
+        twa.ready();
         
         // Отключаем MainButton, так как он не используется
         if (twa.MainButton) {
@@ -204,8 +205,9 @@ const App = () => {
     const initTelegramWebApp = () => {
       if (window.Telegram?.WebApp) {
         const tg = window.Telegram.WebApp;
-        tg.ready();
+        // Сначала expand, потом ready
         tg.expand();
+        tg.ready();
       }
     };
 
