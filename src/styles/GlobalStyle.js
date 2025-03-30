@@ -192,51 +192,27 @@ const GlobalStyle = createGlobalStyle`
 
   /* Стили для полноэкранного режима */
   :fullscreen {
-    background: ${props => props.theme.colors.primary};
+    background: ${props => props.theme.colors.background};
     width: 100vw !important;
     height: 100vh !important;
-    overflow: hidden;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
   }
 
   :-webkit-full-screen {
-    background: ${props => props.theme.colors.primary};
+    background: ${props => props.theme.colors.background};
     width: 100vw !important;
     height: 100vh !important;
-    overflow: hidden;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
   }
 
   :-moz-full-screen {
-    background: ${props => props.theme.colors.primary};
+    background: ${props => props.theme.colors.background};
     width: 100vw !important;
     height: 100vh !important;
-    overflow: hidden;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
   }
 
   :-ms-fullscreen {
-    background: ${props => props.theme.colors.primary};
+    background: ${props => props.theme.colors.background};
     width: 100vw !important;
     height: 100vh !important;
-    overflow: hidden;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
   }
 
   /* Стили для контейнера приложения */
