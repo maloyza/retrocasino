@@ -142,21 +142,8 @@ const AppContent = () => {
       const twa = window.Telegram?.WebApp;
       
       if (twa) {
-        // Сначала сообщаем что приложение готово
         twa.ready();
-        
-        // Функция для расширения окна с проверкой
-        const expandWindow = () => {
-          twa.expand();
-          
-          // Если окно не расширилось, пробуем еще раз
-          if (!twa.isExpanded) {
-            setTimeout(expandWindow, 100);
-          }
-        };
-        
-        // Запускаем расширение окна
-        expandWindow();
+        twa.expand();
         
         // Отключаем MainButton, так как он не используется
         if (twa.MainButton) {
@@ -175,7 +162,7 @@ const AppContent = () => {
       document.body.style.overscrollBehavior = '';
       document.documentElement.style.overscrollBehavior = '';
     };
-  }, [navigate, location]);
+  }, []);
 
   return (
     <AppContainer>
@@ -215,35 +202,10 @@ const App = () => {
     };
 
     const initTelegramWebApp = () => {
-      try {
-        if (window.Telegram?.WebApp) {
-          const tg = window.Telegram.WebApp;
-          
-          // Сначала сообщаем что приложение готово
-          tg.ready();
-          
-          // Функция для расширения окна с проверкой
-          const expandWindow = () => {
-            tg.expand();
-            
-            // Если окно не расширилось, пробуем еще раз
-            if (!tg.isExpanded) {
-              setTimeout(expandWindow, 100);
-            }
-            
-            // Логируем состояние
-            console.log('TWA viewport info:', {
-              viewportHeight: tg.viewportHeight,
-              viewportStableHeight: tg.viewportStableHeight,
-              isExpanded: tg.isExpanded
-            });
-          };
-          
-          // Запускаем расширение окна
-          expandWindow();
-        }
-      } catch (error) {
-        console.error('TWA initialization error:', error);
+      if (window.Telegram?.WebApp) {
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+        tg.expand();
       }
     };
 
