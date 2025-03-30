@@ -137,19 +137,9 @@ const AppContent = () => {
       const twa = window.Telegram?.WebApp;
       
       if (twa) {
-        // Устанавливаем обработчики событий
-        twa.onEvent('viewportChanged', () => {
-          console.log('Viewport changed:', {
-            height: twa.viewportHeight,
-            isExpanded: twa.isExpanded
-          });
-        });
-
-        // Расширяем окно
-        twa.expand();
-        
-        // Сообщаем о готовности
+        // Инициализация для десктопной версии
         twa.ready();
+        twa.expand();
         
         // Отключаем MainButton
         if (twa.MainButton) {
@@ -159,15 +149,6 @@ const AppContent = () => {
     } catch (error) {
       console.error('TWA initialization error:', error);
     }
-    
-    // Предотвращаем стандартное поведение свайпа через CSS
-    document.body.style.overscrollBehavior = 'none';
-    document.documentElement.style.overscrollBehavior = 'none';
-    
-    return () => {
-      document.body.style.overscrollBehavior = '';
-      document.documentElement.style.overscrollBehavior = '';
-    };
   }, []);
 
   return (
@@ -193,67 +174,19 @@ const AppContent = () => {
 };
 
 const App = () => {
-  const [isPortrait, setIsPortrait] = useState(true);
-  const [showOrientationWarning, setShowOrientationWarning] = useState(false);
-
   useEffect(() => {
-    const isMobile = () => {
-      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    };
-
-    const checkOrientation = () => {
-      const isPortraitMode = window.innerHeight > window.innerWidth;
-      setIsPortrait(isPortraitMode);
-      setShowOrientationWarning(isMobile() && isPortraitMode);
-    };
-
     const initTelegramWebApp = () => {
       if (window.Telegram?.WebApp) {
         const tg = window.Telegram.WebApp;
-        
-        // Проверяем, что TWA уже инициализирован
-        if (!tg.isExpanded) {
-          // Устанавливаем обработчик события готовности
-          window.Telegram.WebApp.onEvent('viewportChanged', () => {
-            console.log('Viewport changed:', {
-              height: tg.viewportHeight,
-              isExpanded: tg.isExpanded
-            });
-          });
-
-          // Расширяем окно
-          tg.expand();
-          
-          // Сообщаем о готовности
-          tg.ready();
-        }
+        // Инициализация для десктопной версии
+        tg.ready();
+        tg.expand();
       }
     };
 
-    // Проверяем ориентацию
-    checkOrientation();
-    window.addEventListener('resize', checkOrientation);
-    window.addEventListener('orientationchange', checkOrientation);
-
     // Инициализируем TWA
     initTelegramWebApp();
-
-    return () => {
-      window.removeEventListener('resize', checkOrientation);
-      window.removeEventListener('orientationchange', checkOrientation);
-    };
   }, []);
-
-  if (showOrientationWarning) {
-    return (
-      <ThemeProvider theme={theme}>
-        <OrientationWarning>
-          <h2>Пожалуйста, переверните устройство</h2>
-          <p>Для лучшего игрового опыта используйте горизонтальную ориентацию экрана</p>
-        </OrientationWarning>
-      </ThemeProvider>
-    );
-  }
 
   return (
     <ThemeProvider theme={theme}>
