@@ -160,18 +160,27 @@ const AppContent = () => {
         });
       }
 
-      // Автоматическое расширение на весь экран
+      // Функция для запроса полноэкранного режима
       const requestFullscreen = () => {
         const element = document.documentElement;
         if (element.requestFullscreen) {
           element.requestFullscreen();
         } else if (element.webkitRequestFullscreen) {
           element.webkitRequestFullscreen();
+        } else if (element.mozRequestFullScreen) {
+          element.mozRequestFullScreen();
+        } else if (element.msRequestFullscreen) {
+          element.msRequestFullscreen();
         }
       };
 
-      // Запускаем расширение на весь экран после небольшой задержки
-      setTimeout(requestFullscreen, 1000);
+      // Добавляем обработчик клика для запроса полноэкранного режима
+      const handleClick = () => {
+        requestFullscreen();
+      };
+
+      // Добавляем обработчик клика на весь документ
+      document.addEventListener('click', handleClick, { once: true });
       
     } catch (error) {
       console.error('TWA initialization error:', error);
