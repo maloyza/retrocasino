@@ -75,18 +75,22 @@ const GlobalStyle = createGlobalStyle`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 10px;
-    gap: 10px;
+    justify-content: flex-start;
+    padding: 20px;
+    gap: 20px;
+    min-height: calc(100vh - 130px); /* Учитываем высоту баланса и навигации */
   }
 
   .game-button {
     background: ${props => props.theme.colors.accent};
     color: ${props => props.theme.colors.black};
-    padding: 8px 16px;
-    border-radius: 5px;
-    font-size: 14px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
     transition: transform 0.2s;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
 
     &:active {
       transform: scale(0.95);
@@ -97,9 +101,10 @@ const GlobalStyle = createGlobalStyle`
     background: rgba(0, 0, 0, 0.8);
     border: 2px solid ${props => props.theme.colors.accent};
     border-radius: 10px;
-    padding: 15px;
+    padding: 20px;
     width: 100%;
     max-width: 400px;
+    margin: 10px 0;
   }
 
   /* Стили для баланса */
@@ -228,15 +233,41 @@ const GlobalStyle = createGlobalStyle`
     flex: 1;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    padding-bottom: env(safe-area-inset-bottom);
+    padding: 20px;
+    padding-top: 80px; /* Учитываем высоту баланса */
+    padding-bottom: 90px; /* Учитываем высоту навигации */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
 
   /* Стили для лидерборда */
   .leaderboard-container {
-    height: 100%;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: env(safe-area-inset-bottom);
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-height: calc(100vh - 130px);
+  }
+
+  /* Стили для профиля */
+  .profile-container {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-height: calc(100vh - 130px);
+  }
+
+  .profile-card {
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid ${props => props.theme.colors.accent};
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    margin-bottom: 20px;
   }
 
   a {
@@ -473,6 +504,39 @@ const GlobalStyle = createGlobalStyle`
     ::-webkit-scrollbar-thumb {
       background: ${props => props.theme.colors.accent};
       border-radius: 4px;
+    }
+
+    .game-container {
+      padding: 40px;
+      gap: 30px;
+    }
+
+    .game-card {
+      padding: 30px;
+      margin: 15px 0;
+    }
+
+    .main-content {
+      padding: 40px;
+      padding-top: 100px;
+      padding-bottom: 110px;
+    }
+
+    .profile-container,
+    .leaderboard-container {
+      padding: 40px;
+      gap: 30px;
+    }
+
+    .profile-card {
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+
+    .game-button {
+      padding: 15px 30px;
+      font-size: 18px;
+      max-width: 400px;
     }
   }
 `;

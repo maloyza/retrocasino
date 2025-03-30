@@ -101,12 +101,14 @@ const AppContainer = styled.div`
   flex-direction: column;
   background: ${props => props.theme.colors.background};
   overflow: hidden;
+  min-height: 100vh;
 
   @media (min-width: 768px) {
     position: relative;
     max-width: 1200px;
     margin: 0 auto;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    height: 100vh;
   }
 `;
 
@@ -119,10 +121,12 @@ const MainContent = styled.main`
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
+  min-height: calc(100vh - 130px); /* Учитываем высоту баланса и навигации */
 
   @media (min-width: 768px) {
     padding: 20px;
     overflow-y: auto;
+    height: calc(100vh - 130px);
   }
 `;
 
@@ -138,12 +142,14 @@ const BalanceWrapper = styled.div`
   height: 60px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  border-bottom: 2px solid ${props => props.theme.colors.accent};
 
   @media (min-width: 768px) {
     position: relative;
     max-width: 1200px;
     margin: 0 auto;
-    border-bottom: 2px solid ${props => props.theme.colors.accent};
+    height: 70px;
   }
 `;
 
