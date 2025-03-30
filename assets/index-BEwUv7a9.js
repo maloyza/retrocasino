@@ -523,6 +523,31 @@ Error generating stack: `+o.message+`
       padding-bottom: 60px;
     }
   }
+
+  /* Стили для десктопной версии */
+  @media (min-width: 768px) {
+    #root {
+      max-width: 1200px;
+      margin: 0 auto;
+      height: 100vh;
+      border-left: 2px solid ${e=>e.theme.colors.accent};
+      border-right: 2px solid ${e=>e.theme.colors.accent};
+    }
+
+    /* Стилизация скроллбара */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: ${e=>e.theme.colors.background};
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: ${e=>e.theme.colors.accent};
+      border-radius: 4px;
+    }
+  }
 `,LP={colors:{primary:"#1a1a1a",secondary:"#2a2a2a",accent:"#b87333",text:"#ffffff",error:"#ff0000",success:"#00ff00",button:{primary:"#8b4513",hover:"#a0522d",text:"#ffd700"},game:{background:"rgba(0, 0, 0, 0.8)",border:"#8b4513",card:"#ffffff",table:"#006400",chip:"#ffd700",highlight:"#b87333"}},fonts:{primary:"'Press Start 2P', cursive",secondary:"'VT323', monospace"},breakpoints:{mobile:"480px",tablet:"768px",desktop:"1024px"},spacing:{xs:"0.25rem",sm:"0.5rem",md:"1rem",lg:"1.5rem",xl:"2rem"},borderRadius:{small:"4px",medium:"8px",large:"16px"},shadows:{card:"0 4px 8px rgba(0, 0, 0, 0.5)",button:"0 2px 4px rgba(0, 0, 0, 0.3)",hover:"0 6px 12px rgba(0, 0, 0, 0.6)"},gradients:{primary:"linear-gradient(45deg, #8b4513, #a0522d)",accent:"linear-gradient(45deg, #ffd700, #ffa500)",dark:"linear-gradient(to bottom, #1a1a1a, #000000)"},transitions:{default:"0.3s ease-in-out",fast:"0.15s ease-in-out",slow:"0.5s ease-in-out"},gameStyles:{table:{border:"2px solid #8b4513",borderRadius:"16px",padding:"1rem",background:"rgba(0, 0, 0, 0.8)",boxShadow:"0 4px 8px rgba(0, 0, 0, 0.5)"},card:{background:"#ffffff",border:"2px solid #000000",borderRadius:"8px",boxShadow:"0 2px 4px rgba(0, 0, 0, 0.3)"},button:{background:"#8b4513",color:"#ffd700",border:"2px solid #ffd700",borderRadius:"8px",padding:"0.5rem 1rem",fontSize:"1rem",fontFamily:"'Press Start 2P', cursive",cursor:"pointer",transition:"0.3s ease-in-out","&:hover":{background:"#a0522d",transform:"translateY(-2px)",boxShadow:"0 4px 8px rgba(0, 0, 0, 0.3)"}}}},IP=j.nav`
   position: fixed;
   bottom: 0;
@@ -1506,6 +1531,13 @@ Error generating stack: `+o.message+`
   flex-direction: column;
   background: ${e=>e.theme.colors.background};
   overflow: hidden;
+
+  @media (min-width: 768px) {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  }
 `,qC=j.main`
   flex: 1;
   width: 100%;
@@ -1515,6 +1547,11 @@ Error generating stack: `+o.message+`
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
+
+  @media (min-width: 768px) {
+    padding: 20px;
+    overflow-y: auto;
+  }
 `,JC=j.div`
   position: fixed;
   top: 0;
@@ -1527,5 +1564,12 @@ Error generating stack: `+o.message+`
   height: 60px;
   display: flex;
   align-items: center;
+
+  @media (min-width: 768px) {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-bottom: 2px solid ${e=>e.theme.colors.accent};
+  }
 `,eA=()=>(_c(),Vr(),S.jsxs(ZC,{children:[S.jsx(JC,{children:S.jsx(ro,{})}),S.jsx(qC,{children:S.jsx(c_,{mode:"wait",children:S.jsxs(Gx,{children:[S.jsx(Sn,{path:"/",element:S.jsx(KP,{})}),S.jsx(Sn,{path:"/profile",element:S.jsx(gC,{})}),S.jsx(Sn,{path:"/leaderboard",element:S.jsx(AC,{})}),S.jsx(Sn,{path:"/blackjack",element:S.jsx(LC,{})}),S.jsx(Sn,{path:"/video-poker",element:S.jsx(zC,{})}),S.jsx(Sn,{path:"/roulette",element:S.jsx(XC,{})})]})})}),S.jsx($P,{})]})),tA=()=>(k.useEffect(()=>{(()=>{var t;if((t=window.Telegram)!=null&&t.WebApp){const n=window.Telegram.WebApp;console.log("Initializing TWA..."),n.expand(),setTimeout(()=>{n.ready(),console.log("TWA ready")},100)}})()},[]),S.jsx(n_,{theme:LP,children:S.jsxs(Jx,{basename:"/retrocasino",children:[S.jsx(DP,{}),S.jsx(eA,{})]})}));il.createRoot(document.getElementById("root")).render(S.jsx(ze.StrictMode,{children:S.jsx(tA,{})}));
-//# sourceMappingURL=index-DBDYWQNu.js.map
+//# sourceMappingURL=index-BEwUv7a9.js.map
