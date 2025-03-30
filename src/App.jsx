@@ -132,25 +132,6 @@ const AppContent = () => {
   const navigate = useNavigate();
   const location = useLocation();
   
-  useEffect(() => {
-    try {
-      const twa = window.Telegram?.WebApp;
-      
-      if (twa) {
-        // Инициализация для десктопной версии
-        twa.ready();
-        twa.expand();
-        
-        // Отключаем MainButton
-        if (twa.MainButton) {
-          twa.MainButton.hide();
-        }
-      }
-    } catch (error) {
-      console.error('TWA initialization error:', error);
-    }
-  }, []);
-
   return (
     <AppContainer>
       <BalanceWrapper>
@@ -178,9 +159,34 @@ const App = () => {
     const initTelegramWebApp = () => {
       if (window.Telegram?.WebApp) {
         const tg = window.Telegram.WebApp;
-        // Инициализация для десктопной версии
-        tg.ready();
-        tg.expand();
+        
+        // Проверяем, что это десктопная версия
+        const isDesktop = !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+        
+        if (isDesktop) {
+          console.log('Initializing desktop TWA...');
+          
+          // Устанавливаем обработчик для отслеживания состояния
+          tg.onEvent('viewportChanged', () => {
+            console.log('Viewport changed:', {
+              height: tg.viewportHeight,
+              isExpanded: tg.isExpanded
+            });
+          });
+          
+          // Пробуем развернуть окно с небольшой задержкой
+          setTimeout(() => {
+            tg.expand();
+            tg.ready();
+            console.log('TWA initialized:', {
+              height: tg.viewportHeight,
+              isExpanded: tg.isExpanded
+            });
+          }, 100);
+        } else {
+          // Для мобильных устройств просто сообщаем о готовности
+          tg.ready();
+        }
       }
     };
 
