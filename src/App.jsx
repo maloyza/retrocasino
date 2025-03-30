@@ -145,10 +145,18 @@ const AppContent = () => {
         // Сначала сообщаем что приложение готово
         twa.ready();
         
-        // После ready() вызываем expand()
-        setTimeout(() => {
+        // Функция для расширения окна с проверкой
+        const expandWindow = () => {
           twa.expand();
-        }, 50);
+          
+          // Если окно не расширилось, пробуем еще раз
+          if (!twa.isExpanded) {
+            setTimeout(expandWindow, 100);
+          }
+        };
+        
+        // Запускаем расширение окна
+        expandWindow();
         
         // Отключаем MainButton, так как он не используется
         if (twa.MainButton) {
@@ -214,17 +222,25 @@ const App = () => {
           // Сначала сообщаем что приложение готово
           tg.ready();
           
-          // После ready() вызываем expand()
-          setTimeout(() => {
+          // Функция для расширения окна с проверкой
+          const expandWindow = () => {
             tg.expand();
             
-            // Проверяем результат
+            // Если окно не расширилось, пробуем еще раз
+            if (!tg.isExpanded) {
+              setTimeout(expandWindow, 100);
+            }
+            
+            // Логируем состояние
             console.log('TWA viewport info:', {
               viewportHeight: tg.viewportHeight,
               viewportStableHeight: tg.viewportStableHeight,
               isExpanded: tg.isExpanded
             });
-          }, 50);
+          };
+          
+          // Запускаем расширение окна
+          expandWindow();
         }
       } catch (error) {
         console.error('TWA initialization error:', error);
