@@ -166,23 +166,42 @@ const App = () => {
         if (isDesktop) {
           console.log('Initializing desktop TWA...');
           
-          // Устанавливаем обработчик для отслеживания состояния
+          // Устанавливаем все необходимые настройки
+          tg.setHeaderColor('#000000');
+          tg.setBackgroundColor('#000000');
+          tg.enableClosingConfirmation();
+          
+          // Отключаем жесты
+          if (tg.MainButton) {
+            tg.MainButton.hide();
+          }
+          
+          // Расширяем окно перед ready()
+          tg.expand();
+          
+          // Добавляем обработчик для отслеживания изменений
           tg.onEvent('viewportChanged', () => {
             console.log('Viewport changed:', {
               height: tg.viewportHeight,
+              width: tg.viewportWidth,
               isExpanded: tg.isExpanded
             });
+            
+            // Если окно не развернуто, пробуем развернуть снова
+            if (!tg.isExpanded) {
+              tg.expand();
+            }
           });
           
-          // Пробуем развернуть окно с небольшой задержкой
+          // Сообщаем о готовности в последнюю очередь
           setTimeout(() => {
-            tg.expand();
             tg.ready();
             console.log('TWA initialized:', {
               height: tg.viewportHeight,
+              width: tg.viewportWidth,
               isExpanded: tg.isExpanded
             });
-          }, 100);
+          }, 500);
         } else {
           // Для мобильных устройств просто сообщаем о готовности
           tg.ready();
