@@ -137,11 +137,21 @@ const AppContent = () => {
       const twa = window.Telegram?.WebApp;
       
       if (twa) {
-        // Сначала expand, потом ready
+        // Устанавливаем обработчики событий
+        twa.onEvent('viewportChanged', () => {
+          console.log('Viewport changed:', {
+            height: twa.viewportHeight,
+            isExpanded: twa.isExpanded
+          });
+        });
+
+        // Расширяем окно
         twa.expand();
+        
+        // Сообщаем о готовности
         twa.ready();
         
-        // Отключаем MainButton, так как он не используется
+        // Отключаем MainButton
         if (twa.MainButton) {
           twa.MainButton.hide();
         }
@@ -200,9 +210,23 @@ const App = () => {
     const initTelegramWebApp = () => {
       if (window.Telegram?.WebApp) {
         const tg = window.Telegram.WebApp;
-        // Сначала expand, потом ready
-        tg.expand();
-        tg.ready();
+        
+        // Проверяем, что TWA уже инициализирован
+        if (!tg.isExpanded) {
+          // Устанавливаем обработчик события готовности
+          window.Telegram.WebApp.onEvent('viewportChanged', () => {
+            console.log('Viewport changed:', {
+              height: tg.viewportHeight,
+              isExpanded: tg.isExpanded
+            });
+          });
+
+          // Расширяем окно
+          tg.expand();
+          
+          // Сообщаем о готовности
+          tg.ready();
+        }
       }
     };
 
