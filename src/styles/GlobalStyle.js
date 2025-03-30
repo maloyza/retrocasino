@@ -23,11 +23,19 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
   }
 
   #root {
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -191,28 +199,18 @@ const GlobalStyle = createGlobalStyle`
   }
 
   /* Стили для полноэкранного режима */
-  :fullscreen {
-    background: ${props => props.theme.colors.background};
-    width: 100vw !important;
-    height: 100vh !important;
-  }
-
-  :-webkit-full-screen {
-    background: ${props => props.theme.colors.background};
-    width: 100vw !important;
-    height: 100vh !important;
-  }
-
-  :-moz-full-screen {
-    background: ${props => props.theme.colors.background};
-    width: 100vw !important;
-    height: 100vh !important;
-  }
-
+  :fullscreen,
+  :-webkit-full-screen,
+  :-moz-full-screen,
   :-ms-fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100% !important;
+    height: 100% !important;
     background: ${props => props.theme.colors.background};
-    width: 100vw !important;
-    height: 100vh !important;
   }
 
   /* Стили для контейнера приложения */

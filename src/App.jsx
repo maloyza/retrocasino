@@ -92,30 +92,26 @@ const OrientationWarning = styled.div`
 `;
 
 const AppContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  min-height: 100vh;
-  min-height: calc(100vh - env(safe-area-inset-bottom));
-  width: 100%;
-  max-width: 100vw;
   background: ${props => props.theme.colors.background};
-  position: relative;
-  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  overflow: hidden;
 `;
 
 const MainContent = styled.main`
   flex: 1;
   width: 100%;
-  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
-  position: relative;
-  padding-top: 60px;
-  padding-bottom: 70px;
-  display: flex;
-  flex-direction: column;
 `;
 
 const BalanceWrapper = styled.div`
@@ -127,7 +123,6 @@ const BalanceWrapper = styled.div`
   background: rgba(0, 0, 0, 0.9);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  padding-top: max(env(safe-area-inset-top), 10px);
   height: 60px;
   display: flex;
   align-items: center;
