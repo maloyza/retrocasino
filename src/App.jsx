@@ -142,7 +142,7 @@ const AppContent = () => {
       const twa = window.Telegram?.WebApp;
       
       if (twa) {
-        // Отключаем свайп через MainButton, так как disableSwipeToClose не поддерживается
+        // Отключаем свайп через MainButton
         twa.MainButton.setParams({
           is_visible: false
         });
@@ -158,21 +158,11 @@ const AppContent = () => {
         twa.BackButton.onClick(() => {
           navigate(-1);
         });
+
+        // Расширяем окно и отключаем свайп
+        twa.expand();
+        twa.enableClosingConfirmation();
       }
-
-      // Автоматическое расширение на весь экран
-      const requestFullscreen = () => {
-        const element = document.documentElement;
-        if (element.requestFullscreen) {
-          element.requestFullscreen();
-        } else if (element.webkitRequestFullscreen) {
-          element.webkitRequestFullscreen();
-        }
-      };
-
-      // Запускаем расширение на весь экран после небольшой задержки
-      setTimeout(requestFullscreen, 1000);
-      
     } catch (error) {
       console.error('TWA initialization error:', error);
     }
@@ -235,24 +225,12 @@ const App = () => {
           // Расширяем окно приложения
           tg.expand();
           
+          // Отключаем свайп-вниз
+          tg.enableClosingConfirmation();
+          
           // Устанавливаем цвета для хедера и нижней панели
           tg.setHeaderColor('#000000');
           tg.setBackgroundColor('#000000');
-
-          // Запрашиваем полноэкранный режим для десктопа
-          if (!tg.platform.includes('mobile_')) {
-            const requestFullscreen = () => {
-              const element = document.documentElement;
-              if (element.requestFullscreen) {
-                element.requestFullscreen();
-              } else if (element.webkitRequestFullscreen) {
-                element.webkitRequestFullscreen();
-              }
-            };
-            
-            // Запускаем полноэкранный режим после небольшой задержки
-            setTimeout(requestFullscreen, 1000);
-          }
           
           // Проверяем результат
           console.log('TWA viewport info:', {
@@ -260,8 +238,7 @@ const App = () => {
             viewportStableHeight: tg.viewportStableHeight,
             isExpanded: tg.isExpanded,
             headerColor: tg.headerColor,
-            backgroundColor: tg.backgroundColor,
-            platform: tg.platform
+            backgroundColor: tg.backgroundColor
           });
         }
       } catch (error) {
