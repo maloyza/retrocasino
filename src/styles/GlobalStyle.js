@@ -13,32 +13,19 @@ const GlobalStyle = createGlobalStyle`
   html, body {
     width: 100%;
     height: 100%;
-    margin: 0;
-    padding: 0;
     background: ${props => props.theme.colors.background};
     color: ${props => props.theme.colors.text};
     font-family: ${props => props.theme.fonts.primary};
     font-size: 16px;
     line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     overflow: hidden;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
   }
 
   #root {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
   }
 
   button {
@@ -70,31 +57,13 @@ const GlobalStyle = createGlobalStyle`
 
   /* Стили для игровых компонентов */
   .game-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
-    min-height: calc(100vh - 130px); /* Учитываем высоту баланса и навигации */
-  }
-
-  .game-button {
-    background: ${props => props.theme.colors.accent};
-    color: ${props => props.theme.colors.black};
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-size: 16px;
-    transition: transform 0.2s;
+    padding: 20px;
     width: 100%;
-    max-width: 300px;
-    text-align: center;
-
-    &:active {
-      transform: scale(0.95);
-    }
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   .game-card {
@@ -102,9 +71,34 @@ const GlobalStyle = createGlobalStyle`
     border: 2px solid ${props => props.theme.colors.accent};
     border-radius: 10px;
     padding: 20px;
-    width: 100%;
-    max-width: 400px;
-    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    aspect-ratio: 1;
+    cursor: pointer;
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+
+    img {
+      width: 60%;
+      height: auto;
+      margin-bottom: 15px;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      font-size: 1rem;
+      color: ${props => props.theme.colors.accent};
+    }
   }
 
   /* Стили для баланса */
@@ -153,34 +147,31 @@ const GlobalStyle = createGlobalStyle`
     bottom: 0;
     left: 0;
     right: 0;
-    background: ${props => props.theme.gradients.dark};
-    padding: ${props => props.theme.spacing.sm};
+    height: 70px;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+    border-top: 2px solid ${props => props.theme.colors.accent};
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 70px;
-    border-top: 2px solid ${props => props.theme.colors.game.border};
-    z-index: 1000;
-
-    @media (min-width: ${props => props.theme.breakpoints.desktop}) {
-      height: 80px;
-      padding: ${props => props.theme.spacing.md};
-    }
+    padding: 0 20px;
   }
 
   .nav-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-decoration: none;
     color: ${props => props.theme.colors.text};
-    padding: ${props => props.theme.spacing.sm};
-    border-radius: ${props => props.theme.borderRadius.medium};
-    transition: ${props => props.theme.transitions.default};
+    text-decoration: none;
+    font-size: 0.8rem;
 
-    &:hover, &.active {
-      background: ${props => props.theme.gradients.primary};
-      transform: translateY(-2px);
+    svg {
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+    }
+
+    &.active {
+      color: ${props => props.theme.colors.accent};
     }
   }
 
@@ -241,33 +232,109 @@ const GlobalStyle = createGlobalStyle`
     flex-direction: column;
   }
 
-  /* Стили для лидерборда */
-  .leaderboard-container {
-    flex: 1;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    min-height: calc(100vh - 130px);
-  }
-
   /* Стили для профиля */
   .profile-container {
-    flex: 1;
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    min-height: calc(100vh - 130px);
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
   }
 
   .profile-card {
     background: rgba(0, 0, 0, 0.8);
     border: 2px solid ${props => props.theme.colors.accent};
     border-radius: 10px;
-    padding: 20px;
-    width: 100%;
+    padding: 30px;
     margin-bottom: 20px;
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+
+      h4 {
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+        color: ${props => props.theme.colors.accent};
+      }
+
+      p {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  /* Стили для лидерборда */
+  .leaderboard-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .leaderboard-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+
+    button {
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid ${props => props.theme.colors.accent};
+      border-radius: 5px;
+      color: ${props => props.theme.colors.text};
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &.active {
+        background: ${props => props.theme.colors.accent};
+        color: ${props => props.theme.colors.background};
+      }
+    }
+  }
+
+  .leaderboard-list {
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid ${props => props.theme.colors.accent};
+    border-radius: 10px;
+    overflow: hidden;
+
+    .leaderboard-item {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .rank {
+        width: 40px;
+        text-align: center;
+        font-size: 1.2rem;
+        color: ${props => props.theme.colors.accent};
+      }
+
+      .player-info {
+        flex: 1;
+        padding: 0 15px;
+      }
+
+      .score {
+        font-size: 1.1rem;
+        color: ${props => props.theme.colors.accent};
+      }
+    }
   }
 
   a {

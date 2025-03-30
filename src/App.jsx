@@ -92,42 +92,25 @@ const OrientationWarning = styled.div`
 `;
 
 const AppContainer = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   display: flex;
   flex-direction: column;
   background: ${props => props.theme.colors.background};
-  overflow: hidden;
   min-height: 100vh;
-
-  @media (min-width: 768px) {
-    position: relative;
-    max-width: 1200px;
-    margin: 0 auto;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    height: 100vh;
-  }
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
 `;
 
 const MainContent = styled.main`
   flex: 1;
   width: 100%;
-  position: relative;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-y: contain;
-  min-height: calc(100vh - 130px); /* Учитываем высоту баланса и навигации */
-
-  @media (min-width: 768px) {
-    padding: 20px;
-    overflow-y: auto;
-    height: calc(100vh - 130px);
-  }
+  padding-top: 60px;
+  padding-bottom: 70px;
 `;
 
 const BalanceWrapper = styled.div`
@@ -138,25 +121,14 @@ const BalanceWrapper = styled.div`
   z-index: 100;
   background: rgba(0, 0, 0, 0.9);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-bottom: 2px solid ${props => props.theme.colors.accent};
-
-  @media (min-width: 768px) {
-    position: relative;
-    max-width: 1200px;
-    margin: 0 auto;
-    height: 70px;
-  }
 `;
 
 const AppContent = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  
   return (
     <AppContainer>
       <BalanceWrapper>
@@ -185,15 +157,18 @@ const App = () => {
       if (window.Telegram?.WebApp) {
         const tg = window.Telegram.WebApp;
         
-        console.log('Initializing TWA...');
+        // Устанавливаем цвета и настройки
+        tg.setHeaderColor('#000000');
+        tg.setBackgroundColor('#000000');
         
-        // Простая инициализация, как было раньше
+        // Отключаем свайп для закрытия
+        tg.enableClosingConfirmation();
+        
+        // Расширяем окно
         tg.expand();
         
-        setTimeout(() => {
-          tg.ready();
-          console.log('TWA ready');
-        }, 100);
+        // Сообщаем о готовности
+        tg.ready();
       }
     };
 
