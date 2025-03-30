@@ -160,52 +160,15 @@ const App = () => {
       if (window.Telegram?.WebApp) {
         const tg = window.Telegram.WebApp;
         
-        // Проверяем, что это десктопная версия
-        const isDesktop = !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+        console.log('Initializing TWA...');
         
-        if (isDesktop) {
-          console.log('Initializing desktop TWA...');
-          
-          // Устанавливаем все необходимые настройки
-          tg.setHeaderColor('#000000');
-          tg.setBackgroundColor('#000000');
-          tg.enableClosingConfirmation();
-          
-          // Отключаем жесты
-          if (tg.MainButton) {
-            tg.MainButton.hide();
-          }
-          
-          // Расширяем окно перед ready()
-          tg.expand();
-          
-          // Добавляем обработчик для отслеживания изменений
-          tg.onEvent('viewportChanged', () => {
-            console.log('Viewport changed:', {
-              height: tg.viewportHeight,
-              width: tg.viewportWidth,
-              isExpanded: tg.isExpanded
-            });
-            
-            // Если окно не развернуто, пробуем развернуть снова
-            if (!tg.isExpanded) {
-              tg.expand();
-            }
-          });
-          
-          // Сообщаем о готовности в последнюю очередь
-          setTimeout(() => {
-            tg.ready();
-            console.log('TWA initialized:', {
-              height: tg.viewportHeight,
-              width: tg.viewportWidth,
-              isExpanded: tg.isExpanded
-            });
-          }, 500);
-        } else {
-          // Для мобильных устройств просто сообщаем о готовности
+        // Простая инициализация, как было раньше
+        tg.expand();
+        
+        setTimeout(() => {
           tg.ready();
-        }
+          console.log('TWA ready');
+        }, 100);
       }
     };
 
