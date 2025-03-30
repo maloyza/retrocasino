@@ -1,327 +1,195 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import Balance from '../components/Balance';
 
-const ProfileContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background: ${props => props.theme.colors.background};
-  padding: 20px 10px 160px 10px;
-`;
-
-const MainContent = styled.div`
+const Container = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  flex: 1;
+  min-height: calc(100vh - 130px);
   padding: 20px;
-  padding-top: max(20px, env(safe-area-inset-top));
-  padding-bottom: max(20px, env(safe-area-inset-bottom));
-
-  @media (orientation: landscape) {
-    padding: 15px;
-    padding-top: max(15px, env(safe-area-inset-top));
-    padding-bottom: max(15px, env(safe-area-inset-bottom));
-  }
-`;
-
-const ContentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto;
 `;
 
 const ProfileCard = styled.div`
   background: rgba(0, 0, 0, 0.8);
-  border-radius: 10px;
-  padding: 20px;
-  width: 100%;
-  max-width: 800px;
   border: 2px solid ${props => props.theme.colors.accent};
-  margin-bottom: 20px;
+  border-radius: 10px;
+  padding: 30px;
+  width: 100%;
+  margin-bottom: 30px;
 `;
 
-const LeftSection = styled.div`
+const AvatarSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
-
-  @media (orientation: landscape) and (max-height: 600px) {
-    width: 200px;
-    flex-shrink: 0;
-  }
+  margin-bottom: 30px;
 `;
 
-const RightSection = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-`;
+const AvatarButton = styled.button`
+  background: ${props => props.theme.colors.accent};
+  color: ${props => props.theme.colors.background};
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  margin-top: 15px;
+  cursor: pointer;
+  transition: transform 0.2s;
 
-const AvatarContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
-
-  @media (orientation: landscape) and (max-height: 600px) {
-    margin-bottom: 5px;
+  &:hover {
+    transform: scale(1.05);
   }
 `;
 
 const Avatar = styled.div`
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  background: url('/assets/default-avatar.jpg') center/cover;
-  border: 3px solid ${props => props.theme.colors.accent};
-  position: relative;
-
-  @media (orientation: landscape) and (max-height: 600px) {
-    width: 100px;
-    height: 100px;
-  }
-`;
-
-const ChangeAvatarButton = styled(motion.button)`
   background: ${props => props.theme.colors.accent};
-  color: ${props => props.theme.colors.black};
-  padding: 8px 16px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  font-family: ${props => props.theme.fonts.primary};
-  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: ${props => props.theme.colors.background};
+  margin-bottom: 15px;
 `;
 
-const NicknameContainer = styled.div`
+const Username = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
   margin-bottom: 20px;
-`;
 
-const Nickname = styled.input`
-  background: ${props => props.theme.colors.primary};
-  border: 2px solid ${props => props.theme.colors.accent};
-  color: ${props => props.theme.colors.text};
-  padding: 8px 16px;
-  border-radius: 5px;
-  font-family: ${props => props.theme.fonts.primary};
-  font-size: 16px;
-  width: 200px;
-  
-  &:focus {
-    outline: none;
-    border-color: ${props => props.theme.colors.text};
+  input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid ${props => props.theme.colors.accent};
+    border-radius: 5px;
+    padding: 8px 15px;
+    color: ${props => props.theme.colors.text};
+    font-size: 1rem;
+  }
+
+  button {
+    background: ${props => props.theme.colors.accent};
+    color: ${props => props.theme.colors.background};
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 `;
 
-const ChangeNicknameButton = styled(motion.button)`
-  background: ${props => props.theme.colors.accent};
-  color: ${props => props.theme.colors.black};
-  padding: 8px 16px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  font-family: ${props => props.theme.fonts.primary};
-  font-size: 12px;
-`;
-
-const StatsContainer = styled.div`
+const StatsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  margin-top: 10px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 `;
 
-const StatCard = styled.div`
-  background: rgba(0, 0, 0, 0.6);
+const StatItem = styled.div`
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
-  padding: 8px;
+  padding: 15px;
   text-align: center;
-  border: 1px solid ${props => props.theme.colors.accent};
-`;
 
-const StatTitle = styled.div`
-  color: ${props => props.theme.colors.accent};
-  font-size: 0.7rem;
-  margin-bottom: 3px;
-`;
+  h4 {
+    color: ${props => props.theme.colors.accent};
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+  }
 
-const StatValue = styled.div`
-  color: ${props => props.theme.colors.text};
-  font-size: 1rem;
-`;
-
-const LevelProgress = styled.div`
-  background: rgba(0, 0, 0, 0.6);
-  border-radius: 8px;
-  padding: 8px;
-  border: 1px solid ${props => props.theme.colors.accent};
-  margin-top: 10px;
-`;
-
-const ProgressBar = styled.div`
-  width: 100%;
-  height: 12px;
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 6px;
-  overflow: hidden;
-  margin-top: 4px;
-  border: 1px solid ${props => props.theme.colors.accent};
-`;
-
-const Progress = styled.div`
-  width: ${props => props.progress}%;
-  height: 100%;
-  background: ${props => props.theme.colors.accent};
-  transition: width 0.3s ease;
+  p {
+    font-size: 1.2rem;
+  }
 `;
 
 const ReferralSection = styled.div`
-  background: rgba(0, 0, 0, 0.6);
-  border-radius: 8px;
-  padding: 10px;
   text-align: center;
-  margin-top: 10px;
-`;
+  margin-top: 30px;
 
-const ReferralCode = styled.div`
-  background: rgba(0, 0, 0, 0.4);
-  color: ${props => props.theme.colors.accent};
-  padding: 8px;
-  border-radius: 5px;
-  margin: 8px 0;
-  font-family: ${props => props.theme.fonts.primary};
-  font-size: 16px;
-  border: 1px solid ${props => props.theme.colors.accent};
-`;
+  h3 {
+    color: ${props => props.theme.colors.accent};
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
 
-const CopyButton = styled(motion.button)`
-  background: ${props => props.theme.colors.accent};
-  color: ${props => props.theme.colors.black};
-  padding: 6px 12px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  font-family: ${props => props.theme.fonts.primary};
-  font-size: 12px;
+  .code {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid ${props => props.theme.colors.accent};
+    border-radius: 5px;
+    padding: 10px;
+    font-family: monospace;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+  }
+
+  button {
+    background: ${props => props.theme.colors.accent};
+    color: ${props => props.theme.colors.background};
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
 `;
 
 const Profile = () => {
-  const [nickname, setNickname] = useState('Player123');
-  const [balance, setBalance] = useState({
-    blueCoins: 1000,
-    greenCoins: 1000,
-    redCoins: 1000,
-    goldCoins: 100
-  });
-
-  const stats = {
-    level: 5,
-    xp: 750,
-    nextLevelXp: 1000,
-    gamesPlayed: 42,
-    totalWins: 28,
-    winRate: '67%',
-    referralCount: 3
-  };
-
-  const handleChangeNickname = () => {
-    console.log('Changing nickname to:', nickname);
-  };
-
-  const handleCopyReferralCode = () => {
-    console.log('Copying referral code');
-  };
-
   return (
-    <ProfileContainer>
-      <MainContent>
-        <ContentWrapper>
-          <Balance {...balance} />
-          <ProfileCard>
-            <AvatarContainer>
-              <Avatar />
-              <ChangeAvatarButton
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Сменить аватар
-              </ChangeAvatarButton>
-            </AvatarContainer>
+    <Container
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.3 }}
+    >
+      <ProfileCard>
+        <AvatarSection>
+          <Avatar>👤</Avatar>
+          <AvatarButton>Сменить аватар</AvatarButton>
+        </AvatarSection>
 
-            <NicknameContainer>
-              <Nickname
-                value={nickname}
-                onChange={(e) => setNickname(e.target.value)}
-                placeholder="Введите никнейм"
-              />
-              <ChangeNicknameButton
-                onClick={handleChangeNickname}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Изменить
-              </ChangeNicknameButton>
-            </NicknameContainer>
+        <Username>
+          <input type="text" value="Player123" readOnly />
+          <button>Изменить</button>
+        </Username>
 
-            <LevelProgress>
-              <StatTitle>Уровень {stats.level}</StatTitle>
-              <ProgressBar>
-                <Progress progress={(stats.xp / stats.nextLevelXp) * 100} />
-              </ProgressBar>
-              <StatTitle style={{ marginTop: '5px' }}>
-                {stats.xp}/{stats.nextLevelXp} XP
-              </StatTitle>
-            </LevelProgress>
+        <StatsGrid>
+          <StatItem>
+            <h4>Игр сыграно</h4>
+            <p>42</p>
+          </StatItem>
+          <StatItem>
+            <h4>Побед</h4>
+            <p>28</p>
+          </StatItem>
+          <StatItem>
+            <h4>Винрейт</h4>
+            <p>67%</p>
+          </StatItem>
+          <StatItem>
+            <h4>Рефералов</h4>
+            <p>3</p>
+          </StatItem>
+        </StatsGrid>
 
-            <StatsContainer>
-              <StatCard>
-                <StatTitle>Игр сыграно</StatTitle>
-                <StatValue>{stats.gamesPlayed}</StatValue>
-              </StatCard>
-              <StatCard>
-                <StatTitle>Побед</StatTitle>
-                <StatValue>{stats.totalWins}</StatValue>
-              </StatCard>
-              <StatCard>
-                <StatTitle>Винрейт</StatTitle>
-                <StatValue>{stats.winRate}</StatValue>
-              </StatCard>
-              <StatCard>
-                <StatTitle>Рефералов</StatTitle>
-                <StatValue>{stats.referralCount}</StatValue>
-              </StatCard>
-            </StatsContainer>
-
-            <ReferralSection>
-              <StatTitle>Реферальная программа</StatTitle>
-              <div style={{ color: '#fff', fontSize: '14px', marginTop: '5px' }}>
-                Приглашено друзей: {stats.referralCount}
-              </div>
-              <ReferralCode>REF123456</ReferralCode>
-              <CopyButton
-                onClick={handleCopyReferralCode}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Скопировать код
-              </CopyButton>
-            </ReferralSection>
-          </ProfileCard>
-        </ContentWrapper>
-      </MainContent>
-    </ProfileContainer>
+        <ReferralSection>
+          <h3>Реферальная программа</h3>
+          <div className="code">REF123456</div>
+          <button>Скопировать код</button>
+        </ReferralSection>
+      </ProfileCard>
+    </Container>
   );
 };
 
