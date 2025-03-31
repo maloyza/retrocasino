@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import BuyCoins from '../components/BuyCoins';
 
 const Container = styled(motion.div)`
   display: flex;
@@ -190,8 +189,6 @@ const Profile = () => {
           <button>Скопировать код</button>
         </ReferralSection>
       </ProfileCard>
-
-      <BuyCoins />
     </Container>
   );
 };

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import BuyCoinsModal from './BuyCoinsModal';
 
 const BalanceContainer = styled.div`
   position: fixed;
@@ -85,25 +86,33 @@ const TopUpButton = styled(motion.button)`
 `;
 
 const Balance = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const handleTopUp = () => {
-    // Здесь будет логика пополнения баланса
-    console.log('Top up clicked');
+    setIsModalOpen(true);
   };
 
   return (
-    <BalanceContainer>
-      <CoinsWrapper>
-        <CoinIcon>$</CoinIcon>
-        <CoinsAmount>1000</CoinsAmount>
-        <TopUpButton
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={handleTopUp}
-        >
-          Пополнить
-        </TopUpButton>
-      </CoinsWrapper>
-    </BalanceContainer>
+    <>
+      <BalanceContainer>
+        <CoinsWrapper>
+          <CoinIcon>$</CoinIcon>
+          <CoinsAmount>1000</CoinsAmount>
+          <TopUpButton
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleTopUp}
+          >
+            Пополнить
+          </TopUpButton>
+        </CoinsWrapper>
+      </BalanceContainer>
+
+      <BuyCoinsModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
+    </>
   );
 };
 
