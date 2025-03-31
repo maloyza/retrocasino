@@ -157,23 +157,30 @@ const App = () => {
       if (window.Telegram?.WebApp) {
         const tg = window.Telegram.WebApp;
         
-        // Устанавливаем цвета и настройки
-        tg.setHeaderColor('#000000');
-        tg.setBackgroundColor('#000000');
+        // Сначала сообщаем о готовности
+        tg.ready();
+        
+        // Затем запрашиваем полноэкранный режим
+        tg.expand();
         
         // Отключаем свайп для закрытия
         tg.enableClosingConfirmation();
         
-        // Расширяем окно
-        tg.expand();
-        
-        // Сообщаем о готовности
-        tg.ready();
+        // Устанавливаем цвета для корректного отображения
+        tg.setBackgroundColor('#000000');
+        tg.setHeaderColor('#000000');
+
+        // Добавляем обработчик для отслеживания изменений viewport
+        tg.onEvent('viewportChanged', () => {
+          if (!tg.isExpanded) {
+            tg.expand();
+          }
+        });
       }
     };
 
-    // Инициализируем TWA
-    initTelegramWebApp();
+    // Инициализируем с небольшой задержкой
+    setTimeout(initTelegramWebApp, 50);
   }, []);
 
   return (
