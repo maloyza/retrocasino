@@ -160,20 +160,25 @@ const App = () => {
         // Сначала сообщаем о готовности
         tg.ready();
         
-        // Затем запрашиваем полноэкранный режим
+        // Устанавливаем цвета для корректного отображения
+        tg.setBackgroundColor('#000000');
+        tg.setHeaderColor('#000000');
+        
+        // Отключаем свайп для закрытия
+        tg.enableClosingConfirmation();
+        
+        // Запрашиваем полноэкранный режим
         tg.expand();
         
         // Запрашиваем полноэкранный режим через postEvent
         if (window.TelegramWebviewProxy) {
           window.TelegramWebviewProxy.postEvent('web_app_request_fullscreen', null);
+        } else if (window.external && window.external.notify) {
+          window.external.notify(JSON.stringify({
+            eventType: 'web_app_request_fullscreen',
+            eventData: null
+          }));
         }
-        
-        // Отключаем свайп для закрытия
-        tg.enableClosingConfirmation();
-        
-        // Устанавливаем цвета для корректного отображения
-        tg.setBackgroundColor('#000000');
-        tg.setHeaderColor('#000000');
 
         // Добавляем обработчик для отслеживания изменений viewport
         tg.onEvent('viewportChanged', () => {
