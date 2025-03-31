@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import { AnimatePresence } from 'framer-motion';
@@ -152,8 +152,10 @@ const AppContent = () => {
 };
 
 const App = () => {
-  useEffect(() => {
-    const initTelegramWebApp = () => {
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  const initTelegramWebApp = useCallback(() => {
+    try {
       if (window.Telegram?.WebApp) {
         const tg = window.Telegram.WebApp;
         
@@ -181,17 +183,35 @@ const App = () => {
         }
 
         // Добавляем обработчик для отслеживания изменений viewport
-        tg.onEvent('viewportChanged', () => {
+        const handleViewportChange = () => {
           if (!tg.isExpanded) {
             tg.expand();
           }
-        });
-      }
-    };
+        };
 
-    // Инициализируем с небольшой задержкой
-    setTimeout(initTelegramWebApp, 50);
+        tg.onEvent('viewportChanged', handleViewportChange);
+
+        // Очистка обработчика при размонтировании
+        return () => {
+          tg.offEvent('viewportChanged', handleViewportChange);
+        };
+      }
+    } catch (error) {
+      console.error('Ошибка при инициализации Telegram Web App:', error);
+    }
   }, []);
+
+  useEffect(() => {
+    if (!isInitialized) {
+      // Инициализируем с небольшой задержкой
+      const timer = setTimeout(() => {
+        initTelegramWebApp();
+        setIsInitialized(true);
+      }, 50);
+
+      return () => clearTimeout(timer);
+    }
+  }, [initTelegramWebApp, isInitialized]);
 
   return (
     <ThemeProvider theme={theme}>
