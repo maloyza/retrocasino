@@ -163,6 +163,11 @@ const App = () => {
         // Затем запрашиваем полноэкранный режим
         tg.expand();
         
+        // Запрашиваем полноэкранный режим через postEvent
+        if (window.TelegramWebviewProxy) {
+          window.TelegramWebviewProxy.postEvent('web_app_request_fullscreen', null);
+        }
+        
         // Отключаем свайп для закрытия
         tg.enableClosingConfirmation();
         
