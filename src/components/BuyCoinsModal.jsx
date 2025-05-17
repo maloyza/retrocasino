@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
+import { paymentService } from '../services/payment';
+import { packages } from '../config/coinPackages';
 
 const Overlay = styled(motion.div)`
   position: fixed;
@@ -115,19 +117,25 @@ const BuyButton = styled.button`
   }
 `;
 
-const packages = [
-  { coins: 600, bonus: 600, price: 99 },
-  { coins: 3000, bonus: 300, price: 499 },
-  { coins: 9800, bonus: 1100, price: 1499 },
-  { coins: 19800, bonus: 2600, price: 2999 },
-  { coins: 32800, bonus: 6000, price: 4999 },
-  { coins: 64800, bonus: 16000, price: 9999 }
-];
-
 const BuyCoinsModal = ({ isOpen, onClose }) => {
-  const handleBuy = (pkg) => {
-    // В демо версии просто показываем уведомление
-    alert(`Демо версия: Покупка ${pkg.coins} монет + ${pkg.bonus} бонусных за ${pkg.price} старс`);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleBuy = async (pkg) => {
+    try {
+      setIsLoading(true);
+      const description = `Покупка ${pkg.coins} монет + ${pkg.bonus} бонусных`;
+      const success = await paymentService.initiatePayment(pkg.price, description);
+      
+      if (success) {
+        // В реальном приложении здесь будет обработка успешного платежа
+        console.log('Платеж успешно инициализирован');
+      }
+    } catch (error) {
+      console.error('Ошибка при покупке:', error);
+      alert('Произошла ошибка при обработке платежа. Пожалуйста, попробуйте позже.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -149,11 +157,17 @@ const BuyCoinsModal = ({ isOpen, onClose }) => {
             <Title>Покупка золотых монет</Title>
             <CoinsGrid>
               {packages.map((pkg, index) => (
-                <CoinPackage key={index} onClick={() => handleBuy(pkg)}>
+                <CoinPackage 
+                  key={index} 
+                  onClick={() => !isLoading && handleBuy(pkg)}
+                  style={{ opacity: isLoading ? 0.7 : 1, pointerEvents: isLoading ? 'none' : 'auto' }}
+                >
                   <CoinAmount>{pkg.coins.toLocaleString()} монет</CoinAmount>
                   <BonusAmount>+{pkg.bonus.toLocaleString()} бонусных</BonusAmount>
                   <Price>{pkg.price} старс</Price>
-                  <BuyButton>Купить</BuyButton>
+                  <BuyButton disabled={isLoading}>
+                    {isLoading ? 'Загрузка...' : 'Купить'}
+                  </BuyButton>
                 </CoinPackage>
               ))}
             </CoinsGrid>
