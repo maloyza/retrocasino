@@ -917,101 +917,107 @@ Error generating stack: `+o.message+`
   }
 `,NP=()=>_.jsx(jP,{initial:{opacity:0,y:20},animate:{opacity:1,y:0},exit:{opacity:0,y:-20},transition:{duration:.3},children:_.jsxs(MP,{children:[_.jsxs(DP,{children:[_.jsx(IP,{children:"👤"}),_.jsx(LP,{children:"Сменить аватар"})]}),_.jsxs($P,{children:[_.jsx("input",{type:"text",value:"Player123",readOnly:!0}),_.jsx("button",{children:"Изменить"})]}),_.jsxs(VP,{children:[_.jsxs(To,{children:[_.jsx("h4",{children:"Игр сыграно"}),_.jsx("p",{children:"42"})]}),_.jsxs(To,{children:[_.jsx("h4",{children:"Побед"}),_.jsx("p",{children:"28"})]}),_.jsxs(To,{children:[_.jsx("h4",{children:"Винрейт"}),_.jsx("p",{children:"67%"})]}),_.jsxs(To,{children:[_.jsx("h4",{children:"Рефералов"}),_.jsx("p",{children:"3"})]})]}),_.jsxs(OP,{children:[_.jsx("h3",{children:"Реферальная программа"}),_.jsx("div",{className:"code",children:"REF123456"}),_.jsx("button",{children:"Скопировать код"})]})]})}),FP={initiatePayment:async(e,t)=>!0},zP=[{coins:100,bonus:10,price:1},{coins:500,bonus:75,price:5},{coins:1e3,bonus:200,price:10},{coins:5e3,bonus:1500,price:50}],BP=j(be.div)`
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.8);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+  z-index: 9999;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 `,UP=j(be.div)`
-  background: ${e=>e.theme.colors.background};
-  border: 2px solid ${e=>e.theme.colors.accent};
-  border-radius: 10px;
-  padding: 20px;
-  width: 90%;
-  max-width: 500px;
+  background: ${({theme:e})=>e.colors.background};
+  border: 2px solid ${({theme:e})=>e.colors.accent};
+  border-radius: 16px;
+  padding: 32px 20px 24px 20px;
+  width: 95vw;
+  max-width: 400px;
   position: relative;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `,HP=j.button`
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 14px;
+  right: 18px;
   background: none;
   border: none;
-  color: ${e=>e.theme.colors.text};
-  font-size: 24px;
+  color: ${({theme:e})=>e.colors.text};
+  font-size: 28px;
   cursor: pointer;
   padding: 5px;
   line-height: 1;
-  
+  transition: color 0.2s;
   &:hover {
-    color: ${e=>e.theme.colors.accent};
+    color: ${({theme:e})=>e.colors.accent};
   }
 `,WP=j.h2`
-  color: ${e=>e.theme.colors.accent};
+  color: ${({theme:e})=>e.colors.accent};
   font-family: 'Press Start 2P', cursive;
-  font-size: 20px;
-  margin-bottom: 20px;
+  font-size: 22px;
+  margin-bottom: 18px;
   text-align: center;
 `,GP=j.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
-  margin-top: 20px;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  width: 100%;
+  margin-top: 10px;
+  @media (min-width: 480px) {
+    grid-template-columns: 1fr 1fr;
+  }
 `,KP=j(be.div)`
-  background: ${e=>e.theme.colors.background};
-  border: 2px solid ${e=>e.theme.colors.accent};
-  border-radius: 8px;
-  padding: 15px;
+  background: ${({theme:e})=>e.colors.background};
+  border: 2px solid ${({theme:e})=>e.colors.accent};
+  border-radius: 10px;
+  padding: 18px 10px 14px 10px;
   text-align: center;
   cursor: pointer;
-  transition: all 0.3s ease;
-
+  transition: box-shadow 0.2s, transform 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+    border-color: ${({theme:e})=>e.colors.text};
   }
 `,QP=j.div`
-  color: ${e=>e.theme.colors.accent};
+  color: ${({theme:e})=>e.colors.accent};
   font-family: 'Press Start 2P', cursive;
-  font-size: 18px;
-  margin-bottom: 5px;
+  font-size: 20px;
+  margin-bottom: 4px;
 `,YP=j.div`
-  color: ${e=>e.theme.colors.text};
+  color: ${({theme:e})=>e.colors.text};
   font-family: 'Press Start 2P', cursive;
-  font-size: 12px;
-  margin-bottom: 10px;
+  font-size: 13px;
+  margin-bottom: 8px;
 `,XP=j.div`
-  color: ${e=>e.theme.colors.accent};
+  color: ${({theme:e})=>e.colors.accent};
   font-family: 'Press Start 2P', cursive;
-  font-size: 14px;
+  font-size: 15px;
   margin-bottom: 10px;
 `,ZP=j.button`
-  background: ${e=>e.theme.colors.accent};
-  color: ${e=>e.theme.colors.black};
+  background: ${({theme:e})=>e.colors.accent};
+  color: ${({theme:e})=>e.colors.black};
   border: none;
-  border-radius: 5px;
-  padding: 8px 16px;
+  border-radius: 6px;
+  padding: 9px 0;
   font-family: 'Press Start 2P', cursive;
-  font-size: 12px;
+  font-size: 13px;
   cursor: pointer;
   width: 100%;
-  transition: all 0.3s ease;
-
+  transition: background 0.2s, color 0.2s, transform 0.15s;
   &:disabled {
     opacity: 0.7;
     cursor: not-allowed;
   }
-
   &:hover:not(:disabled) {
-    transform: scale(1.05);
+    background: ${({theme:e})=>e.colors.text};
+    color: ${({theme:e})=>e.colors.accent};
+    transform: scale(1.04);
   }
-`,qP=({isOpen:e,onClose:t})=>{const[n,r]=k.useState(!1),i=async o=>{try{r(!0);const s=`Покупка ${o.coins} монет + ${o.bonus} бонусных`;await FP.initiatePayment(o.price,s)&&console.log("Платеж успешно инициализирован")}catch(s){console.error("Ошибка при покупке:",s),alert("Произошла ошибка при обработке платежа. Пожалуйста, попробуйте позже.")}finally{r(!1)}};return _.jsx(Qg,{children:e&&_.jsx(BP,{initial:{opacity:0},animate:{opacity:1},exit:{opacity:0},onClick:t,children:_.jsxs(UP,{initial:{scale:.8,opacity:0},animate:{scale:1,opacity:1},exit:{scale:.8,opacity:0},onClick:o=>o.stopPropagation(),children:[_.jsx(HP,{onClick:t,children:"×"}),_.jsx(WP,{children:"Покупка золотых монет"}),_.jsx(GP,{children:zP.map((o,s)=>_.jsxs(KP,{onClick:()=>!n&&i(o),style:{opacity:n?.7:1,pointerEvents:n?"none":"auto"},children:[_.jsxs(QP,{children:[o.coins.toLocaleString()," монет"]}),_.jsxs(YP,{children:["+",o.bonus.toLocaleString()," бонусных"]}),_.jsxs(XP,{children:[o.price," старс"]}),_.jsx(ZP,{disabled:n,children:n?"Загрузка...":"Купить"})]},s))})]})})})},JP=j.div`
+`,qP=({isOpen:e,onClose:t})=>{const[n,r]=k.useState(!1),i=async o=>{try{r(!0);const s=`Покупка ${o.coins} монет + ${o.bonus} бонусных`;await FP.initiatePayment(o.price,s)&&console.log("Платеж успешно инициализирован")}catch(s){console.error("Ошибка при покупке:",s),alert("Произошла ошибка при обработке платежа. Пожалуйста, попробуйте позже.")}finally{r(!1)}};return _.jsx(Qg,{children:e&&_.jsx(BP,{initial:{opacity:0},animate:{opacity:1},exit:{opacity:0},onClick:t,children:_.jsxs(UP,{initial:{scale:.85,opacity:0},animate:{scale:1,opacity:1},exit:{scale:.85,opacity:0},transition:{type:"spring",stiffness:260,damping:20},onClick:o=>o.stopPropagation(),children:[_.jsx(HP,{onClick:t,children:"×"}),_.jsx(WP,{children:"Покупка золотых монет"}),_.jsx(GP,{children:zP.map((o,s)=>_.jsxs(KP,{whileTap:{scale:.97},onClick:()=>!n&&i(o),style:{opacity:n?.7:1,pointerEvents:n?"none":"auto"},children:[_.jsxs(QP,{children:[o.coins.toLocaleString()," монет"]}),_.jsxs(YP,{children:["+",o.bonus.toLocaleString()," бонусных"]}),_.jsxs(XP,{children:[o.price," старс"]}),_.jsx(ZP,{disabled:n,children:n?"Загрузка...":"Купить"})]},s))})]})})})},JP=j.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -1711,4 +1717,4 @@ Error generating stack: `+o.message+`
   justify-content: center;
   border-bottom: 2px solid ${e=>e.theme.colors.accent};
 `,zC=()=>_.jsxs(OC,{children:[_.jsx(FC,{children:_.jsx(ia,{})}),_.jsx(NC,{children:_.jsx(Qg,{mode:"wait",children:_.jsxs(Bx,{children:[_.jsx(wn,{path:"/",element:_.jsx(RP,{})}),_.jsx(wn,{path:"/profile",element:_.jsx(NP,{})}),_.jsx(wn,{path:"/leaderboard",element:_.jsx(hC,{})}),_.jsx(wn,{path:"/blackjack",element:_.jsx(_C,{})}),_.jsx(wn,{path:"/video-poker",element:_.jsx(bC,{})}),_.jsx(wn,{path:"/roulette",element:_.jsx(VC,{})})]})})}),_.jsx(kP,{})]}),BC=()=>{const[e,t]=k.useState(!1),n=k.useCallback(()=>{var r;try{if((r=window.Telegram)!=null&&r.WebApp){const i=window.Telegram.WebApp;i.ready(),i.setBackgroundColor("#000000"),i.setHeaderColor("#000000"),i.enableClosingConfirmation(),i.expand(),window.TelegramWebviewProxy?window.TelegramWebviewProxy.postEvent("web_app_request_fullscreen",null):window.external&&window.external.notify&&window.external.notify(JSON.stringify({eventType:"web_app_request_fullscreen",eventData:null}));const o=()=>{i.isExpanded||i.expand()};return i.onEvent("viewportChanged",o),()=>{i.offEvent("viewportChanged",o)}}}catch(i){console.error("Ошибка при инициализации Telegram Web App:",i)}},[]);return k.useEffect(()=>{if(!e){const r=setTimeout(()=>{n(),t(!0)},50);return()=>clearTimeout(r)}},[n,e]),_.jsx(Hw,{theme:_P,children:_.jsxs(Wx,{basename:"/retrocasino",children:[_.jsx(wP,{}),_.jsx(zC,{})]})})};el.createRoot(document.getElementById("root")).render(_.jsx(Ue.StrictMode,{children:_.jsx(BC,{})}));
-//# sourceMappingURL=index-BA7sFddX.js.map
+//# sourceMappingURL=index-CtJqYwnU.js.map
