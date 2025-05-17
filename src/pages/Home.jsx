@@ -86,9 +86,9 @@ const GameCard = styled(motion.div)`
 `;
 
 const games = [
-  { id: 'blackjack', name: 'Блэкджек', price: 2000, image: '/images/blackjack.png', path: '/blackjack' },
-  { id: 'video-poker', name: 'Видеопокер', price: 3000, image: '/images/poker.png', path: '/video-poker' },
-  { id: 'roulette', name: 'Рулетка', price: 5000, image: '/images/roulette.png', path: '/roulette' }
+  { id: 'blackjack', name: 'Блэкджек', price: 2000, image: '/images/games/blackjack.png', path: '/blackjack' },
+  { id: 'video-poker', name: 'Видеопокер', price: 3000, image: '/images/games/video-poker.png', path: '/video-poker' },
+  { id: 'roulette', name: 'Рулетка', price: 5000, image: '/images/games/roulette.png', path: '/roulette' }
 ];
 
 const Home = () => {
