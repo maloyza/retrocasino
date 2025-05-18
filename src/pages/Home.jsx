@@ -45,6 +45,22 @@ const GamesGrid = styled.div`
   margin: 0 auto;
 `;
 
+const ImageWrapper = styled.div`
+  width: 100%;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+`;
+
+const StyledImg = styled.img`
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+`;
+
 const GameCard = styled(motion.div)`
   background: rgba(0, 0, 0, 0.8);
   border: 2px solid ${props => props.theme.colors.accent};
@@ -111,7 +127,9 @@ const Home = () => {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            <img src={`${import.meta.env.BASE_URL}images/games/${game.image}`} alt={game.name} />
+            <ImageWrapper>
+              <StyledImg src={`${import.meta.env.BASE_URL}images/games/${game.image}`} alt={game.name} />
+            </ImageWrapper>
             <h3>{game.name}</h3>
             <div className="price">
               <span>🪙</span>
