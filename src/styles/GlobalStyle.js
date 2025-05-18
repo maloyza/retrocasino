@@ -11,21 +11,23 @@ const GlobalStyle = createGlobalStyle`
   }
 
   html, body {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    min-height: 100vh;
     background: ${props => props.theme.colors.background};
     color: ${props => props.theme.colors.text};
     font-family: ${props => props.theme.fonts.primary};
     font-size: 16px;
     line-height: 1.5;
-    overflow: hidden;
+    overflow-x: hidden;
+    overscroll-behavior-y: none;
   }
 
   #root {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
   }
 
   button {
@@ -58,12 +60,17 @@ const GlobalStyle = createGlobalStyle`
   /* Стили для игровых компонентов */
   .game-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 20px;
     padding: 20px;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding: 8px;
+    }
   }
 
   .game-card {
@@ -85,9 +92,10 @@ const GlobalStyle = createGlobalStyle`
     }
 
     img {
-      width: 60%;
+      width: 80%;
       height: auto;
       margin-bottom: 15px;
+      object-fit: contain;
     }
 
     h3 {
@@ -98,6 +106,15 @@ const GlobalStyle = createGlobalStyle`
     .price {
       font-size: 1rem;
       color: ${props => props.theme.colors.accent};
+    }
+
+    @media (max-width: 600px) {
+      padding: 10px;
+      aspect-ratio: unset;
+      min-height: 140px;
+      h3 { font-size: 1rem; margin-bottom: 6px; }
+      .price { font-size: 0.95rem; }
+      img { margin-bottom: 8px; }
     }
   }
 
@@ -604,6 +621,30 @@ const GlobalStyle = createGlobalStyle`
       padding: 15px 30px;
       font-size: 18px;
       max-width: 400px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    html {
+      font-size: 14px;
+    }
+    body {
+      font-size: 0.9rem;
+    }
+    #root {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 400px) {
+    html {
+      font-size: 12px;
+    }
+    .game-card {
+      padding: 6px;
+      min-height: 100px;
+      h3 { font-size: 0.9rem; }
+      .price { font-size: 0.8rem; }
     }
   }
 `;

@@ -9,6 +9,9 @@ const LeaderboardContainer = styled.div`
   min-height: 100vh;
   background: ${props => props.theme.colors.background};
   padding: 20px 10px 160px 10px;
+  @media (max-width: 600px) {
+    padding: 8px 2px 80px 2px;
+  }
 `;
 
 const MainContent = styled.div`
@@ -49,6 +52,10 @@ const LeaderboardTable = styled.div`
   border: 2px solid ${props => props.theme.colors.accent};
   overflow: hidden;
   margin-top: 20px;
+  @media (max-width: 600px) {
+    margin-top: 10px;
+    border-radius: 6px;
+  }
 `;
 
 const TableHeader = styled.div`
@@ -57,6 +64,10 @@ const TableHeader = styled.div`
   padding: 15px;
   background: rgba(0, 0, 0, 0.6);
   border-bottom: 2px solid ${props => props.theme.colors.accent};
+  @media (max-width: 600px) {
+    padding: 7px;
+    font-size: 0.7rem;
+  }
 `;
 
 const TableContent = styled.div`
@@ -73,9 +84,10 @@ const TableRow = styled.div`
   height: 60px;
   align-items: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-
-  &:last-child {
-    border-bottom: none;
+  &:last-child { border-bottom: none; }
+  @media (max-width: 600px) {
+    padding: 6px 4px;
+    height: 38px;
   }
 `;
 
@@ -83,6 +95,9 @@ const HeaderCell = styled.div`
   color: ${props => props.theme.colors.accent};
   font-family: 'Press Start 2P', cursive;
   font-size: 0.8rem;
+  @media (max-width: 600px) {
+    font-size: 0.7rem;
+  }
 `;
 
 const Cell = styled.div`
@@ -92,12 +107,19 @@ const Cell = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+  @media (max-width: 600px) {
+    font-size: 0.7rem;
+    gap: 5px;
+  }
 `;
 
 const PlayerInfo = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+  @media (max-width: 600px) {
+    gap: 5px;
+  }
 `;
 
 const Avatar = styled.div`
@@ -106,6 +128,10 @@ const Avatar = styled.div`
   border-radius: 50%;
   background: url(${props => props.src}) center/cover;
   border: 2px solid ${props => props.theme.colors.accent};
+  @media (max-width: 600px) {
+    width: 22px;
+    height: 22px;
+  }
 `;
 
 const PlayerName = styled.span`
@@ -114,6 +140,9 @@ const PlayerName = styled.span`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  @media (max-width: 600px) {
+    font-size: 11px;
+  }
 `;
 
 const Score = styled.div`
@@ -123,6 +152,10 @@ const Score = styled.div`
   font-family: ${props => props.theme.fonts.primary};
   font-size: 14px;
   justify-content: flex-end;
+  @media (max-width: 600px) {
+    font-size: 11px;
+    gap: 2px;
+  }
 `;
 
 const CoinIcon = styled.img`
@@ -135,6 +168,11 @@ const TabsContainer = styled.div`
   gap: 5px;
   padding: 0 10px;
   margin-bottom: 10px;
+  @media (max-width: 600px) {
+    gap: 2px;
+    padding: 0 2px;
+    margin-bottom: 6px;
+  }
 `;
 
 const Tab = styled.button`
@@ -147,10 +185,14 @@ const Tab = styled.button`
   font-size: 14px;
   cursor: pointer;
   transition: all 0.2s;
-
   &:hover {
     background: ${props => props.theme.colors.accent};
     color: ${props => props.theme.colors.black};
+  }
+  @media (max-width: 600px) {
+    font-size: 11px;
+    padding: 4px 7px;
+    border-radius: 3px;
   }
 `;
 

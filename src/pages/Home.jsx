@@ -38,20 +38,30 @@ const DailyBonusButton = styled.button`
 
 const GamesGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
 `;
 
 const ImageWrapper = styled.div`
   width: 100%;
-  height: 130px;
+  height: 110px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
+
+  @media (max-width: 600px) {
+    height: 70px;
+    margin-bottom: 8px;
+  }
 `;
 
 const StyledImg = styled.img`
@@ -65,7 +75,7 @@ const GameCard = styled(motion.div)`
   background: rgba(0, 0, 0, 0.8);
   border: 2px solid ${props => props.theme.colors.accent};
   border-radius: 10px;
-  padding: 20px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -78,26 +88,27 @@ const GameCard = styled(motion.div)`
     transform: scale(1.02);
   }
 
-  img {
-    width: 80%;
-    height: auto;
-    margin-bottom: 15px;
-    object-fit: contain;
+  @media (max-width: 600px) {
+    padding: 10px;
+    aspect-ratio: unset;
+    min-height: 140px;
   }
 
   h3 {
     font-family: 'Press Start 2P', cursive;
     font-size: 1rem;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     color: ${props => props.theme.colors.text};
+    text-align: center;
   }
 
   .price {
     color: ${props => props.theme.colors.accent};
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     display: flex;
     align-items: center;
     gap: 5px;
+    margin-top: 4px;
   }
 `;
 

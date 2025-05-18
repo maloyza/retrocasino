@@ -30,6 +30,13 @@ const ModalContent = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: 600px) {
+    padding: 16px 6px 12px 6px;
+    border-radius: 10px;
+    max-width: 98vw;
+    min-width: 0;
+  }
 `;
 
 const CloseButton = styled.button`
@@ -47,6 +54,11 @@ const CloseButton = styled.button`
   &:hover {
     color: ${({ theme }) => theme.colors.accent};
   }
+  @media (max-width: 600px) {
+    top: 8px;
+    right: 10px;
+    font-size: 24px;
+  }
 `;
 
 const Title = styled.h2`
@@ -55,16 +67,21 @@ const Title = styled.h2`
   font-size: 22px;
   margin-bottom: 18px;
   text-align: center;
+  @media (max-width: 600px) {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
 `;
 
 const CoinsGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 18px;
   width: 100%;
   margin-top: 10px;
-  @media (min-width: 480px) {
-    grid-template-columns: 1fr 1fr;
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
 `;
 
@@ -82,6 +99,10 @@ const CoinPackage = styled(motion.div)`
     box-shadow: 0 6px 18px rgba(0,0,0,0.18);
     border-color: ${({ theme }) => theme.colors.text};
   }
+  @media (max-width: 600px) {
+    padding: 10px 4px 8px 4px;
+    border-radius: 7px;
+  }
 `;
 
 const CoinAmount = styled.div`
@@ -89,6 +110,10 @@ const CoinAmount = styled.div`
   font-family: 'Press Start 2P', cursive;
   font-size: 20px;
   margin-bottom: 4px;
+  @media (max-width: 600px) {
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
 `;
 
 const BonusAmount = styled.div`
@@ -96,6 +121,10 @@ const BonusAmount = styled.div`
   font-family: 'Press Start 2P', cursive;
   font-size: 13px;
   margin-bottom: 8px;
+  @media (max-width: 600px) {
+    font-size: 10px;
+    margin-bottom: 4px;
+  }
 `;
 
 const Price = styled.div`
@@ -103,6 +132,10 @@ const Price = styled.div`
   font-family: 'Press Start 2P', cursive;
   font-size: 15px;
   margin-bottom: 10px;
+  @media (max-width: 600px) {
+    font-size: 11px;
+    margin-bottom: 6px;
+  }
 `;
 
 const BuyButton = styled.button`
@@ -124,6 +157,11 @@ const BuyButton = styled.button`
     background: ${({ theme }) => theme.colors.text};
     color: ${({ theme }) => theme.colors.accent};
     transform: scale(1.04);
+  }
+  @media (max-width: 600px) {
+    font-size: 10px;
+    padding: 6px 0;
+    border-radius: 4px;
   }
 `;
 

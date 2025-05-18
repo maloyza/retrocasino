@@ -18,6 +18,11 @@ const NavContainer = styled.nav`
   display: flex;
   justify-content: space-around;
   align-items: center;
+
+  @media (max-width: 600px) {
+    padding: 4px 0;
+    padding-bottom: max(4px, env(safe-area-inset-bottom));
+  }
 `;
 
 const NavItem = styled(motion.button)`
@@ -43,6 +48,16 @@ const NavItem = styled(motion.button)`
 
   &:active {
     transform: scale(0.95);
+  }
+
+  @media (max-width: 600px) {
+    font-size: 10px;
+    min-width: 44px;
+    padding: 2px 0;
+    svg {
+      width: 20px;
+      height: 20px;
+    }
   }
 `;
 

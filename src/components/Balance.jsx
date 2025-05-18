@@ -23,6 +23,11 @@ const BalanceContainer = styled.div`
     padding: 5px 10px;
     height: 40px;
   }
+
+  @media (max-width: 600px) {
+    padding: 4px 8px;
+    height: 38px;
+  }
 `;
 
 const CoinsWrapper = styled.div`
@@ -51,6 +56,12 @@ const CoinIcon = styled.div`
     height: 20px;
     font-size: 12px;
   }
+
+  @media (max-width: 600px) {
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+  }
 `;
 
 const CoinsAmount = styled.span`
@@ -63,6 +74,11 @@ const CoinsAmount = styled.span`
   @media (orientation: landscape) {
     font-size: 14px;
   }
+
+  @media (max-width: 600px) {
+    font-size: 12px;
+    margin-right: 6px;
+  }
 `;
 
 const TopUpButton = styled(motion.button)`
@@ -74,12 +90,16 @@ const TopUpButton = styled(motion.button)`
   font-family: 'Press Start 2P', cursive;
   border: 2px solid ${props => props.theme.colors.text};
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  
+  transition: all 0.2s;
   @media (orientation: landscape) {
     font-size: 12px;
     padding: 4px 10px;
   }
-
+  @media (max-width: 600px) {
+    font-size: 11px;
+    padding: 3px 7px;
+    border-radius: 4px;
+  }
   &:active {
     transform: scale(0.95);
   }
