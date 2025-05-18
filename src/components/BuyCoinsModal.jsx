@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { paymentService } from '../services/payment';
@@ -146,7 +147,7 @@ const BuyCoinsModal = ({ isOpen, onClose }) => {
     }
   };
 
-  return (
+  return ReactDOM.createPortal(
     <AnimatePresence>
       {isOpen && (
         <Overlay
@@ -184,7 +185,8 @@ const BuyCoinsModal = ({ isOpen, onClose }) => {
           </ModalContent>
         </Overlay>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 };
 
