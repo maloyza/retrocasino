@@ -86,9 +86,9 @@ const GameCard = styled(motion.div)`
 `;
 
 const games = [
-  { id: 'blackjack', name: 'Блэкджек', price: 2000, image: '../../public/images/games/prev_blackjack.png', path: '/blackjack' },
-  { id: 'video-poker', name: 'Видеопокер', price: 3000, image: '../../public/images/games/prev_video-poker.png', path: '/video-poker' },
-  { id: 'roulette', name: 'Рулетка', price: 5000, image: '../../public/images/games/prev_roulette.png', path: '/roulette' }
+  { id: 'blackjack', name: 'Блэкджек', price: 2000, image: 'prev_blackjack.png', path: '/blackjack' },
+  { id: 'video-poker', name: 'Видеопокер', price: 3000, image: 'prev_video-poker.png', path: '/video-poker' },
+  { id: 'roulette', name: 'Рулетка', price: 5000, image: 'prev_roulette.png', path: '/roulette' }
 ];
 
 const Home = () => {
@@ -111,7 +111,7 @@ const Home = () => {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            <img src={game.image} alt={game.name} />
+            <img src={`${import.meta.env.BASE_URL}images/games/${game.image}`} alt={game.name} />
             <h3>{game.name}</h3>
             <div className="price">
               <span>🪙</span>
