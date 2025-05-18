@@ -34,31 +34,24 @@ const GamesGrid = styled.div`
 const Games = () => {
   const games = [
     {
-      id: 'slots',
-      title: 'Retro Slots',
-      description: 'Classic slot machine with retro symbols',
-      image: '/games/slots.jpg',
-      coins: 1000
-    },
-    {
       id: 'blackjack',
-      title: 'Blackjack',
-      description: 'Classic card game against the dealer',
-      image: '/games/blackjack.jpg',
+      title: 'Блэкджек',
+      description: 'Классическая карточная игра против дилера',
+      image: `${import.meta.env.BASE_URL}images/games/prev_blackjack.png`,
       coins: 2000
     },
     {
-      id: 'poker',
-      title: 'Video Poker',
-      description: 'Draw poker with classic rules',
-      image: '/games/poker.jpg',
+      id: 'video-poker',
+      title: 'Видеопокер',
+      description: 'Draw poker с классическими правилами',
+      image: `${import.meta.env.BASE_URL}images/games/prev_video-poker.png`,
       coins: 3000
     },
     {
       id: 'roulette',
-      title: 'Roulette',
-      description: 'European roulette with classic bets',
-      image: '/games/roulette.jpg',
+      title: 'Рулетка',
+      description: 'Европейская рулетка с классическими ставками',
+      image: `${import.meta.env.BASE_URL}images/games/prev_roulette.png`,
       coins: 5000
     }
   ];
