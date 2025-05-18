@@ -37,24 +37,26 @@ const Games = () => {
       id: 'blackjack',
       title: 'Блэкджек',
       description: 'Классическая карточная игра против дилера',
-      image: `${import.meta.env.BASE_URL}images/games/prev_blackjack.png`,
+      image: 'prev_blackjack.png',
       coins: 2000
     },
     {
       id: 'video-poker',
       title: 'Видеопокер',
       description: 'Draw poker с классическими правилами',
-      image: `${import.meta.env.BASE_URL}images/games/prev_video-poker.png`,
+      image: 'prev_video-poker.png',
       coins: 3000
     },
     {
       id: 'roulette',
       title: 'Рулетка',
       description: 'Европейская рулетка с классическими ставками',
-      image: `${import.meta.env.BASE_URL}images/games/prev_roulette.png`,
+      image: 'prev_roulette.png',
       coins: 5000
     }
   ];
+
+  const getImagePath = (filename) => `${import.meta.env.BASE_URL}images/games/${filename}`;
 
   return (
     <GamesContainer
@@ -64,7 +66,7 @@ const Games = () => {
     >
       <GamesGrid>
         {games.map(game => (
-          <GameCard key={game.id} game={game} />
+          <GameCard key={game.id} game={{ ...game, image: getImagePath(game.image) }} />
         ))}
       </GamesGrid>
     </GamesContainer>
